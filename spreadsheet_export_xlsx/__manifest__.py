@@ -2,7 +2,9 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
     'name': "Spreadsheet export xlsx",
+    'author': "He Jian",
     'category': 'Hidden',
+    'website': 'https://github.com/chr00tt/odoo-addons',
     'depends': ['spreadsheet_oca'],
     'installable': True,
     'auto_install': True,
