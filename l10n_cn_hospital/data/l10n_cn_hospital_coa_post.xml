@@ -4,16 +4,16 @@
         <!-- Chart template account links -->
         <record id="chart_template_hospital" model="account.chart.template">
             <field name="use_anglo_saxon" eval="True"/>
-            <field name="property_account_receivable_id" ref="account_template_hospital_1212"/>
+            <field name="property_account_receivable_id" ref="account_template_hospital_121203"/>
             <field name="property_account_payable_id" ref="account_template_hospital_2302"/>
             <field name="property_account_expense_categ_id" ref="account_template_hospital_5201"/>
             <field name="property_account_income_categ_id" ref="account_template_hospital_4401"/>
             <field name="property_stock_account_input_categ_id" ref="account_template_hospital_1301"/>
             <field name="property_stock_account_output_categ_id" ref="account_template_hospital_1303"/>
-            <field name="property_stock_valuation_account_id" ref="account_template_hospital_1302"/>
+            <field name="property_stock_valuation_account_id" ref="account_template_hospital_130201"/>
             <field name="default_cash_difference_income_account_id" ref="account_template_hospital_1902"/>
             <field name="default_cash_difference_expense_account_id" ref="account_template_hospital_1902"/>
-            <field name="default_pos_receivable_account_id" ref="account_template_hospital_1212" />
+            <field name="default_pos_receivable_account_id" ref="account_template_hospital_121203" />
             <field name="account_journal_suspense_account_id" ref="account_template_hospital_100207" />
             <field name="account_journal_payment_debit_account_id" ref="account_template_hospital_100208" />
             <field name="account_journal_payment_credit_account_id" ref="account_template_hospital_100209" />
