@@ -14,6 +14,8 @@
             <field name="default_cash_difference_income_account_id" ref="account_template_hospital_1902"/>
             <field name="default_cash_difference_expense_account_id" ref="account_template_hospital_1902"/>
             <field name="default_pos_receivable_account_id" ref="account_template_hospital_121203" />
+            <field name="property_tax_payable_account_id" ref="account_template_hospital_21010105"/>
+            <field name="property_tax_receivable_account_id" ref="account_template_hospital_21010101"/>
             <field name="account_journal_suspense_account_id" ref="account_template_hospital_100207" />
             <field name="account_journal_payment_debit_account_id" ref="account_template_hospital_100208" />
             <field name="account_journal_payment_credit_account_id" ref="account_template_hospital_100209" />
