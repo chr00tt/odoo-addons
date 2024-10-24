@@ -359,42 +359,56 @@
                                 <field name="code">CN_INSTITUTIONS_2401</field>
                                 <field name="groupby">account_id</field>
                                 <field name="foldable" eval="True"/>
-                                <field name="domain_formula">-sum([('account_id.code', '=like', '2401%')])</field>
+                                <field name="account_codes_formula">-2401</field>
+                            </record>
+                            <record id="account_financial_report_NL_1_cn_institutions" model="account.report.line">
+                                <field name="name">一年内到期的非流动负债</field>
+                                <field name="code">CN_INSTITUTIONS_NL_1</field>
+                                <field name="groupby">account_id</field>
+                                <field name="foldable" eval="True"/>
+                                <field name="account_codes_formula">-</field>
+                            </record>
+                            <record id="account_financial_report_CL_other_cn_institutions" model="account.report.line">
+                                <field name="name">其他流动负债</field>
+                                <field name="code">CN_INSTITUTIONS_CL_OTHER</field>
+                                <field name="groupby">account_id</field>
+                                <field name="foldable" eval="True"/>
+                                <field name="account_codes_formula">-2\(2001,2101,2102,2103,2201,2301,2302,2303,2304,2305,2307,2401,25,26,29)</field>
                             </record>
                         </field>
                     </record>
                     <record id="account_financial_report_non_current_liabilities0_cn_institutions" model="account.report.line">
                         <field name="name">非流动负债：</field>
                         <field name="code">CN_INSTITUTIONS_NL</field>
-                        <field name="domain_formula">-sum([('account_id.account_type', '=', 'liability_non_current')])</field>
+                        <field name="aggregation_formula">CN_INSTITUTIONS_2501.balance + CN_INSTITUTIONS_2502.balance + CN_INSTITUTIONS_2601.balance + CN_INSTITUTIONS_NL_other.balance</field>
                         <field name="children_ids">
                             <record id="account_financial_report_2501_cn_institutions" model="account.report.line">
                                 <field name="name">长期借款</field>
                                 <field name="code">CN_INSTITUTIONS_2501</field>
                                 <field name="groupby">account_id</field>
                                 <field name="foldable" eval="True"/>
-                                <field name="domain_formula">-sum([('account_id.code', '=like', '2501%')])</field>
+                                <field name="account_codes_formula">-2501</field>
                             </record>
                             <record id="account_financial_report_2502_cn_institutions" model="account.report.line">
                                 <field name="name">长期应付款</field>
                                 <field name="code">CN_INSTITUTIONS_2502</field>
                                 <field name="groupby">account_id</field>
                                 <field name="foldable" eval="True"/>
-                                <field name="domain_formula">-sum([('account_id.code', '=like', '2502%')])</field>
+                                <field name="account_codes_formula">-2502</field>
                             </record>
                             <record id="account_financial_report_2601_cn_institutions" model="account.report.line">
                                 <field name="name">预计负债</field>
                                 <field name="code">CN_INSTITUTIONS_2601</field>
                                 <field name="groupby">account_id</field>
                                 <field name="foldable" eval="True"/>
-                                <field name="domain_formula">-sum([('account_id.code', '=like', '2601%')])</field>
+                                <field name="account_codes_formula">-2601</field>
                             </record>
                             <record id="account_financial_report_non_current_liabilities_other_cn_institutions" model="account.report.line">
                                 <field name="name">其他非流动负债</field>
                                 <field name="code">CN_INSTITUTIONS_NL_other</field>
                                 <field name="groupby">account_id</field>
                                 <field name="foldable" eval="True"/>
-                                <field name="domain_formula">-sum([('account_id.code', '=like', '2601')])</field>
+                                <field name="account_codes_formula">-2\(20,21,22,23,24,25,2601,2901)</field>
                             </record>
                         </field>
                     </record>
@@ -403,7 +417,7 @@
                         <field name="code">CN_INSTITUTIONS_2901</field>
                         <field name="groupby">account_id</field>
                         <field name="foldable" eval="True"/>
-                        <field name="domain_formula">-sum([('account_id.code', '=like', '2901%')])</field>
+                        <field name="account_codes_formula">-2901</field>
                     </record>
                     <record id="account_financial_report_liabilities_view0_cn_institutions" model="account.report.line">
                         <field name="name">　负债合计</field>
