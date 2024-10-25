@@ -9,7 +9,7 @@ class CashFlowReportCustomHandler(models.AbstractModel):
     def _get_tags_ids(self):
         ''' Get a dict to pass on to _dispatch_aml_data containing information mapping account tags to report lines. '''
         return {
-            'operating_4001': self.env.ref('l10n_cn_institution_reports.account_tag_operating_4001').id,
+            'operating_4001': self.env.ref('l10n_cn_institution.account_tag_operating_4001').id,
             'investing': self.env.ref('account.account_tag_investing').id,
             'financing': self.env.ref('account.account_tag_financing').id,
         }

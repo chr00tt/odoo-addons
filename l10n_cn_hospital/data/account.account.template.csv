@@ -96,7 +96,7 @@
 "account_template_hospital_330202","转入累计盈余","3302.02","equity","中国 - 医院","","False"
 "account_template_hospital_3401","无偿调拨净资产","3401","equity","中国 - 医院","","False"
 "account_template_hospital_3501","以前年度盈余调整","3501","equity","中国 - 医院","","False"
-"account_template_hospital_4001","财政拨款收入","4001","income_other","中国 - 医院","l10n_cn_institution_reports.account_tag_operating_4001","False"
+"account_template_hospital_4001","财政拨款收入","4001","income_other","中国 - 医院","l10n_cn_institution.account_tag_operating_4001","False"
 "account_template_hospital_4101010101","挂号收入","4101.01.01.01","income","中国 - 医院","","False"
 "account_template_hospital_4101010102","诊察收入","4101.01.01.02","income","中国 - 医院","","False"
 "account_template_hospital_4101010103","检查收入","4101.01.01.03","income","中国 - 医院","","False"
