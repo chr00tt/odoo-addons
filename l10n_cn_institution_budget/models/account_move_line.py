@@ -5,6 +5,8 @@ from odoo import api, fields, models, Command, _
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
+    is_budget = fields.Boolean("预算会计", default=False)
+
     account_id = fields.Many2one(
         comodel_name='account.account',
         string='Account',
@@ -17,5 +19,3 @@ class AccountMoveLine(models.Model):
         check_company=True,
         tracking=True,
     )
-
-    is_budget = fields.Boolean("预算会计", default=False)

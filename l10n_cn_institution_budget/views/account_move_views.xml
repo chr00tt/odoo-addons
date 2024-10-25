@@ -17,7 +17,9 @@
                                            'default_partner_id': commercial_partner_id,
                                            'default_currency_id': currency_id or company_currency_id,
                                            'kanban_view_ref': 'account.account_move_line_view_kanban_mobile',
+                                           'default_is_budget': context.get('default_is_budget'),
                                        }"
+                                       domain="[('is_budget', '=', True)]"
                                        attrs="{'invisible': [('payment_state', '=', 'invoicing_legacy'), ('move_type', '!=', 'entry')]}">
                                     <tree editable="bottom" string="预算会计项目" decoration-muted="display_type in ('line_section', 'line_note')" default_order="sequence, id">
                                         <!-- Displayed fields -->
@@ -90,6 +92,8 @@
 
                                         <field name="tax_tag_invert" readonly="1" optional="hide" groups="base.group_no_one"/>
 
+                                        <field name="is_budget" optional="hide"/>
+
                                         <!-- Buttons -->
                                         <button name="action_automatic_entry"
                                                 type="object"
@@ -113,7 +117,7 @@
                                     <!-- Form view to cover mobile use -->
                                     <form>
                                       <group>
-                                        <field name="account_id" domain="[('company_id', '=', parent.company_id), ('deprecated', '=', False)]"/>
+                                        <field name="account_id" domain="[('company_id', '=', parent.company_id), ('deprecated', '=', False), ('is_budget', '=', True)]"/>
                                         <field name="partner_id" domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]"/>
                                         <field name="name"/>
                                         <field name="analytic_distribution" widget="analytic_distribution" groups="analytic.group_analytic_accounting"/>

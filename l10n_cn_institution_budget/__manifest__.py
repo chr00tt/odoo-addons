@@ -8,6 +8,7 @@
     'website': 'https://github.com/chr00tt/odoo-addons',
     'depends': ['l10n_cn_institution'],
     'data': [
+        'views/account_account_views.xml',
         'views/account_move_views.xml',
     ],
     'license': 'LGPL-3',

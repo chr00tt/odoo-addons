@@ -12,8 +12,8 @@ class AccountMove(models.Model):
         copy=True,
         readonly=True,
         states={'draft': [('readonly', False)]},
-        domain="[('is_budget', '!=', True)]",
-        context="{'default_is_budget': False}"
+        domain="[('is_budget', '=', False)]",
+        context={'default_is_budget': False}
     )
 
     budget_line_ids = fields.One2many(
@@ -24,5 +24,5 @@ class AccountMove(models.Model):
         readonly=True,
         states={'draft': [('readonly', False)]},
         domain="[('is_budget', '=', True)]",
-        context="{'default_is_budget': True}"
+        context={'default_is_budget': True}
     )
