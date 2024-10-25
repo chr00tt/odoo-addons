@@ -6,7 +6,6 @@
     'category': 'Accounting/Localizations',
     'depends': ['l10n_cn_institution', 'account_reports'],
     'data': [
-        'data/account.account.tag.csv',
         'data/balance_sheet.xml',
         'data/cash_flow_report.xml',
         'data/income_and_expense.xml',
