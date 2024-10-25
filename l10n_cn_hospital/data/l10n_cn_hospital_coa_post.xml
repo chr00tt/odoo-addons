@@ -39,7 +39,7 @@
                 (0,0, {
                     'factor_percent': 100,
                     'repartition_type': 'tax',
-                    'account_id': ref('account_template_hospital_2101'),
+                    'account_id': ref('account_template_hospital_21010105'),
                 }),
             ]"/>
             <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
@@ -50,7 +50,7 @@
                 (0,0, {
                     'factor_percent': 100,
                     'repartition_type': 'tax',
-                    'account_id': ref('account_template_hospital_2101'),
+                    'account_id': ref('account_template_hospital_21010105'),
                 }),
             ]"/>
         </record>
@@ -73,7 +73,7 @@
                 (0,0, {
                     'factor_percent': 100,
                     'repartition_type': 'tax',
-                    'account_id': ref('account_template_hospital_2101'),
+                    'account_id': ref('account_template_hospital_21010105'),
                 }),
             ]"/>
             <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
@@ -84,7 +84,7 @@
                 (0,0, {
                     'factor_percent': 100,
                     'repartition_type': 'tax',
-                    'account_id': ref('account_template_hospital_2101'),
+                    'account_id': ref('account_template_hospital_21010105'),
                 }),
             ]"/>
         </record>
@@ -107,7 +107,7 @@
                 (0,0, {
                     'factor_percent': 100,
                     'repartition_type': 'tax',
-                    'account_id': ref('account_template_hospital_2101'),
+                    'account_id': ref('account_template_hospital_21010101'),
                 }),
             ]"/>
             <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
@@ -118,7 +118,7 @@
                 (0,0, {
                     'factor_percent': 100,
                     'repartition_type': 'tax',
-                    'account_id': ref('account_template_hospital_2101'),
+                    'account_id': ref('account_template_hospital_21010101'),
                 }),
             ]"/>
         </record>
