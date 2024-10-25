@@ -5,21 +5,19 @@
             <field name="model">account.move</field>
             <field name="inherit_id" ref="account.view_move_form"/>
             <field name="arch" type="xml">
-                <field name="line_ids" position="after">
+                <xpath expr="//field[@name='line_ids']" position="after">
                                 <group string="预算会计项目">
                                 </group>
                                 <field name="budget_line_ids"
+                                       widget="section_and_note_one2many"
                                        mode="tree,kanban"
                                        context="{
                                            'default_move_type': context.get('default_move_type'),
-                                           'budget_line_ids': budget_line_ids,
                                            'journal_id': journal_id,
                                            'default_partner_id': commercial_partner_id,
                                            'default_currency_id': currency_id or company_currency_id,
-                                           'kanban_view_ref': 'account.account_move_line_view_kanban_mobile',
-                                           'default_is_budget': context.get('default_is_budget'),
+                                           'default_is_budget': True,
                                        }"
-                                       domain="[('is_budget', '=', True)]"
                                        attrs="{'invisible': [('payment_state', '=', 'invoicing_legacy'), ('move_type', '!=', 'entry')]}">
                                     <tree editable="bottom" string="预算会计项目" decoration-muted="display_type in ('line_section', 'line_note')" default_order="sequence, id">
                                         <!-- Displayed fields -->
@@ -28,7 +26,7 @@
                                                     'required': [('display_type', 'not in', ('line_section', 'line_note'))],
                                                     'invisible': [('display_type', 'in', ('line_section', 'line_note'))],
                                                }"
-                                               domain="[('deprecated', '=', False), ('company_id', '=', parent.company_id)]" />
+                                               domain="[('deprecated', '=', False), ('company_id', '=', parent.company_id), ('is_budget', '=', True)]" />
                                         <field name="partner_id"
                                                optional="show"
                                                domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]"
@@ -133,7 +131,7 @@
                                       </group>
                                     </form>
                                 </field>
-                </field>
+                </xpath>
             </field>
         </record>
     </data>
