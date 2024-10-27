@@ -23,7 +23,9 @@ class CashFlowReportCustomHandler(models.AbstractModel):
 
     def _get_layout_data(self):
         return {
-            'net_increase': {'name': '现金净增加额', 'level': 0},
-                'operating_activities': {'name': '日常活动产生的现金流量', 'level': 2, 'parent_line_id': 'net_increase'},
-                    'received_operating_4001': {'name': '财政基本支出拨款收到的现金', 'level': 3, 'parent_line_id': 'operating_activities'},
+            'opening_balance': {'name': '现金及现金等价物，期初', 'level': 0},
+            'operating_activities': {'name': '一、日常活动产生的现金流量', 'level': 0, 'parent_line_id': 'net_increase'},
+                'received_operating_4001': {'name': '财政基本支出拨款收到的现金', 'level': 2, 'parent_line_id': 'operating_activities'},
+            'net_increase': {'name': '五、现金净增加额', 'level': 0},
+            'closing_balance': {'name': '现金及现金等价物，期末余额', 'level': 0},
         }
