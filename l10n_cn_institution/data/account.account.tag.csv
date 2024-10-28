@@ -1,3 +1,7 @@
 "id","name","applicability"
-"account_tag_operating_4001","财政拨款","accounts"
+"account_tag_operating_1","财政基本支出拨款","accounts"
+"account_tag_operating_2","财政非资本性项目拨款","accounts"
 "account_tag_operating","事业活动","accounts"
+"account_tag_operating_4","其他日常活动","accounts"
+"account_tag_operating_5","职工","accounts"
+"account_tag_operating_6","各项税费","accounts"
