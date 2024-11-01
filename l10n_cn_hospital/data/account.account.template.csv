@@ -132,7 +132,7 @@
 "account_template_hospital_4604","利息收入","4604","income_other","中国 - 医院","","False"
 "account_template_hospital_4605","租金收入","4605","income_other","中国 - 医院","","False"
 "account_template_hospital_4609","其他收入","4609","income_other","中国 - 医院","","False"
-"account_template_hospital_5001","业务活动费用","5001","expense_direct_cost","中国 - 医院","","False"
+"account_template_hospital_5001","业务活动费用","5001","expense_direct_cost","中国 - 医院","l10n_cn_institution.account_tag_operating","False"
 "account_template_hospital_5101","单位管理费用","5101","expense","中国 - 医院","","False"
 "account_template_hospital_5201","经营费用","5201","expense","中国 - 医院","","False"
 "account_template_hospital_5301","资产处置费用","5301","expense","中国 - 医院","","False"
