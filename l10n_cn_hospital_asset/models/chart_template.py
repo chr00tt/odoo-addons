@@ -1,0 +1,72 @@
+# -*- coding: utf-8 -*-
+
+from odoo import api, fields, models, _
+
+class AccountChartTemplate(models.Model):
+    _inherit = "account.chart.template"
+
+    def _load(self, sale_tax_rate, purchase_tax_rate, company):
+        super(AccountChartTemplate, self)._load(sale_tax_rate, purchase_tax_rate, company)
+        if self == self.env.ref('l10n_cn_hospital.chart_template_hospital'):
+            self._create_account_asset(company)
+
+    def _create_account_asset(self, company):
+        # 财会〔2018〕24号 关于医院执行《政府会计制度——行政事业单位会计科目和报表》的补充规定.
+        model_data = [
+            {'name': '钢结构业务及管理用房', 'method_number': 50*12},
+            {'name': '钢筋混凝土结构构业务及管理用房', 'method_number': 50*12},
+            {'name': '砖混结构业务及管理用房', 'method_number': 30*12},
+            {'name': '砖木结构业务及管理用房', 'method_number': 30*12},
+            {'name': '简易房', 'method_number': 8*12},
+            {'name': '房屋附属设施', 'method_number': 8*12},
+            {'name': '构筑物', 'method_number': 8*12},
+            {'name': '计算机设备', 'method_number': 6*12},
+            {'name': '通信设备', 'method_number': 5*12},
+            {'name': '办公设备', 'method_number': 6*12},
+            {'name': '车辆', 'method_number': 10*12},
+            {'name': '图书档案设备', 'method_number': 5*12},
+            {'name': '机械设备', 'method_number': 10*12},
+            {'name': '电气设备', 'method_number': 5*12},
+            {'name': '雷达、无线电和卫星导航设备', 'method_number': 10*12},
+            {'name': '广播、电视、电影设备', 'method_number': 5*12},
+            {'name': '仪器仪表', 'method_number': 5*12},
+            {'name': '电子和通信测量设备', 'method_number': 5*12},
+            {'name': '计量标准器具及量具、衡器', 'method_number': 5*12},
+        ]
+
+        AccountAccount = self.env['account.account']
+        funds_name_data = ['财政项目拨款经费', '科教经费', '其他经费']
+        funds_data = [
+            {
+                'account_asset_id': AccountAccount.search([('code', '=', '1601.01'), ('company_id', '=', company.id)], limit=1),
+                'account_depreciation_id': AccountAccount.search([('code', '=', '1602.01'), ('company_id', '=', company.id)], limit=1),
+                'account_depreciation_expense_id': AccountAccount.search([('code', '=', '5001'), ('company_id', '=', company.id)], limit=1),
+            },
+            {
+                'account_asset_id': AccountAccount.search([('code', '=', '1601.02'), ('company_id', '=', company.id)], limit=1),
+                'account_depreciation_id': AccountAccount.search([('code', '=', '1602.02'), ('company_id', '=', company.id)], limit=1),
+                'account_depreciation_expense_id': AccountAccount.search([('code', '=', '5001'), ('company_id', '=', company.id)], limit=1),
+            },
+            {
+                'account_asset_id': AccountAccount.search([('code', '=', '1601.03'), ('company_id', '=', company.id)], limit=1),
+                'account_depreciation_id': AccountAccount.search([('code', '=', '1602.03'), ('company_id', '=', company.id)], limit=1),
+                'account_depreciation_expense_id': AccountAccount.search([('code', '=', '5001'), ('company_id', '=', company.id)], limit=1),
+            },
+        ]
+
+        journal = self.env['account.jourlal'].search([('type', '=', 'general')], limit=1)
+
+        asset_model_data_list = []
+        for data in model_data:
+            data.update({
+                'method': 'linear',
+                'method_period': '12',
+                'company_id': company.id,
+                'journal_id': journal.id,
+            })
+            for i in range(1,3):
+                data_dict = data.copy()
+                data_dict.update({'name': '%s(%s)' % (data_dict['name'], funds_name_data[i])})
+                data_dict.update(funds_data[i])
+                asset_model_data_list.append(data_dict)
+        self.env['account.asset'].create(asset_model_data_list)

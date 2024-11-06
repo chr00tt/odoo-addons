@@ -5,6 +5,8 @@
 "account_group_121202","1212.02","应收医疗款","account_group_1212"
 "account_group_1302","1302","库存物品","l10n_cn_institution.account_group_13"
 "account_group_130202","1302.02","卫生材料","account_group_1302"
+"account_group_1601","1601","固定资产","l10n_cn_institution.account_group_1"
+"account_group_1602","1602","固定资产累计折旧","l10n_cn_institution.account_group_1"
 "account_group_2305","2305","预收账款","l10n_cn_institution.account_group_23"
 "account_group_230501","2305.01","预收医疗款","account_group_2305"
 "account_group_3001","3001","累计盈余","l10n_cn_institution.account_group_3"
