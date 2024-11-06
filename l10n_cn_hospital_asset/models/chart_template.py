@@ -38,33 +38,35 @@ class AccountChartTemplate(models.Model):
         funds_name_data = ['财政项目拨款经费', '科教经费', '其他经费']
         funds_data = [
             {
-                'account_asset_id': AccountAccount.search([('code', '=', '1601.01'), ('company_id', '=', company.id)], limit=1),
-                'account_depreciation_id': AccountAccount.search([('code', '=', '1602.01'), ('company_id', '=', company.id)], limit=1),
-                'account_depreciation_expense_id': AccountAccount.search([('code', '=', '5001'), ('company_id', '=', company.id)], limit=1),
+                'account_asset_id': AccountAccount.search([('code', '=', '1601.01'), ('company_id', '=', company.id)], limit=1).id,
+                'account_depreciation_id': AccountAccount.search([('code', '=', '1602.01'), ('company_id', '=', company.id)], limit=1).id,
+                'account_depreciation_expense_id': AccountAccount.search([('code', '=', '5001'), ('company_id', '=', company.id)], limit=1).id,
             },
             {
-                'account_asset_id': AccountAccount.search([('code', '=', '1601.02'), ('company_id', '=', company.id)], limit=1),
-                'account_depreciation_id': AccountAccount.search([('code', '=', '1602.02'), ('company_id', '=', company.id)], limit=1),
-                'account_depreciation_expense_id': AccountAccount.search([('code', '=', '5001'), ('company_id', '=', company.id)], limit=1),
+                'account_asset_id': AccountAccount.search([('code', '=', '1601.02'), ('company_id', '=', company.id)], limit=1).id,
+                'account_depreciation_id': AccountAccount.search([('code', '=', '1602.02'), ('company_id', '=', company.id)], limit=1).id,
+                'account_depreciation_expense_id': AccountAccount.search([('code', '=', '5001'), ('company_id', '=', company.id)], limit=1).id,
             },
             {
-                'account_asset_id': AccountAccount.search([('code', '=', '1601.03'), ('company_id', '=', company.id)], limit=1),
-                'account_depreciation_id': AccountAccount.search([('code', '=', '1602.03'), ('company_id', '=', company.id)], limit=1),
-                'account_depreciation_expense_id': AccountAccount.search([('code', '=', '5001'), ('company_id', '=', company.id)], limit=1),
+                'account_asset_id': AccountAccount.search([('code', '=', '1601.03'), ('company_id', '=', company.id)], limit=1).id,
+                'account_depreciation_id': AccountAccount.search([('code', '=', '1602.03'), ('company_id', '=', company.id)], limit=1).id,
+                'account_depreciation_expense_id': AccountAccount.search([('code', '=', '5001'), ('company_id', '=', company.id)], limit=1).id,
             },
         ]
 
-        journal = self.env['account.jourlal'].search([('type', '=', 'general')], limit=1)
+        journal = self.env['account.journal'].search([('type', '=', 'general')], limit=1)
 
         asset_model_data_list = []
         for data in model_data:
             data.update({
                 'method': 'linear',
-                'method_period': '12',
+                'method_period': '1',
                 'company_id': company.id,
                 'journal_id': journal.id,
+                'state': 'model',
+                'asset_type': 'purchase',
             })
-            for i in range(1,3):
+            for i in range(3):
                 data_dict = data.copy()
                 data_dict.update({'name': '%s(%s)' % (data_dict['name'], funds_name_data[i])})
                 data_dict.update(funds_data[i])
