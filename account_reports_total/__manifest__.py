@@ -9,6 +9,7 @@
     'depends': ['account_reports'],
     'data': [
         'views/account_report_view.xml',
+        'views/report_templates.xml',
     ],
     'auto_install': True,
     'license': 'LGPL-3',
