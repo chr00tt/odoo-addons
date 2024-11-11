@@ -134,5 +134,17 @@
                 </xpath>
             </field>
         </record>
+
+        <record id="view_account_move_line_filter" model="ir.ui.view">
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+            <field name="arch" type="xml">
+                <filter name="posted" position="after">
+                    <separator/>
+                    <filter string="财务会计" name="financial_accounting" domain="[('account_id.is_budget', '=', False)]"/>
+                    <filter string="预算会计" name="budget_accounting" domain="[('account_id.is_budget', '=', True)]"/>
+                </filter>
+            </field>
+        </record>
     </data>
 </odoo>
