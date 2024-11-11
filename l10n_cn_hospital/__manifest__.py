@@ -12,6 +12,7 @@
         'data/account.group.template.csv',
         'data/account.account.template.csv',
         'data/l10n_cn_hospital_coa_post.xml',
+        'data/product.category.csv',
     ],
     'demo': [
         'demo/demo_company.xml',
