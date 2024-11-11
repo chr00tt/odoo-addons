@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="account_report_form" model="ir.ui.view">
+            <field name="name">account.report.form</field>
+            <field name="model">account.report</field>
+            <field name="inherit_id" ref="account_reports.account_report_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[last()]/group" position="inside">
+                    <group string="合计" class="oe_edit_only">
+                        <field name="daily_total"/>
+                        <field name="monthly_total"/>
+                        <field name="accumulative_total"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
