@@ -9,6 +9,7 @@ class AccountChartTemplate(models.Model):
         super(AccountChartTemplate, self)._load(sale_tax_rate, purchase_tax_rate, company)
         if self == self.env.ref('l10n_cn_hospital.chart_template_hospital'):
             self._create_account_asset(company)
+            self._load_product_category(company)
 
     def _create_account_asset(self, company):
         # 财会〔2018〕24号 关于医院执行《政府会计制度——行政事业单位会计科目和报表》的补充规定.
@@ -93,3 +94,15 @@ class AccountChartTemplate(models.Model):
                 data_dict.update(funds_data[i])
                 asset_model_data_list.append(data_dict)
         self.env['account.asset'].create(asset_model_data_list)
+
+    def _load_product_category(self, company):
+        categories = [
+            {'id': 'product_category_01', 'account_id': ''}
+        ]
+        for category in categories:
+            self.env.ref(category['id']).with_company(company).write({
+                'property_valuation': 'real_time',
+                'property_stock_valuation_account_id': category['account_id'],
+                'property_stock_valuation_account1_id': category['account1_id'],
+                'property_stock_valuation_account2_id': category['account2_id'],
+            })
