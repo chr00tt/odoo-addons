@@ -10,7 +10,7 @@
                     <group string="合计" class="oe_edit_only">
                         <field name="show_daily_total"/>
                         <field name="show_monthly_total"/>
-                        <field name="show_accumulative_total"/>
+                        <field name="show_yearly_total"/>
                     </group>
                 </xpath>
             </field>
