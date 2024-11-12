@@ -8,6 +8,7 @@
     'website': 'https://github.com/chr00tt/odoo-addons',
     'depends': ['account_reports'],
     'data': [
+        'data/general_ledger.xml',
         'views/account_report_view.xml',
         'views/report_templates.xml',
     ],

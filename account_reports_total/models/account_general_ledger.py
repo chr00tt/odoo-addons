@@ -72,25 +72,25 @@ class GeneralLedgerCustomHandler(models.AbstractModel):
             'level': 2,
         }
     
-    def _get_daily_total_line(self, report, parent_line_id, options, init_bal_by_col_group, balance):
+    def _get_periodic_total_line(self, report, parent_line_id, options, init_bal_by_col_group, balance, title, type):
         line_columns = []
         for column in options['columns']:
             col_expr_label = column['expression_label']
 
             if col_expr_label == 'communication':
                 col_class = 'o_account_report_line_ellipsis'
-                col_value = '本日合计'
+                col_value = title
                 formatted_value = report.format_value(col_value, figure_type=column['figure_type'])
             elif col_expr_label == 'balance':
                 col_value = balance
                 formatted_value = report.format_value(col_value, figure_type=column['figure_type'], blank_if_zero=False)
             elif col_expr_label == 'debit':
                 col_class = 'number'
-                col_value = init_bal_by_col_group['daily_debit'][column['column_group_key']]
+                col_value = init_bal_by_col_group['%s_debit' % type][column['column_group_key']]
                 formatted_value = report.format_value(col_value, figure_type=column['figure_type'], blank_if_zero=column['blank_if_zero'])
             elif col_expr_label == 'credit':
                 col_class = 'number'
-                col_value = init_bal_by_col_group['daily_credit'][column['column_group_key']]
+                col_value = init_bal_by_col_group['%s_credit' % type][column['column_group_key']]
                 formatted_value = report.format_value(col_value, figure_type=column['figure_type'], blank_if_zero=column['blank_if_zero'])
             else:
                 line_columns.append({})
@@ -110,6 +110,15 @@ class GeneralLedgerCustomHandler(models.AbstractModel):
             'columns': line_columns,
             'level': 2,
         }
+
+    def _get_daily_total_line(self, report, parent_line_id, options, init_bal_by_col_group, balance):
+        return self._get_periodic_total_line(report, parent_line_id, options, init_bal_by_col_group, balance, '本日合计', 'daily')
+
+    def _get_monthly_total_line(self, report, parent_line_id, options, init_bal_by_col_group, balance):
+        return self._get_periodic_total_line(report, parent_line_id, options, init_bal_by_col_group, balance, '当前合计', 'monthly')
+
+    def _get_yearly_total_line(self, report, parent_line_id, options, init_bal_by_col_group, balance):
+        return self._get_periodic_total_line(report, parent_line_id, options, init_bal_by_col_group, balance, '当前累计', 'yearly')
 
     def _report_expand_unfoldable_line_general_ledger(self, line_dict_id, groupby, options, progress, offset, unfold_all_batch_data=None):
         def init_load_more_progress(line_dict, progress=None):
@@ -254,10 +263,19 @@ class GeneralLedgerCustomHandler(models.AbstractModel):
                 if column['expression_label'] == 'date']
             progress_date = next_progress['date'][date_column['column_group_key']]
 
-            # 本日合计
-            if options['daily_total'] and progress_date and line_date != progress_date:
-                total_line = self._get_daily_total_line(report, line_dict_id, options, next_progress, balance)
-                lines.append(total_line)
+            if progress_date:
+                # 本日合计
+                if options['daily_total'] and line_date != progress_date:
+                    total_line = self._get_daily_total_line(report, line_dict_id, options, next_progress, balance)
+                    lines.append(total_line)
+                # 本月合计
+                if options['monthly_total'] and line_date[:7] != progress_date[:7]:
+                    total_line = self._get_monthly_total_line(report, line_dict_id, options, next_progress, balance)
+                    lines.append(total_line)
+                # 本年累计
+                if options['yearly_total'] and line_date[:7] != progress_date[:7]:
+                    total_line = self._get_yearly_total_line(report, line_dict_id, options, next_progress, balance)
+                    lines.append(total_line)
 
             lines.append(new_line)
             next_progress = init_load_more_progress(new_line, next_progress)
