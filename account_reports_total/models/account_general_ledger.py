@@ -33,7 +33,7 @@ class GeneralLedgerCustomHandler(models.AbstractModel):
                     col_class = 'date'
                 elif col_expr_label == 'balance':
                     # 取余额数据
-                    col_value += init_bal_by_col_group['balance'][column['column_group_key']]
+                    col_value += init_bal_by_col_group['balance'][column['column_group_key']] if 'balance' in init_bal_by_col_group else 0
                     formatted_value = report.format_value(col_value, figure_type=column['figure_type'], blank_if_zero=False)
                 elif col_expr_label == 'communication' or col_expr_label == 'partner_name':
                     col_class = 'o_account_report_line_ellipsis'
@@ -129,7 +129,7 @@ class GeneralLedgerCustomHandler(models.AbstractModel):
         [line_date] = [line_col.get('no_format').strftime('%Y-%m-%d')
             for column, line_col in zip(options['columns'], new_line['columns'])
             if column['expression_label'] == 'date']
-        progress_date = progress['date'][date_column['column_group_key']]
+        progress_date = progress['date'][date_column['column_group_key']] if 'date' in progress else ''
 
         if progress_date:
             # 本日合计
@@ -191,7 +191,7 @@ class GeneralLedgerCustomHandler(models.AbstractModel):
                     for column in options['columns']
                     if column['expression_label'] == 'credit']
 
-                progress_date = progress['date'][date_column['column_group_key']]
+                progress_date = progress['date'][date_column['column_group_key']] if 'date' in progress else ''
                 result_date = result['date'][date_column['column_group_key']]
 
                 if progress_date == result_date:
@@ -276,7 +276,7 @@ class GeneralLedgerCustomHandler(models.AbstractModel):
             [balance_column] = [column
                 for column in options['columns']
                 if column['expression_label'] == 'balance']
-            balance = next_progress['balance'][balance_column['column_group_key']]
+            balance = next_progress['balance'][balance_column['column_group_key']] if 'balance' in next_progress else 0
 
             new_line = self._get_aml_line(report, line_dict_id, options, aml_result, next_progress)
 
