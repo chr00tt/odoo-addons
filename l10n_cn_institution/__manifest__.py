@@ -3,16 +3,14 @@
 
 {
     'name': '中国 - 行政事业单位会计',
-    'author': "He Jian",
+    'icon': '/account/static/description/l10n.png',
+    'countries': ['cn'],
     'category': 'Accounting/Localizations/Account Charts',
+    'author': "He Jian",
     'website': 'https://github.com/chr00tt/odoo-addons',
     'depends': ['l10n_cn'],
     'data': [
-        'data/l10n_cn_institution_coa.xml',
         'data/account.account.tag.csv',
-        'data/account.group.template.csv',
-        'data/account.account.template.csv',
-        'data/l10n_cn_institution_coa_post.xml',
     ],
     'demo': [
         'demo/demo_company.xml',

@@ -3,8 +3,10 @@
 
 {
     'name': '中国 - 医院会计',
-    'author': "He Jian",
+    'icon': '/account/static/description/l10n.png',
+    'countries': ['cn'],
     'category': 'Accounting/Localizations/Account Charts',
+    'author': "He Jian",
     'website': 'https://github.com/chr00tt/odoo-addons',
     'depends': ['l10n_cn_institution'],
     'data': [

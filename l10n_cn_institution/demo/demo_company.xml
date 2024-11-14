@@ -23,7 +23,9 @@
     </function>
 
     <function model="account.chart.template" name="try_loading">
-        <value eval="[ref('l10n_cn_institution.chart_template_administrative_institution')]"/>
+        <value eval="[]"/>
+        <value>cn_institution</value>
         <value model="res.company" eval="obj().env.ref('l10n_cn_institution.res_company_cn_institution')"/>
+        <value name="install_demo" eval="True"/>
     </function>
 </odoo>
