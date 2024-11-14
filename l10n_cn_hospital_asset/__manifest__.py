@@ -9,7 +9,6 @@
     'depends': [
         'l10n_cn_hospital',
         'account_asset',
-        'l10n_cn_hospital_funding_type',
     ],
     'data': [
         'data/product.category.csv',
