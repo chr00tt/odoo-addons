@@ -57,24 +57,11 @@ class AccountChartTemplate(models.Model):
         ]
 
         AccountAccount = self.env['account.account']
-        funds_name_data = ['财政项目拨款经费', '科教经费', '其他经费']
-        funds_data = [
-            {
-                'account_asset_id': AccountAccount.search([('code', '=', '1601.01'), ('company_id', '=', company.id)], limit=1).id,
-                'account_depreciation_id': AccountAccount.search([('code', '=', '1602.01'), ('company_id', '=', company.id)], limit=1).id,
-                'account_depreciation_expense_id': AccountAccount.search([('code', '=', '5001'), ('company_id', '=', company.id)], limit=1).id,
-            },
-            {
-                'account_asset_id': AccountAccount.search([('code', '=', '1601.02'), ('company_id', '=', company.id)], limit=1).id,
-                'account_depreciation_id': AccountAccount.search([('code', '=', '1602.02'), ('company_id', '=', company.id)], limit=1).id,
-                'account_depreciation_expense_id': AccountAccount.search([('code', '=', '5001'), ('company_id', '=', company.id)], limit=1).id,
-            },
-            {
-                'account_asset_id': AccountAccount.search([('code', '=', '1601.03'), ('company_id', '=', company.id)], limit=1).id,
-                'account_depreciation_id': AccountAccount.search([('code', '=', '1602.03'), ('company_id', '=', company.id)], limit=1).id,
-                'account_depreciation_expense_id': AccountAccount.search([('code', '=', '5001'), ('company_id', '=', company.id)], limit=1).id,
-            },
-        ]
+        account_data = {
+            'account_asset_id': AccountAccount.search([('code', '=', '1601'), ('company_id', '=', company.id)], limit=1).id,
+            'account_depreciation_id': AccountAccount.search([('code', '=', '1602'), ('company_id', '=', company.id)], limit=1).id,
+            'account_depreciation_expense_id': AccountAccount.search([('code', '=', '5001'), ('company_id', '=', company.id)], limit=1).id,
+        }
 
         journal = self.env['account.journal'].search([('type', '=', 'general')], limit=1)
 
@@ -88,57 +75,52 @@ class AccountChartTemplate(models.Model):
                 'state': 'model',
                 'asset_type': 'purchase',
             })
-            for i in range(3):
-                data_dict = data.copy()
-                data_dict.update({'name': '%s(%s)' % (data_dict['name'], funds_name_data[i])})
-                data_dict.update(funds_data[i])
-                asset_model_data_list.append(data_dict)
+            data.update(account_data)
+            asset_model_data_list.append(data)
         self.env['account.asset'].create(asset_model_data_list)
 
     def _load_product_category(self, company):
         AccountAccount = self.env['account.account']
         categories = [
-            {'id': 'l10n_cn_hospital_asset.product_category_01', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0101', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0102', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0103', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0104', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0105', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0106', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0107', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0108', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0109', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0110', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0111', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0112', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_02', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0201', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0202', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0203', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0204', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0205', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0206', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0207', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0208', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0209', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0210', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0211', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0212', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0213', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0214', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0215', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0216', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0217', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0218', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0219', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_03', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0301', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
-            {'id': 'l10n_cn_hospital_asset.product_category_0302', 'account_id': '1601.03', 'account1_id': '1601.01', 'account2_id': '1601.02'},
+            {'id': 'l10n_cn_hospital_asset.product_category_01', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0101', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0102', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0103', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0104', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0105', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0106', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0107', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0108', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0109', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0110', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0111', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0112', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_02', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0201', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0202', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0203', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0204', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0205', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0206', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0207', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0208', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0209', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0210', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0211', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0212', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0213', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0214', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0215', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0216', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0217', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0218', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0219', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_03', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0301', 'account_id': '1601'},
+            {'id': 'l10n_cn_hospital_asset.product_category_0302', 'account_id': '1601'},
         ]
         for category in categories:
             self.env.ref(category['id']).with_company(company).write({
                 'property_valuation': 'real_time',
-                'property_stock_valuation_account_id': AccountAccount.search([('code', '=', category['account_id'])]),
-                'property_stock_valuation_account1_id': AccountAccount.search([('code', '=', category['account1_id'])]),
-                'property_stock_valuation_account2_id': AccountAccount.search([('code', '=', category['account2_id'])]),
+                'property_stock_valuation_account_id': AccountAccount.search([('code', '=', category['account_id']), ('company_id', '=', company.id)], limit=1),
             })
