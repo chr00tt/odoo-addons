@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Analytic -->
+        <record id="analytic_plan_funding_type" model="account.analytic.plan">
+            <field name="name">经费性质</field>
+            <field name="default_applicability">unavailable</field>
+            <field name="company_id" eval="False"/>
+            <field name="applicability_ids" eval="[
+                Command.clear(),
+                Command.create({
+                    'business_domain': 'bill',
+                    'account_prefix': '1601',
+                    'applicability': 'mandatory'}),
+                Command.create({
+                    'business_domain': 'bill',
+                    'account_prefix': '1602',
+                    'applicability': 'mandatory'}),
+                Command.create({
+                    'business_domain': 'bill',
+                    'account_prefix': '1701',
+                    'applicability': 'mandatory'}),
+                Command.create({
+                    'business_domain': 'bill',
+                    'account_prefix': '1702',
+                    'applicability': 'mandatory'}),
+                Command.create({
+                    'business_domain': 'bill',
+                    'account_prefix': '5001',
+                    'applicability': 'mandatory'}),
+                Command.create({
+                    'business_domain': 'bill',
+                    'account_prefix': '5101',
+                    'applicability': 'mandatory'}),
+                ]"/>
+        </record>
+        <!-- Analytic Accounts -->
+        <record id="analytic_1" model="account.analytic.account">
+            <field name="name">财政基本拨款经费</field>
+            <field name="plan_id" ref="analytic_plan_funding_type"/>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="analytic_2" model="account.analytic.account">
+            <field name="name">科教经费</field>
+            <field name="plan_id" ref="analytic_plan_funding_type"/>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="analytic_3" model="account.analytic.account">
+            <field name="name">其他经费</field>
+            <field name="plan_id" ref="analytic_plan_funding_type"/>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

@@ -11,7 +11,7 @@
         'stock_account',
     ],
     'data': [
-        'views/account_move_views.xml',
+        'data/l10n_cn_hospital_funding_type_data.xml',
         'views/product_views.xml',
     ],
     'auto_install': True,
