@@ -2,6 +2,15 @@
 <odoo>
     <template id="search_template_extra_options" inherit_id="account_reports.search_template_extra_options">
         <xpath expr="//div[hasclass('o_filter_menu')]" position="inside">
+            <div role="separator" class="dropdown-divider"/>
+            <a role="menuitem" class="dropdown-item js_account_report_bool_filter" title="财务会计" data-filter="financial_account" groups="account.group_account_readonly">财务会计</a>
+            <a role="menuitem" class="dropdown-item js_account_report_bool_filter" title="预算会计" data-filter="budget_account" groups="account.group_account_readonly">预算会计</a>
+        </xpath>
+    </template>
+
+    <template id="search_template_extra_options_journal_audit_report" inherit_id="account_reports.search_template_extra_options_journal_audit_report">
+        <xpath expr="//div[hasclass('o_filter_menu')]" position="inside">
+            <div role="separator" class="dropdown-divider"/>
             <a role="menuitem" class="dropdown-item js_account_report_bool_filter" title="财务会计" data-filter="financial_account" groups="account.group_account_readonly">财务会计</a>
             <a role="menuitem" class="dropdown-item js_account_report_bool_filter" title="预算会计" data-filter="budget_account" groups="account.group_account_readonly">预算会计</a>
         </xpath>
