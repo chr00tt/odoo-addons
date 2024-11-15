@@ -1,4 +1,4 @@
-"id","name","code","account_type","tag_ids/id","reconcile","name@zh_CN"
+"id","name","code","account_type","tag_ids","reconcile","name@zh_CN"
 "account_template_1001","Cash on Hand","1001","asset_current","","False","库存现金"
 "account_template_1002","银行存款","1002","asset_current","","False","银行存款"
 "account_template_100201","银行","100201","asset_current","","False","银行"

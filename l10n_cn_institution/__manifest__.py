@@ -8,6 +8,9 @@
     'category': 'Accounting/Localizations/Account Charts',
     'author': "He Jian",
     'website': 'https://github.com/chr00tt/odoo-addons',
+    'description': """
+行政事业单位会计制度、医院会计制度。
+    """,
     'depends': ['l10n_cn'],
     'data': [
         'data/account.account.tag.csv',
