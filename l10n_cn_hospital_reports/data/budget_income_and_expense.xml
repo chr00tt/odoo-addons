@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="budget_income_and_expense" model="account.report">
+        <field name="name">预算收入支出表(医院)</field>
+        <field name="root_report_id" ref="l10n_cn_institution_reports.budget_income_and_expense"/>
+        <field name="filter_analytic_groupby" eval="True"/>
+        <field name="filter_unfold_all" eval="True"/>
+        <field name="filter_journals" eval="True"/>
+        <field name="country_id" ref="base.cn"/>
+        <field name="filter_multi_company">selector</field>
+        <field name="default_opening_date_filter">this_year</field>
+        <field name="column_ids">
+            <record id="budget_income_and_expense_balance_column" model="account.report.column">
+                <field name="name">余额</field>
+                <field name="expression_label">balance</field>
+            </record>
+        </field>
+        <field name="line_ids">
+            <record id="budget_income_and_expense_totalincome0" model="account.report.line">
+                <field name="name">预算收入</field>
+                <field name="code">BIEH_INC</field>
+                <field name="aggregation_formula">BIEH_6001.balance + BIEH_6101.balance + BIEH_6201.balance + BIEH_6301.balance + BIEH_6401.balance + BIEH_6501.balance + BIEH_6601.balance + BIEH_6602.balance + BIEH_6609.balance</field>
+                <field name="children_ids">
+                    <record id="budget_income_and_expense_6001" model="account.report.line">
+                        <field name="name">财政拨款预算收入</field>
+                        <field name="code">BIEH_6001</field>
+                        <field name="groupby">account_id</field>
+                        <field name="foldable" eval="True"/>
+                        <field name="account_codes_formula">-6001</field>
+                    </record>
+                    <record id="budget_income_and_expense_01" model="account.report.line">
+                        <field name="name">　其中：政府性基金收入</field>
+                        <field name="code">BIEH_01</field>
+                        <field name="groupby">account_id</field>
+                        <field name="foldable" eval="True"/>
+                    </record>
+                    <record id="budget_income_and_expense_600101" model="account.report.line">
+                        <field name="name">　其中：财政基本拨款预算收入</field>
+                        <field name="code">BIEH_600101</field>
+                        <field name="groupby">account_id</field>
+                        <field name="foldable" eval="True"/>
+                        <field name="account_codes_formula">-6001.01</field>
+                    </record>
+                    <record id="budget_income_and_expense_600102" model="account.report.line">
+                        <field name="name">　　　　财政项目拨款预算收入</field>
+                        <field name="code">BIEH_600102</field>
+                        <field name="groupby">account_id</field>
+                        <field name="foldable" eval="True"/>
+                        <field name="account_codes_formula">-6001.02</field>
+                    </record>
+                    <record id="budget_income_and_expense_6101" model="account.report.line">
+                        <field name="name">事业预算收入</field>
+                        <field name="code">BIEH_6101</field>
+                        <field name="groupby">account_id</field>
+                        <field name="foldable" eval="True"/>
+                        <field name="account_codes_formula">-6101</field>
+                    </record>
+                    <record id="budget_income_and_expense_610101" model="account.report.line">
+                        <field name="name">　其中：医疗预算收入</field>
+                        <field name="code">BIEH_610101</field>
+                        <field name="groupby">account_id</field>
+                        <field name="foldable" eval="True"/>
+                        <field name="account_codes_formula">-6101.01</field>
+                    </record>
+                    <record id="budget_income_and_expense_610102" model="account.report.line">
+                        <field name="name">　　　　科教预算收入</field>
+                        <field name="code">BIEH_610102</field>
+                        <field name="groupby">account_id</field>
+                        <field name="foldable" eval="True"/>
+                        <field name="account_codes_formula">-6101.02</field>
+                    </record>
+                    <record id="budget_income_and_expense_6201" model="account.report.line">
+                        <field name="name">上级补助预算收入</field>
+                        <field name="code">BIEH_6201</field>
+                        <field name="groupby">account_id</field>
+                        <field name="foldable" eval="True"/>
+                        <field name="account_codes_formula">-6201</field>
+                    </record>
+                    <record id="budget_income_and_expense_6301" model="account.report.line">
+                        <field name="name">附属单位上缴预算收入</field>
+                        <field name="code">BIEH_6301</field>
+                        <field name="groupby">account_id</field>
+                        <field name="foldable" eval="True"/>
+                        <field name="account_codes_formula">-6301</field>
+                    </record>
+                    <record id="budget_income_and_expense_6401" model="account.report.line">
+                        <field name="name">经营预算收入</field>
+                        <field name="code">BIEH_6401</field>
+                        <field name="groupby">account_id</field>
+                        <field name="foldable" eval="True"/>
+                        <field name="account_codes_formula">-6401</field>
+                    </record>
+                    <record id="budget_income_and_expense_6501" model="account.report.line">
+                        <field name="name">债务预算收入</field>
+                        <field name="code">BIEH_6501</field>
+                        <field name="groupby">account_id</field>
+                        <field name="foldable" eval="True"/>
+                        <field name="account_codes_formula">-6501</field>
+                    </record>
+                    <record id="budget_income_and_expense_6601" model="account.report.line">
+                        <field name="name">非同级财政拨款预算收入</field>
+                        <field name="code">BIEH_6601</field>
+                        <field name="groupby">account_id</field>
+                        <field name="foldable" eval="True"/>
+                        <field name="account_codes_formula">-6601</field>
+                    </record>
+                    <record id="budget_income_and_expense_6602" model="account.report.line">
+                        <field name="name">投资预算收益</field>
+                        <field name="code">BIEH_6602</field>
+                        <field name="groupby">account_id</field>
+                        <field name="foldable" eval="True"/>
+                        <field name="account_codes_formula">-6602</field>
+                    </record>
+                    <record id="budget_income_and_expense_6609" model="account.report.line">
+                        <field name="name">其他预算收入</field>
+                        <field name="code">BIEH_6609</field>
+                        <field name="groupby">account_id</field>
+                        <field name="foldable" eval="True"/>
+                        <field name="account_codes_formula">-6609</field>
+                    </record>
+                    <record id="budget_income_and_expense_660902" model="account.report.line">
+                        <field name="name">　其中：利息预算收入</field>
+                        <field name="code">BIEH_660902</field>
+                        <field name="groupby">account_id</field>
+                        <field name="foldable" eval="True"/>
+                        <field name="account_codes_formula">-6609.02</field>
+                    </record>
+                    <record id="budget_income_and_expense_660901" model="account.report.line">
+                        <field name="name">　　　　捐赠预算收入</field>
+                        <field name="code">BIEH_660901</field>
+                        <field name="groupby">account_id</field>
+                        <field name="foldable" eval="True"/>
+                        <field name="account_codes_formula">-6609.01</field>
+                    </record>
+                    <record id="budget_income_and_expense_660903" model="account.report.line">
+                        <field name="name">　　　　租金预算收入</field>
+                        <field name="code">BIEH_660903</field>
+                        <field name="groupby">account_id</field>
+                        <field name="foldable" eval="True"/>
+                        <field name="account_codes_formula">-6609.03</field>
+                    </record>
+                </field>
+            </record>
+        </field>
+    </record>
+</odoo>
