@@ -120,7 +120,7 @@ class GeneralLedgerCustomHandler(models.AbstractModel):
     def _get_yearly_total_line(self, report, parent_line_id, options, init_bal_by_col_group, balance):
         return self._get_periodic_total_line(report, parent_line_id, options, init_bal_by_col_group, balance, '当前累计', 'yearly')
 
-    def _add_period_total_lines(self, line_dict_id, groupby, options, progress, offset, unfold_all_batch_data, new_line, balance, lines):
+    def _add_period_total_lines(self, line_dict_id, groupby, options, progress, offset, unfold_all_batch_data, new_line, balance, lines, last_one=False):
         report = self.env.ref('account_reports.general_ledger_report')
 
         [date_column] = [column
@@ -133,15 +133,15 @@ class GeneralLedgerCustomHandler(models.AbstractModel):
 
         if progress_date:
             # 本日合计
-            if options['daily_total'] and line_date != progress_date:
+            if options['daily_total'] and (line_date != progress_date or last_one):
                 total_line = self._get_daily_total_line(report, line_dict_id, options, progress, balance)
                 lines.append(total_line)
             # 本月合计
-            if options['monthly_total'] and line_date[:7] != progress_date[:7]:
+            if options['monthly_total'] and (line_date[:7] != progress_date[:7] or last_one):
                 total_line = self._get_monthly_total_line(report, line_dict_id, options, progress, balance)
                 lines.append(total_line)
             # 本年累计
-            if options['yearly_total'] and line_date[:7] != progress_date[:7]:
+            if options['yearly_total'] and (line_date[:7] != progress_date[:7] or last_one):
                 total_line = self._get_yearly_total_line(report, line_dict_id, options, progress, balance)
                 lines.append(total_line)
 
@@ -286,6 +286,10 @@ class GeneralLedgerCustomHandler(models.AbstractModel):
 
             lines.append(new_line)
             next_progress = init_load_more_progress(new_line, next_progress)
+
+        # 添加本日合计、本月合计、本年累计行
+        if options['daily_total'] or options['monthly_total'] or options['yearly_total']:
+            self._add_period_total_lines(line_dict_id, groupby, options, next_progress, offset, unfold_all_batch_data, new_line, balance, lines, True)
 
         return {
             'lines': lines,
