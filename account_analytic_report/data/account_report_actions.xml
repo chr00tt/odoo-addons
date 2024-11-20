@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_account_analytic_report" model="ir.actions.client">
+            <field name="name">分析项目报表</field>
+            <field name="tag">account_report</field>
+            <field name="context" eval="{'report_id': ref('account_analytic_report.analytic_report')}"/>
+        </record>
+    </data>
+</odoo>

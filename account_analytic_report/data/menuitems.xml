@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_action_account_analytic_report" name="分析项目报表" action="action_account_analytic_report" groups="account.group_account_readonly" parent="account.menu_finance_reports" sequence="4"/>
+</odoo>
