@@ -155,7 +155,7 @@
                             <record id="account_financial_report_1601_1602_cn_hospital" model="account.report.line">
                                 <field name="name">　固定资产净值</field>
                                 <field name="code">cn_hospital_1601_1602</field>
-                                <field name="aggregation_formula">cn_hospital_1601.balance - CN_INSTITUTIONS_1602.balance</field>
+                                <field name="aggregation_formula">cn_hospital_1601.balance - cn_hospital_1602.balance</field>
                             </record>
                             <record id="account_financial_report_1611_cn_hospital" model="account.report.line">
                                 <field name="name">工程物资</field>
@@ -188,7 +188,7 @@
                             <record id="account_financial_report_1701_1702_cn_hospital" model="account.report.line">
                                 <field name="name">　无形资产净值</field>
                                 <field name="code">cn_hospital_1701_1702</field>
-                                <field name="aggregation_formula">cn_hospital_1701.balance - CN_INSTITUTIONS_1702.balance</field>
+                                <field name="aggregation_formula">cn_hospital_1701.balance - cn_hospital_1702.balance</field>
                             </record>
                             <record id="account_financial_report_1703_cn_hospital" model="account.report.line">
                                 <field name="name">研发支出</field>
@@ -214,7 +214,7 @@
                             <record id="account_financial_report_1801_1802_cn_hospital" model="account.report.line">
                                 <field name="name">　公共基础设施净值</field>
                                 <field name="code">cn_hospital_1801_1802</field>
-                                <field name="aggregation_formula">cn_hospital_1801.balance - CN_INSTITUTIONS_1802.balance</field>
+                                <field name="aggregation_formula">cn_hospital_1801.balance - cn_hospital_1802.balance</field>
                             </record>
                             <record id="account_financial_report_1811_cn_hospital" model="account.report.line">
                                 <field name="name">政府储备物资</field>
@@ -247,7 +247,7 @@
                             <record id="account_financial_report_1831_1832_cn_hospital" model="account.report.line">
                                 <field name="name">　保障性住房净值</field>
                                 <field name="code">cn_hospital_1831_1832</field>
-                                <field name="aggregation_formula">cn_hospital_1831.balance - CN_INSTITUTIONS_1832.balance</field>
+                                <field name="aggregation_formula">cn_hospital_1831.balance - cn_hospital_1832.balance</field>
                             </record>
                             <record id="account_financial_report_1901_cn_hospital" model="account.report.line">
                                 <field name="name">长期待摊费用</field>
@@ -387,7 +387,7 @@
                     <record id="account_financial_report_non_current_liabilities0_cn_hospital" model="account.report.line">
                         <field name="name">非流动负债：</field>
                         <field name="code">cn_hospital_NL</field>
-                        <field name="aggregation_formula">cn_hospital_2501.balance + CN_INSTITUTIONS_2502.balance + CN_INSTITUTIONS_2601.balance + CN_INSTITUTIONS_NL_other.balance</field>
+                        <field name="aggregation_formula">cn_hospital_2501.balance + cn_hospital_2502.balance + cn_hospital_2601.balance + cn_hospital_NL_other.balance</field>
                         <field name="children_ids">
                             <record id="account_financial_report_2501_cn_hospital" model="account.report.line">
                                 <field name="name">长期借款</field>
@@ -429,13 +429,13 @@
                     <record id="account_financial_report_liabilities_view0_cn_hospital" model="account.report.line">
                         <field name="name">　负债合计</field>
                         <field name="code">cn_hospital_L</field>
-                        <field name="aggregation_formula">cn_hospital_CL.balance + CN_INSTITUTIONS_NL.balance + CN_INSTITUTIONS_2901.balance</field>
+                        <field name="aggregation_formula">cn_hospital_CL.balance + cn_hospital_NL.balance + cn_hospital_2901.balance</field>
                     </record>
 
                     <record id="account_financial_report_equity_view0_cn_hospital" model="account.report.line">
                         <field name="name">净资产：</field>
                         <field name="code">cn_hospital_EQ</field>
-                        <field name="aggregation_formula">cn_hospital_PREV_YEAR_EARNINGS.balance + CN_INSTITUTIONS_3101.balance + CN_INSTITUTIONS_3201.balance + CN_INSTITUTIONS_3401.balance + CN_INSTITUTIONS_CURR_YEAR_EARNINGS.balance</field>
+                        <field name="aggregation_formula">cn_hospital_PREV_YEAR_EARNINGS.balance + cn_hospital_3101.balance + cn_hospital_3201.balance + cn_hospital_3401.balance + cn_hospital_CURR_YEAR_EARNINGS.balance</field>
                         <field name="children_ids">
                             <record id="account_financial_previous_year_earnings0_cn_hospital" model="account.report.line">
                                 <field name="name">累计盈余</field>
@@ -472,7 +472,7 @@
                                     <record id="account_financial_previous_year_earnings0_balance_cn_hospital" model="account.report.expression">
                                         <field name="label">balance</field>
                                         <field name="engine">aggregation</field>
-                                        <field name="formula">cn_hospital_PREV_YEAR_EARNINGS.balance_domain + CN_INSTITUTIONS_PREV_YEAR_EARNINGS.allocated_earnings - CN_INSTITUTIONS_PREV_YEAR_EARNINGS.CURR_YEAR_EARNINGS_PNL_balance - CN_INSTITUTIONS_PREV_YEAR_EARNINGS.CURR_YEAR_EARNINGS_ALLOC_balance</field>
+                                        <field name="formula">cn_hospital_PREV_YEAR_EARNINGS.balance_domain + cn_hospital_PREV_YEAR_EARNINGS.allocated_earnings - cn_hospital_PREV_YEAR_EARNINGS.CURR_YEAR_EARNINGS_PNL_balance - cn_hospital_PREV_YEAR_EARNINGS.CURR_YEAR_EARNINGS_ALLOC_balance</field>
                                     </record>
                                 </field>
                             </record>
@@ -500,7 +500,7 @@
                             <record id="account_financial_current_year_earnings0_cn_hospital" model="account.report.line">
                                 <field name="name">本期盈余</field>
                                 <field name="code">cn_hospital_CURR_YEAR_EARNINGS</field>
-                                <field name="aggregation_formula">cn_hospital_PREV_YEAR_EARNINGS.CURR_YEAR_EARNINGS_PNL_balance + CN_INSTITUTIONS_PREV_YEAR_EARNINGS.CURR_YEAR_EARNINGS_ALLOC_balance</field>
+                                <field name="aggregation_formula">cn_hospital_PREV_YEAR_EARNINGS.CURR_YEAR_EARNINGS_PNL_balance + cn_hospital_PREV_YEAR_EARNINGS.CURR_YEAR_EARNINGS_ALLOC_balance</field>
                             </record>
                         </field>
                     </record>

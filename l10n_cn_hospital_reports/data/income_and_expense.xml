@@ -23,7 +23,7 @@
                     <record id="account_financial_report_totalincome0_balance" model="account.report.expression">
                         <field name="label">balance</field>
                         <field name="engine">aggregation</field>
-                        <field name="formula">cn_hospital_4001.balance + CN_INSTITUTIONS_4101.balance + CN_INSTITUTIONS_4201.balance + CN_INSTITUTIONS_4301.balance + CN_INSTITUTIONS_OPINC.balance + CN_INSTITUTIONS_4601.balance + CN_INSTITUTIONS_4602.balance + CN_INSTITUTIONS_4603.balance + CN_INSTITUTIONS_4604.balance + CN_INSTITUTIONS_4605.balance + CN_INSTITUTIONS_OIN.balance</field>
+                        <field name="formula">cn_hospital_4001.balance + cn_hospital_4101.balance + cn_hospital_4201.balance + cn_hospital_4301.balance + cn_hospital_OPINC.balance + cn_hospital_4601.balance + cn_hospital_4602.balance + cn_hospital_4603.balance + cn_hospital_4604.balance + cn_hospital_4605.balance + cn_hospital_OIN.balance</field>
                         <field name="date_scope">normal</field>
                     </record>
                 </field>
@@ -122,7 +122,7 @@
                     <record id="account_financial_report_less_expenses0_balance" model="account.report.expression">
                         <field name="label">balance</field>
                         <field name="engine">aggregation</field>
-                        <field name="formula">cn_hospital_5001.balance + CN_INSTITUTIONS_5101.balance + CN_INSTITUTIONS_COS.balance + CN_INSTITUTIONS_5301.balance + CN_INSTITUTIONS_5401.balance + CN_INSTITUTIONS_5501.balance + CN_INSTITUTIONS_5801.balance + CN_INSTITUTIONS_5901.balance</field>
+                        <field name="formula">cn_hospital_5001.balance + cn_hospital_5101.balance + cn_hospital_COS.balance + cn_hospital_5301.balance + cn_hospital_5401.balance + cn_hospital_5501.balance + cn_hospital_5801.balance + cn_hospital_5901.balance</field>
                         <field name="date_scope">normal</field>
                         <field name="green_on_positive" eval="False"/>
                     </record>
@@ -202,7 +202,7 @@
                     <record id="account_financial_report_net_profit0_balance_cn_hospital" model="account.report.expression">
                         <field name="label">balance</field>
                         <field name="engine">aggregation</field>
-                        <field name="formula">cn_hospital_INC.balance - CN_INSTITUTIONS_LEX.balance</field>
+                        <field name="formula">cn_hospital_INC.balance - cn_hospital_LEX.balance</field>
                         <field name="date_scope">normal</field>
                     </record>
                 </field>

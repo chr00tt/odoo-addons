@@ -98,7 +98,6 @@ class AnalyticReportHandler(models.AbstractModel):
         company_currency = self.env.company.currency_id
         unfold_all = (self._context.get('print_mode') and not options.get('unfolded_lines')) or options.get('unfold_all')
 
-        unfoldable = False
         column_values = []
         report = self.env['account.report']
 
@@ -109,7 +108,7 @@ class AnalyticReportHandler(models.AbstractModel):
             'name': analytic_plan is not None and (analytic_plan.name or '')[:128] or self._get_no_analytic_plan_line_label(),
             'columns': column_values,
             'level': 2 + level_shift,
-            'unfoldable': unfoldable,
+            'unfoldable': True,
             'unfolded': line_id in options['unfolded_lines'] or unfold_all,
             'expand_function': '_report_expand_unfoldable_line_analytic_plan_ledger',
         }
