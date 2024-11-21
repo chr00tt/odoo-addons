@@ -42,13 +42,13 @@ class AnalyticReportHandler(models.AbstractModel):
 
         analytic_accounts = self.env['account.analytic.account'].search([('plan_id', '=', record_id)])
         for analytic_account in analytic_accounts:
-            lines.append(self._get_report_line_analytic_account(options, analytic_account, 1))
+            lines.append(self._get_report_line_analytic_account(options, line_dict_id, analytic_account, 1))
 
         return {
             'lines': lines,
         }
 
-    def _get_report_line_analytic_account(self, options, analytic_account, level_shift=0):
+    def _get_report_line_analytic_account(self, options, parent_line_id, analytic_account, level_shift=0):
         company_currency = self.env.company.currency_id
         unfold_all = (self._context.get('print_mode') and not options.get('unfolded_lines')) or options.get('unfold_all')
 
@@ -62,6 +62,7 @@ class AnalyticReportHandler(models.AbstractModel):
             'name': analytic_account is not None and (analytic_account.name or '')[:128] or self._get_no_analytic_account_line_label(),
             'columns': column_values,
             'level': 2 + level_shift,
+            'parent_id': parent_line_id,
             'unfoldable': True,
             'unfolded': line_id in options['unfolded_lines'] or unfold_all,
             'expand_function': '_report_expand_unfoldable_line_analytic_account_ledger',
