@@ -169,6 +169,7 @@ class AnalyticReportHandler(models.AbstractModel):
                 FROM {tables}
                 LEFT JOIN {ct_query} ON currency_table.company_id = account_move_line.company_id
                 LEFT JOIN account_analytic_line ON account_analytic_line.id = account_move_line.id
+                LEFT JOIN account_analytic_account ON account_analytic_account.id = account_analytic_line.account_id
                 WHERE {where_clause} AND account_analytic_account.plan_id = %s
                 GROUP BY account_analytic_line.account_id
             """)
