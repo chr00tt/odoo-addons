@@ -46,15 +46,11 @@ class AnalyticReportHandler(models.AbstractModel):
         partner_lines, totals_by_column_group = self._build_analytic_account_lines(report, options, record_id)
         lines = report._regroup_lines_by_name_prefix(options, partner_lines, '_report_expand_unfoldable_line_partner_ledger_prefix_group', 0)
 
-        analytic_accounts = self.env['account.analytic.account'].search([('plan_id', '=', record_id)])
-        for analytic_account in analytic_accounts:
-            lines.append(self._get_report_line_analytic_account(options, line_dict_id, analytic_account, 1))
-
         return {
             'lines': lines,
         }
 
-    def _build_partner_lines(self, report, options, analytic_plan_id, level_shift=0):
+    def _build_analytic_account_lines(self, report, options, analytic_plan_id, level_shift=0):
         lines = []
 
         totals_by_column_group = {
@@ -96,7 +92,7 @@ class AnalyticReportHandler(models.AbstractModel):
         company_currency = self.env.company.currency_id
 
         # Execute the queries and dispatch the results.
-        query, params = self._get_query_sums(options)
+        query, params = self._get_query_sums(options, analytic_plan_id)
 
         groupby_partners = {}
 
@@ -144,6 +140,41 @@ class AnalyticReportHandler(models.AbstractModel):
             partners = [p for p in partners] + [None]
 
         return [(partner, groupby_partners[partner.id if partner else None]) for partner in partners]
+
+    def _get_query_sums(self, options, analytic_plan_id):
+        """ Construct a query retrieving all the aggregated sums to build the report. It includes:
+        - sums for all partners.
+        - sums for the initial balances.
+        :param options:             The report options.
+        :return:                    (query, params)
+        """
+        params = []
+        queries = []
+        report = self.env.ref('account_analytic_report.analytic_report')
+
+        # Create the currency table.
+        ct_query = self.env['res.currency']._get_query_currency_table(options)
+        for column_group_key, column_group_options in report._split_options_per_column_group(options).items():
+            column_group_options['analytic_groupby_option'] = True
+            tables, where_clause, where_params = report._query_get(column_group_options, 'normal')
+            params.append(column_group_key)
+            params += where_params
+            queries.append(f"""
+                SELECT
+                    account_analytic_line.account_id                                                      AS groupby,
+                    %s                                                                                    AS column_group_key,
+                    SUM(ROUND(account_move_line.debit * currency_table.rate, currency_table.precision))   AS debit,
+                    SUM(ROUND(account_move_line.credit * currency_table.rate, currency_table.precision))  AS credit,
+                    SUM(ROUND(account_move_line.balance * currency_table.rate, currency_table.precision)) AS balance
+                FROM {tables}
+                LEFT JOIN {ct_query} ON currency_table.company_id = account_move_line.company_id
+                LEFT JOIN account_analytic_line ON account_analytic_line.id = account_move_line.id
+                WHERE {where_clause} AND account_analytic_account.plan_id = %s
+                GROUP BY account_analytic_line.account_id
+            """)
+            params += [analytic_plan_id]
+
+        return ' UNION ALL '.join(queries), params
 
     def _get_report_line_analytic_account(self, options, parent_line_id, analytic_account, level_shift=0):
         company_currency = self.env.company.currency_id
