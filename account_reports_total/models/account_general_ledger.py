@@ -273,10 +273,11 @@ class GeneralLedgerCustomHandler(models.AbstractModel):
         next_progress = progress
         for aml_result in aml_results.values():
             # 保存计算前的余额
-            [balance_column] = [column
-                for column in options['columns']
-                if column['expression_label'] == 'balance']
-            balance = next_progress['balance'][balance_column['column_group_key']] if 'balance' in next_progress else 0
+            if options['daily_total'] or options['monthly_total'] or options['yearly_total']:
+                [balance_column] = [column
+                    for column in options['columns']
+                    if column['expression_label'] == 'balance']
+                balance = next_progress['balance'][balance_column['column_group_key']] if 'balance' in next_progress else 0
 
             new_line = self._get_aml_line(report, line_dict_id, options, aml_result, next_progress)
 
