@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="template_analytic_report" inherit_id="account_reports.main_template" primary="True">
+    <template id="template_analytic_ledger_report" inherit_id="account_reports.main_template" primary="True">
         <xpath expr="//table" position="attributes">
             <attribute name="class">o_account_reports_table table-hover table-bold-unfold</attribute>
         </xpath>
     </template>
 
-    <template id="line_template_analytic_report" inherit_id="account_reports.line_template" primary="True">
+    <template id="line_template_analytic_ledger_report" inherit_id="account_reports.line_template" primary="True">
         <!--Also used by partner ledger-->
         <xpath expr="//span[hasclass('account_report_line_name')]" position="inside">
             &amp;nbsp;<a t-if="line.get('unfoldable')"
@@ -23,8 +23,8 @@
         </xpath>
     </template>
 
-    <record id="analytic_report" model="account.report">
-        <field name="name">分析项目报表</field>
+    <record id="analytic_ledger_report" model="account.report">
+        <field name="name">分析分类帐</field>
         <field name="filter_journals" eval="True"/>
         <field name="filter_analytic" eval="True"/>
         <field name="filter_period_comparison" eval="False"/>
@@ -33,9 +33,9 @@
         <field name="default_opening_date_filter">this_month</field>
         <field name="search_bar" eval="True"/>
         <field name="load_more_limit" eval="80"/>
-        <field name="main_template">account_analytic_report.template_analytic_report</field>
-        <field name="line_template">account_analytic_report.line_template_analytic_report</field>
-        <field name="custom_handler_model_id" ref="model_account_analytic_report_handler"/>
+        <field name="main_template">account_analytic_report.template_analytic_ledger_report</field>
+        <field name="line_template">account_analytic_report.line_template_analytic_ledger_report</field>
+        <field name="custom_handler_model_id" ref="model_account_analytic_ledger_report_handler"/>
         <field name="column_ids">
             <record id="analytic_report_date" model="account.report.column">
                 <field name="name">日期</field>

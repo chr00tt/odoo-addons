@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-from . import account_analytic_report
+from . import account_analytic_ledger
