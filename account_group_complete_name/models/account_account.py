@@ -11,6 +11,15 @@ class AccountGroup(models.Model):
     def _compute_complete_name(self):
         for category in self:
             if category.parent_id:
-                category.complete_name = '%s / %s' % (category.parent_id.complete_name, category.name)
+                category.complete_name = "%(parent)s / %(own)s" % {
+                    "parent": category.parent_id.complete_name,
+                    "own": category.name,
+                }
             else:
                 category.complete_name = category.name
+
+    def _adapt_parent_account_group(self):
+        super(AccountGroup, self)._adapt_parent_account_group()
+
+        if self:
+            self.env.add_to_compute(self._fields['complete_name'], self.search([]))
