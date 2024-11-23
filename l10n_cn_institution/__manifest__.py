@@ -14,6 +14,7 @@
     'depends': ['l10n_cn'],
     'data': [
         'data/account.account.tag.csv',
+        'data/product.category.csv',
     ],
     'demo': [
         'demo/demo_company.xml',

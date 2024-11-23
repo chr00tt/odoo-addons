@@ -1,6 +1,7 @@
 "id","code_prefix_start","name"
 "account_group_template_1","1","资产"
 "account_group_template_10","10","货币资金"
+"account_group_template_1002","1002","银行存款"
 "account_group_template_12","12","应收款"
 "account_group_template_1219","1219","坏账准备"
 "account_group_template_13","13","存货"

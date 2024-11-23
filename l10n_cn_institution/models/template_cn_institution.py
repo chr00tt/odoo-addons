@@ -15,6 +15,11 @@ class AccountChartTemplate(models.AbstractModel):
             'property_account_payable_id': 'account_template_2302',
             'property_account_expense_categ_id': 'account_template_5001',
             'property_account_income_categ_id': 'account_template_4101',
+            'property_stock_account_input_categ_id': 'account_template_1301',
+            'property_stock_account_output_categ_id': 'account_template_1303',
+            'property_stock_valuation_account_id': 'account_template_1302',
+            'property_tax_payable_account_id': 'account_template_2101',
+            'property_tax_receivable_account_id': 'account_template_2101',
         }
 
     @template('cn_institution', 'res.company')
@@ -34,6 +39,8 @@ class AccountChartTemplate(models.AbstractModel):
                 'account_journal_suspense_account_id': 'account_template_100207',
                 'default_cash_difference_income_account_id': 'account_template_1902',
                 'default_cash_difference_expense_account_id': 'account_template_1902',
+                'account_journal_payment_debit_account_id': 'account_template_100208',
+                'account_journal_payment_credit_account_id': 'account_template_100209',
             },
         }
 

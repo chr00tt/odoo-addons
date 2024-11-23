@@ -7,12 +7,10 @@
     'category': 'Accounting/Localizations',
     'website': 'https://github.com/chr00tt/odoo-addons',
     'depends': [
-        'l10n_cn_hospital',
         'account_asset',
     ],
     'data': [
         'data/product.category.csv',
     ],
-    'auto_install': True,
     'license': 'LGPL-3',
 }
