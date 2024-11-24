@@ -6,11 +6,10 @@
     'category': 'Accounting/Localizations',
     'depends': ['l10n_cn_institution', 'account_reports'],
     'data': [
+        'data/menuitems.xml',
         'data/balance_sheet.xml',
         'data/income_and_expense.xml',
         'data/budget_income_and_expense.xml',
-        'data/institution_report_actions.xml',
-        'data/menuitems.xml',
     ],
     'auto_install': True,
     'license': 'LGPL-3',
