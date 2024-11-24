@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api, _
 
-class CashFlowReportCustomHandler(models.AbstractModel):
-    _name = 'cn_institution.cash.flow.report.handler'
-    _inherit = 'account.cash.flow.report.handler'
-    _description = '现金流量表自定义处理程序'
+class AccountCashFlowReport(models.AbstractModel):
+    _name = 'cn_institution.cash.flow.report'
+    _inherit = 'account.cash.flow.report'
+    _description = '现金流量表'
 
     def _get_tags_ids(self):
         ''' Get a dict to pass on to _dispatch_aml_data containing information mapping account tags to report lines. '''
