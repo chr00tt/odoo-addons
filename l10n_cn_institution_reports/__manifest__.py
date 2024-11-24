@@ -10,6 +10,7 @@
         'data/balance_sheet.xml',
         'data/income_and_expense.xml',
         'data/budget_income_and_expense.xml',
+        'data/account_financial_report_data.xml',
     ],
     'auto_install': True,
     'license': 'LGPL-3',

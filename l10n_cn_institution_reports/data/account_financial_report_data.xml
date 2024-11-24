@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_account_report_cs" model="ir.actions.client">
+            <field name="name">现金流量表（行政事业单位）</field>
+            <field name="tag">account_report</field>
+            <field name="context" eval="{'model': 'cn_institution.cash.flow.report'}"/>
+        </record>
+
+        <menuitem id="menu_action_account_report_cash_flow" name="现金流量表（行政事业单位）" action="action_account_report_cs" parent="account.account_reports_legal_statements_menu" groups="account.group_account_readonly"/>
+    </data>
+</odoo>
