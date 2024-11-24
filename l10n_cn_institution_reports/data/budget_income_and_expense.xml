@@ -1,33 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="budget_income_and_expense" model="account.report">
+    <record id="budget_income_and_expense" model="account.financial.html.report">
         <field name="name">预算收入支出表</field>
-        <field name="filter_analytic_groupby" eval="True"/>
-        <field name="filter_unfold_all" eval="True"/>
-        <field name="filter_journals" eval="True"/>
-        <field name="filter_multi_company">selector</field>
-        <field name="default_opening_date_filter">this_year</field>
-        <field name="column_ids">
-            <record id="profit_and_loss_column" model="account.report.column">
-                <field name="name">余额</field>
-                <field name="expression_label">balance</field>
-            </record>
-        </field>
-        <field name="line_ids">
-            <record id="budget_income_and_expense_totalincome0" model="account.report.line">
+        <field name="analytic" eval="True"/>
+        <field name="unfold_all_filter" eval="True"/>
+        <field name="show_journal_filter" eval="True"/>
+        <field name='parent_id' ref='l10n_cn_institution_reports.account_reports_budget_statements_menu'/>
+        <field name="country_id" ref="base.cn"/>
+    </record>
+
+            <record id="budget_income_and_expense_totalincome0" model="account.financial.html.report.line">
                 <field name="name">预算收入</field>
                 <field name="code">BIE_INC</field>
-                <field name="aggregation_formula">BIE_6001.balance</field>
-                <field name="children_ids">
-                    <record id="budget_income_and_expense_6001" model="account.report.line">
+                <field name="formulas">BIE_6001</field>
+                <field name="financial_report_id" ref="budget_income_and_expense"/>
+                <field name="level" eval="0" />
+            </record>
+
+                    <record id="budget_income_and_expense_6001" model="account.financial.html.report.line">
                         <field name="name">财政拨款预算收入</field>
                         <field name="code">BIE_6001</field>
+                        <field name="formulas">sum</field>
+                        <field name="parent_id" ref='budget_income_and_expense_totalincome0'/>
                         <field name="groupby">account_id</field>
-                        <field name="foldable" eval="True"/>
-                        <field name="account_codes_formula">6001</field>
+                        <field name="domain" eval="[('account_id.code', '=like', '6001%')]" />
+                        <field name="level" eval="1" />
                     </record>
-                </field>
-            </record>
-        </field>
-    </record>
 </odoo>
