@@ -6,6 +6,110 @@ class AccountCashFlowReport(models.AbstractModel):
     _inherit = 'account.cash.flow.report'
     _description = '现金流量表'
 
+    @api.model
+    def _get_lines(self, options, line_id=None):
+        # Compute the cash flow report using the direct method: https://www.investopedia.com/terms/d/direct_method.asp
+        lines = []
+
+        layout_data = self._get_layout_data()
+        report_data = self._get_report_data(options, layout_data)
+
+        for layout_line_id, layout_line_data in layout_data.items():
+            lines.append(self._get_layout_line(options, layout_line_id, layout_line_data, report_data))
+
+            if layout_line_id in report_data and 'aml_groupby_account' in report_data[layout_line_id]:
+                aml_data_values = report_data[layout_line_id]['aml_groupby_account'].values()
+                for aml_data in sorted(aml_data_values, key=lambda x: x['account_code']):
+                    lines.append(self._get_aml_line(options, aml_data))
+
+        unexplained_difference_line = self._get_unexplained_difference_line(options, report_data)
+
+        if unexplained_difference_line:
+            lines.append(unexplained_difference_line)
+
+        return lines
+
+    @api.model
+    def _get_report_name(self):
+        return '现金流量表（行政事业单位）'
+
+    def _get_report_data(self, options, layout_data):
+        report_data = {}
+
+        currency_table_query = self.env['res.currency']._get_query_currency_table(options)
+
+        payment_move_ids, payment_account_ids = self._get_liquidity_move_ids(options)
+
+        # Compute 'Cash and cash equivalents, beginning of period'
+        beginning_period_options = self._get_options_beginning_period(options)
+        for aml_data in self._compute_liquidity_balance(beginning_period_options, currency_table_query, payment_account_ids):
+            self._add_report_data('opening_balance', aml_data, layout_data, report_data)
+            self._add_report_data('closing_balance', aml_data, layout_data, report_data)
+
+        # Compute 'Cash and cash equivalents, closing balance'
+        for aml_data in self._compute_liquidity_balance(options, currency_table_query, payment_account_ids):
+            self._add_report_data('closing_balance', aml_data, layout_data, report_data)
+
+        tags_ids = self._get_tags_ids()
+        tags_per_account = self._get_tags_per_account(options, tuple(tags_ids.values()))
+
+        # Process liquidity moves
+        res = self._get_liquidity_move_report_lines(options, currency_table_query, payment_move_ids, payment_account_ids)
+        for aml_data in res:
+            self._dispatch_aml_data(tags_ids, aml_data, layout_data, report_data, tags_per_account)
+
+        # Process reconciled moves
+        res = self._get_reconciled_move_report_lines(options, currency_table_query, payment_move_ids, payment_account_ids)
+        for aml_data in res:
+            self._dispatch_aml_data(tags_ids, aml_data, layout_data, report_data, tags_per_account)
+
+        return report_data
+
+    def _add_report_data(self, layout_line_id, aml_data, layout_data, report_data):
+        """
+        Add or update the report_data dictionnary with aml_data.
+
+        report_data is a dictionnary where the keys are keys from _cash_flow_report_get_layout_data() (used for mapping)
+        and the values can contain 2 dictionnaries:
+            * (required) 'balance' where the key is the column_group_key and the value is the balance of the line
+            * (optional) 'aml_groupby_account' where the key is an account_id and the values are the aml data
+        """
+        def _report_update_parent(layout_line_id, aml_balance, layout_data, report_data):
+            # Update the balance in report_data of the parent of the layout_line_id recursively (Stops when the line has no parent)
+            if 'parent_line_id' in layout_data[layout_line_id]:
+                parent_line_id = layout_data[layout_line_id]['parent_line_id']
+
+                report_data.setdefault(parent_line_id, {'balance': 0.0})
+                report_data[parent_line_id]['balance'] += aml_balance
+
+                _report_update_parent(parent_line_id, aml_balance, layout_data, report_data)
+
+        aml_account_id, aml_account_code, aml_account_name, aml_balance = aml_data
+
+        if self.env.company.currency_id.is_zero(aml_balance):
+            return
+
+        report_data.setdefault(layout_line_id, {
+            'balance': 0.0,
+            'aml_groupby_account': {},
+        })
+
+        report_data[layout_line_id]['aml_groupby_account'].setdefault(aml_account_id, {
+            'parent_line_id': layout_line_id,
+            'account_id': aml_account_id,
+            'account_code': aml_account_code,
+            'account_name': aml_account_name,
+            'level': layout_data[layout_line_id]['level'] + 1,
+            'balance': 0.0,
+        })
+
+        report_data[layout_line_id]['balance'] += aml_balance
+
+        report_data[layout_line_id]['aml_groupby_account'][aml_account_id].setdefault('balance', 0.0)
+        report_data[layout_line_id]['aml_groupby_account'][aml_account_id]['balance'] += aml_balance
+
+        _report_update_parent(layout_line_id, aml_balance, layout_data, report_data)
+
     def _get_tags_ids(self):
         ''' Get a dict to pass on to _dispatch_aml_data containing information mapping account tags to report lines. '''
         return {
@@ -23,26 +127,28 @@ class AccountCashFlowReport(models.AbstractModel):
             'financing': self.env.ref('account.account_tag_financing').id,
         }
 
-    def _dispatch_aml_data(self, tags_ids, aml_data, layout_data, report_data):
-        if aml_data['balance'] < 0:
-            if aml_data['account_tag_id'] == tags_ids['operating']:
+    def _dispatch_aml_data(self, tags_ids, aml_data, layout_data, report_data, tags_per_account):
+        account_id, account_code, account_name, account_internal_type, amount = aml_data
+        aml_data = (account_id, account_code, account_name, amount)
+        if amount < 0:
+            if tags_ids['operating'] in tags_per_account.get(account_id, []):
                 self._add_report_data('paid_operating_activities', aml_data, layout_data, report_data)
-            elif aml_data['account_tag_id'] == tags_ids['operating_5']:
+            elif tags_ids['operating_5'] in tags_per_account.get(account_id, []):
                 self._add_report_data('paid_operating_5', aml_data, layout_data, report_data)
-            elif aml_data['account_tag_id'] == tags_ids['operating_6']:
+            elif tags_ids['operating_6'] in tags_per_account.get(account_id, []):
                 self._add_report_data('paid_operating_6', aml_data, layout_data, report_data)
-            elif aml_data['account_tag_id'] == tags_ids['operating_4']:
+            elif tags_ids['operating_4'] in tags_per_account.get(account_id, []):
                 self._add_report_data('paid_operating_4', aml_data, layout_data, report_data)
             else:
                 self._add_report_data('unclassified_activities_cash_out', aml_data, layout_data, report_data)
-        elif aml_data['balance'] > 0:
-            if aml_data['account_tag_id'] == tags_ids['operating_1']:
+        elif amount > 0:
+            if tags_ids['operating_1'] in tags_per_account.get(account_id, []):
                 self._add_report_data('received_operating_1', aml_data, layout_data, report_data)
-            elif aml_data['account_tag_id'] == tags_ids['operating_2']:
+            elif tags_ids['operating_2'] in tags_per_account.get(account_id, []):
                 self._add_report_data('received_operating_2', aml_data, layout_data, report_data)
-            elif aml_data['account_tag_id'] == tags_ids['operating']:
+            elif tags_ids['operating'] in tags_per_account.get(account_id, []):
                 self._add_report_data('received_operating_activities', aml_data, layout_data, report_data)
-            elif aml_data['account_tag_id'] == tags_ids['operating_4']:
+            elif tags_ids['operating_4'] in tags_per_account.get(account_id, []):
                 self._add_report_data('received_operating_4', aml_data, layout_data, report_data)
             else:
                 self._add_report_data('unclassified_activities_cash_in', aml_data, layout_data, report_data)
@@ -80,169 +186,55 @@ class AccountCashFlowReport(models.AbstractModel):
             'closing_balance': {'name': '现金及现金等价物，期末余额', 'level': 0},
         }
 
-    @api.model
-    def _get_lines(self, options, line_id=None):
-
-        def _insert_at_index(index, account_id, account_code, account_name, amount):
-            ''' Insert the amount in the right section depending the line's index and the account_id. '''
-            # Helper used to add some values to the report line having the index passed as parameter
-            # (see _get_lines_to_compute).
-            line = lines_to_compute[index]
-
-            if self.env.company.currency_id.is_zero(amount):
-                return
-
-            line.setdefault('unfolded_lines', {})
-            line['unfolded_lines'].setdefault(account_id, {
-                'id': account_id,
-                'name': '%s %s' % (account_code, account_name),
-                'level': line['level'] + 1,
-                'parent_id': line['id'],
-                'columns': [{'name': 0.0, 'class': 'number'}],
-            })
-            line['columns'][0]['name'] += amount
-            line['unfolded_lines'][account_id]['columns'][0]['name'] += amount
-
-        def _dispatch_result(account_id, account_code, account_name, account_internal_type, amount):
-            ''' Dispatch the newly fetched line inside the right section. '''
-            if account_internal_type == 'receivable':
-                # 'Advance Payments received from customers'                (index=3)
-                _insert_at_index(3, account_id, account_code, account_name, -amount)
-            elif account_internal_type == 'payable':
-                # 'Advance Payments made to suppliers'                      (index=5)
-                _insert_at_index(5, account_id, account_code, account_name, -amount)
-            elif amount < 0:
-                if tag_operating_id in tags_per_account.get(account_id, []):
-                    # 'Cash received from operating activities'             (index=4)
-                    _insert_at_index(4, account_id, account_code, account_name, -amount)
-                elif tag_investing_id in tags_per_account.get(account_id, []):
-                    # 'Cash in for investing activities'                    (index=8)
-                    _insert_at_index(8, account_id, account_code, account_name, -amount)
-                elif tag_financing_id in tags_per_account.get(account_id, []):
-                    # 'Cash in for financing activities'                    (index=11)
-                    _insert_at_index(11, account_id, account_code, account_name, -amount)
-                else:
-                    # 'Cash in for unclassified activities'                 (index=14)
-                    _insert_at_index(14, account_id, account_code, account_name, -amount)
-            elif amount > 0:
-                if tag_operating_id in tags_per_account.get(account_id, []):
-                    # 'Cash paid for operating activities'                  (index=6)
-                    _insert_at_index(6, account_id, account_code, account_name, -amount)
-                elif tag_investing_id in tags_per_account.get(account_id, []):
-                    # 'Cash out for investing activities'                   (index=9)
-                    _insert_at_index(9, account_id, account_code, account_name, -amount)
-                elif tag_financing_id in tags_per_account.get(account_id, []):
-                    # 'Cash out for financing activities'                   (index=12)
-                    _insert_at_index(12, account_id, account_code, account_name, -amount)
-                else:
-                    # 'Cash out for unclassified activities'                (index=15)
-                    _insert_at_index(15, account_id, account_code, account_name, -amount)
-
-        self.flush()
-
+    def _get_layout_line(self, options, layout_line_id, layout_line_data, report_data):
+        line_id = self._get_generic_line_id(None, None, markup=layout_line_id)
         unfold_all = self._context.get('print_mode') or options.get('unfold_all')
-        currency_table_query = self.env['res.currency']._get_query_currency_table(options)
-        lines_to_compute = self._get_lines_to_compute(options)
+        unfoldable = 'aml_groupby_account' in report_data[layout_line_id] if layout_line_id in report_data else False
 
-        tag_operating_id = self.env.ref('account.account_tag_operating').id
-        tag_investing_id = self.env.ref('account.account_tag_investing').id
-        tag_financing_id = self.env.ref('account.account_tag_financing').id
-        tag_ids = (tag_operating_id, tag_investing_id, tag_financing_id)
-        tags_per_account = self._get_tags_per_account(options, tag_ids)
+        value = report_data[layout_line_id].get('balance', 0.0) if layout_line_id in report_data else 0.0
+        column_values = [{'name': value, 'class': 'number'}]
 
-        payment_move_ids, payment_account_ids = self._get_liquidity_move_ids(options)
+        return {
+            'id': line_id,
+            'name': layout_line_data['name'],
+            'level': layout_line_data['level'],
+            'class': 'o_account_reports_totals_below_sections' if self.env.company.totals_below_sections else '',
+            'columns': column_values,
+            'unfoldable': unfoldable,
+            'unfolded': line_id in options['unfolded_lines'] or unfold_all,
+        }
 
-        # Compute 'Cash and cash equivalents, beginning of period'      (index=0)
-        beginning_period_options = self._get_options_beginning_period(options)
-        for account_id, account_code, account_name, balance in self._compute_liquidity_balance(beginning_period_options, currency_table_query, payment_account_ids):
-            _insert_at_index(0, account_id, account_code, account_name, balance)
-            _insert_at_index(16, account_id, account_code, account_name, balance)
+    def _get_aml_line(self, options, aml_data):
+        parent_line_id = self._get_generic_line_id(None, None, aml_data['parent_line_id'])
+        line_id = self._get_generic_line_id('account.account', aml_data['account_id'], parent_line_id=parent_line_id)
 
-        # Compute 'Cash and cash equivalents, closing balance'          (index=16)
-        for account_id, account_code, account_name, balance in self._compute_liquidity_balance(options, currency_table_query, payment_account_ids):
-            _insert_at_index(16, account_id, account_code, account_name, balance)
+        value = aml_data['balance']
+        column_values = [{'name': value, 'class': 'number'}]
 
-        # ==== Process liquidity moves ====
-        res = self._get_liquidity_move_report_lines(options, currency_table_query, payment_move_ids, payment_account_ids)
-        for account_id, account_code, account_name, account_internal_type, amount in res:
-            _dispatch_result(account_id, account_code, account_name, account_internal_type, amount)
+        return {
+            'id': line_id,
+            'name': f"{aml_data['account_code']} {aml_data['account_name']}",
+            'caret_options': 'account.account',
+            'level': aml_data['level'],
+            'parent_id': parent_line_id,
+            'columns': column_values,
+        }
 
-        # ==== Process reconciled moves ====
-        res = self._get_reconciled_move_report_lines(options, currency_table_query, payment_move_ids, payment_account_ids)
-        for account_id, account_code, account_name, account_internal_type, balance in res:
-            _dispatch_result(account_id, account_code, account_name, account_internal_type, balance)
+    def _get_unexplained_difference_line(self, options, report_data):
+        unexplained_difference = False
 
-        # 'Cash flows from operating activities'                            (index=2)
-        lines_to_compute[2]['columns'][0]['name'] = \
-            lines_to_compute[3]['columns'][0]['name'] + \
-            lines_to_compute[4]['columns'][0]['name'] + \
-            lines_to_compute[5]['columns'][0]['name'] + \
-            lines_to_compute[6]['columns'][0]['name']
-        # 'Cash flows from investing & extraordinary activities'            (index=7)
-        lines_to_compute[7]['columns'][0]['name'] = \
-            lines_to_compute[8]['columns'][0]['name'] + \
-            lines_to_compute[9]['columns'][0]['name']
-        # 'Cash flows from financing activities'                            (index=10)
-        lines_to_compute[10]['columns'][0]['name'] = \
-            lines_to_compute[11]['columns'][0]['name'] + \
-            lines_to_compute[12]['columns'][0]['name']
-        # 'Cash flows from unclassified activities'                         (index=13)
-        lines_to_compute[13]['columns'][0]['name'] = \
-            lines_to_compute[14]['columns'][0]['name'] + \
-            lines_to_compute[15]['columns'][0]['name']
-        # 'Net increase in cash and cash equivalents'                       (index=1)
-        lines_to_compute[1]['columns'][0]['name'] = \
-            lines_to_compute[2]['columns'][0]['name'] + \
-            lines_to_compute[7]['columns'][0]['name'] + \
-            lines_to_compute[10]['columns'][0]['name'] + \
-            lines_to_compute[13]['columns'][0]['name']
+        opening_balance = report_data['opening_balance']['balance'] if 'opening_balance' in report_data else 0.0
+        closing_balance = report_data['closing_balance']['balance'] if 'closing_balance' in report_data else 0.0
+        net_increase = report_data['net_increase']['balance'] if 'net_increase' in report_data else 0.0
 
-        # ==== Compute the unexplained difference ====
+        delta = closing_balance - opening_balance - net_increase
+        column_values = [{'name': delta, 'class': 'number'}]
 
-        closing_ending_gap = lines_to_compute[16]['columns'][0]['name'] - lines_to_compute[0]['columns'][0]['name']
-        computed_gap = sum(lines_to_compute[index]['columns'][0]['name'] for index in [2, 7, 10, 13])
-        delta = closing_ending_gap - computed_gap
-        if not self.env.company.currency_id.is_zero(delta):
-            lines_to_compute.insert(16, {
-                'id': 'cash_flow_line_unexplained_difference',
-                'name': _('Unexplained Difference'),
+        if unexplained_difference:
+            return {
+                'id': self._get_generic_line_id(None, None, markup='unexplained_difference'),
+                'name': 'Unexplained Difference',
                 'level': 0,
-                'columns': [{'name': delta, 'class': 'number'}],
-            })
-
-        # ==== Build final lines ====
-
-        lines = []
-        for line in lines_to_compute:
-            unfolded_lines = line.pop('unfolded_lines', {})
-            sub_lines = [unfolded_lines[k] for k in sorted(unfolded_lines)]
-
-            line['unfoldable'] = len(sub_lines) > 0
-            line['unfolded'] = line['unfoldable'] and (unfold_all or line['id'] in options['unfolded_lines'])
-
-            # Header line.
-            line['columns'][0]['name'] = self.format_value(line['columns'][0]['name'])
-            lines.append(line)
-
-            # Sub lines.
-            for sub_line in sub_lines:
-                sub_line['columns'][0]['name'] = self.format_value(sub_line['columns'][0]['name'])
-                sub_line['style'] = '' if line['unfolded'] else 'display: none;'
-                lines.append(sub_line)
-
-            # Total line.
-            if line['unfoldable']:
-                lines.append({
-                    'id': '%s_total' % line['id'],
-                    'name': _('Total') + ' ' + line['name'],
-                    'level': line['level'] + 1,
-                    'parent_id': line['id'],
-                    'columns': line['columns'],
-                    'class': 'o_account_reports_domain_total',
-                    'style': '' if line['unfolded'] else 'display: none;',
-                })
-        return lines
-
-    @api.model
-    def _get_report_name(self):
-        return '现金流量表（行政事业单位）'
+                'class': 'o_account_reports_totals_below_sections' if self.env.company.totals_below_sections else '',
+                'columns': column_values,
+            }
