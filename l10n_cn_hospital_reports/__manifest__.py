@@ -4,7 +4,11 @@
 {
     'name': '中国 - 医院会计 - 会计报表',
     'category': 'Accounting/Localizations',
-    'depends': ['l10n_cn_hospital', 'l10n_cn_institution_reports'],
+    'depends': [
+        'l10n_cn_hospital',
+        'l10n_cn_institution_reports',
+        'l10n_cn_hospital_funding_type',
+    ],
     'data': [
         'data/balance_sheet.xml',
         'data/budget_income_and_expense.xml',

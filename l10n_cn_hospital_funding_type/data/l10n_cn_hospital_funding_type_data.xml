@@ -4,7 +4,7 @@
         <!-- Analytic -->
         <record id="analytic_plan_funding_type" model="account.analytic.plan">
             <field name="name">经费性质</field>
-            <field name="default_applicability">unavailable</field>
+            <field name="default_applicability">optional</field>
             <field name="company_id" eval="False"/>
             <field name="applicability_ids" eval="[
                 Command.clear(),
@@ -35,17 +35,22 @@
                 ]"/>
         </record>
         <!-- Analytic Accounts -->
-        <record id="analytic_1" model="account.analytic.account">
+        <record id="analytic_basic" model="account.analytic.account">
             <field name="name">财政基本拨款经费</field>
             <field name="plan_id" ref="analytic_plan_funding_type"/>
             <field name="company_id" eval="False"/>
         </record>
-        <record id="analytic_2" model="account.analytic.account">
+        <record id="analytic_project" model="account.analytic.account">
+            <field name="name">财政项目拨款经费</field>
+            <field name="plan_id" ref="analytic_plan_funding_type"/>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="analytic_education" model="account.analytic.account">
             <field name="name">科教经费</field>
             <field name="plan_id" ref="analytic_plan_funding_type"/>
             <field name="company_id" eval="False"/>
         </record>
-        <record id="analytic_3" model="account.analytic.account">
+        <record id="analytic_other" model="account.analytic.account">
             <field name="name">其他经费</field>
             <field name="plan_id" ref="analytic_plan_funding_type"/>
             <field name="company_id" eval="False"/>
