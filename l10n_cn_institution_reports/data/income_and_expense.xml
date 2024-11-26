@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <record id="income_and_expense" model="account.financial.html.report">
+        <field name="name">收入费用表(行政事业单位)</field>
+        <field name="analytic" eval="True"/>
+        <field name="unfold_all_filter" eval="True"/>
+        <field name="show_journal_filter" eval="True"/>
+        <field name='parent_id' ref='account.account_reports_legal_statements_menu'/>
+    </record>
+
+            <record id="account_financial_report_totalincome0_cn_institutions" model="account.financial.html.report.line">
+                <field name="name">一、本期收入</field>
+                <field name="code">CN_INSTITUTIONS_INC</field>
+                <field name="financial_report_id" ref="income_and_expense"/>
+                <field name="formulas">balance = CN_INSTITUTIONS_4001.balance + CN_INSTITUTIONS_4101.balance + CN_INSTITUTIONS_4201.balance + CN_INSTITUTIONS_4301.balance + CN_INSTITUTIONS_OPINC.balance + CN_INSTITUTIONS_4601.balance + CN_INSTITUTIONS_4602.balance + CN_INSTITUTIONS_4603.balance + CN_INSTITUTIONS_4604.balance + CN_INSTITUTIONS_4605.balance + CN_INSTITUTIONS_OIN.balance</field>
+                <field name="level" eval="0" />
+            </record>
+
+                    <record id="account_financial_report_4001_cn_institutions" model="account.financial.html.report.line">
+                        <field name="name">（一）财政拨款收入</field>
+                        <field name="code">CN_INSTITUTIONS_4001</field>
+                        <field name="formulas">balance = -sum.balance</field>
+                        <field name="parent_id" ref='account_financial_report_totalincome0_cn_institutions'/>
+                        <field name="groupby">account_id</field>
+                        <field name="domain" eval="[('account_id.code', '=like', '4001%')]" />
+                        <field name="level" eval="1" />
+                    </record>
+                    <record id="account_financial_report_4101_cn_institutions" model="account.financial.html.report.line">
+                        <field name="name">（二）事业收入</field>
+                        <field name="code">CN_INSTITUTIONS_4101</field>
+                        <field name="formulas">balance = -sum.balance</field>
+                        <field name="parent_id" ref='account_financial_report_totalincome0_cn_institutions'/>
+                        <field name="groupby">account_id</field>
+                        <field name="domain" eval="[('account_id.code', '=like', '4101%')]" />
+                        <field name="level" eval="1" />
+                    </record>
+                    <record id="account_financial_report_4201_cn_institutions" model="account.financial.html.report.line">
+                        <field name="name">（三）上级补助收入</field>
+                        <field name="code">CN_INSTITUTIONS_4201</field>
+                        <field name="formulas">balance = -sum.balance</field>
+                        <field name="parent_id" ref='account_financial_report_totalincome0_cn_institutions'/>
+                        <field name="groupby">account_id</field>
+                        <field name="domain" eval="[('account_id.code', '=like', '4201%')]" />
+                        <field name="level" eval="1" />
+                    </record>
+                    <record id="account_financial_report_4301_cn_institutions" model="account.financial.html.report.line">
+                        <field name="name">（四）附属单位上缴收入</field>
+                        <field name="code">CN_INSTITUTIONS_4301</field>
+                        <field name="formulas">balance = -sum.balance</field>
+                        <field name="parent_id" ref='account_financial_report_totalincome0_cn_institutions'/>
+                        <field name="groupby">account_id</field>
+                        <field name="domain" eval="[('account_id.code', '=like', '4301%')]" />
+                        <field name="level" eval="1" />
+                    </record>
+                    <record id="account_financial_report_income0_cn_institutions" model="account.financial.html.report.line">
+                        <field name="name">（五）经营收入</field>
+                        <field name="code">CN_INSTITUTIONS_OPINC</field>
+                        <field name="formulas">balance = -sum.balance</field>
+                        <field name="parent_id" ref='account_financial_report_totalincome0_cn_institutions'/>
+                        <field name="groupby">account_id</field>
+                        <field name="domain" eval="[('account_id.user_type_id', '=', ref('account.data_account_type_revenue'))]"/>
+                        <field name="level" eval="1" />
+                    </record>
+                    <record id="account_financial_report_4601_cn_institutions" model="account.financial.html.report.line">
+                        <field name="name">（六）非同级财政拨款收入</field>
+                        <field name="code">CN_INSTITUTIONS_4601</field>
+                        <field name="formulas">balance = -sum.balance</field>
+                        <field name="parent_id" ref='account_financial_report_totalincome0_cn_institutions'/>
+                        <field name="groupby">account_id</field>
+                        <field name="domain" eval="[('account_id.code', '=like', '4601%')]" />
+                        <field name="level" eval="1" />
+                    </record>
+                    <record id="account_financial_report_4602_cn_institutions" model="account.financial.html.report.line">
+                        <field name="name">（七）投资收益</field>
+                        <field name="code">CN_INSTITUTIONS_4602</field>
+                        <field name="formulas">balance = -sum.balance</field>
+                        <field name="parent_id" ref='account_financial_report_totalincome0_cn_institutions'/>
+                        <field name="groupby">account_id</field>
+                        <field name="domain" eval="[('account_id.code', '=like', '4602%')]" />
+                        <field name="level" eval="1" />
+                    </record>
+                    <record id="account_financial_report_4603_cn_institutions" model="account.financial.html.report.line">
+                        <field name="name">（八）捐赠收入</field>
+                        <field name="code">CN_INSTITUTIONS_4603</field>
+                        <field name="formulas">balance = -sum.balance</field>
+                        <field name="parent_id" ref='account_financial_report_totalincome0_cn_institutions'/>
+                        <field name="groupby">account_id</field>
+                        <field name="domain" eval="[('account_id.code', '=like', '4603%')]" />
+                        <field name="level" eval="1" />
+                    </record>
+                    <record id="account_financial_report_4604_cn_institutions" model="account.financial.html.report.line">
+                        <field name="name">（九）利息收入</field>
+                        <field name="code">CN_INSTITUTIONS_4604</field>
+                        <field name="formulas">balance = -sum.balance</field>
+                        <field name="parent_id" ref='account_financial_report_totalincome0_cn_institutions'/>
+                        <field name="groupby">account_id</field>
+                        <field name="domain" eval="[('account_id.code', '=like', '4604%')]" />
+                        <field name="level" eval="1" />
+                    </record>
+                    <record id="account_financial_report_4605_cn_institutions" model="account.financial.html.report.line">
+                        <field name="name">（十）租金收入</field>
+                        <field name="code">CN_INSTITUTIONS_4605</field>
+                        <field name="formulas">balance = -sum.balance</field>
+                        <field name="parent_id" ref='account_financial_report_totalincome0_cn_institutions'/>
+                        <field name="groupby">account_id</field>
+                        <field name="domain" eval="[('account_id.code', '=like', '4605%')]" />
+                        <field name="level" eval="1" />
+                    </record>
+                    <record id="account_financial_report_other_income0_cn_institutions" model="account.financial.html.report.line">
+                        <field name="name">（十一）其他收入</field>
+                        <field name="code">CN_INSTITUTIONS_OIN</field>
+                        <field name="formulas">balance = -sum.balance</field>
+                        <field name="parent_id" ref='account_financial_report_totalincome0_cn_institutions'/>
+                        <field name="groupby">account_id</field>
+                        <field name="domain" eval="[('account_id.code', '=like', '4609%')]" />
+                        <field name="level" eval="1" />
+                    </record>
+
+            <record id="account_financial_report_less_expenses0_cn_institutions" model="account.financial.html.report.line">
+                <field name="name">二、本期费用</field>
+                <field name="code">CN_INSTITUTIONS_LEX</field>
+                <field name="formulas">balance = CN_INSTITUTIONS_5001.balance + CN_INSTITUTIONS_5101.balance + CN_INSTITUTIONS_COS.balance + CN_INSTITUTIONS_5301.balance + CN_INSTITUTIONS_5401.balance + CN_INSTITUTIONS_5501.balance + CN_INSTITUTIONS_5801.balance + CN_INSTITUTIONS_5901.balance</field>
+                <field name="financial_report_id" ref="income_and_expense"/>
+                <field name="level" eval="0" />
+            </record>
+
+                    <record id="account_financial_report_5001_cn_institutions" model="account.financial.html.report.line">
+                        <field name="name">（一）业务活动费用</field>
+                        <field name="code">CN_INSTITUTIONS_5001</field>
+                        <field name="formulas">balance = sum.balance</field>
+                        <field name="parent_id" ref='account_financial_report_less_expenses0_cn_institutions'/>
+                        <field name="groupby">account_id</field>
+                        <field name="domain" eval="[('account_id.code', '=like', '5001%')]" />
+                        <field name="level" eval="1" />
+                    </record>
+                    <record id="account_financial_report_5101_cn_institutions" model="account.financial.html.report.line">
+                        <field name="name">（二）单位管理费用</field>
+                        <field name="code">CN_INSTITUTIONS_5101</field>
+                        <field name="formulas">balance = sum.balance</field>
+                        <field name="parent_id" ref='account_financial_report_less_expenses0_cn_institutions'/>
+                        <field name="groupby">account_id</field>
+                        <field name="domain" eval="[('account_id.code', '=like', '5101%')]" />
+                        <field name="level" eval="1" />
+                    </record>
+                    <record id="account_financial_report_cost_sales0_cn_institutions" model="account.financial.html.report.line">
+                        <field name="name">（三）经营费用</field>
+                        <field name="code">CN_INSTITUTIONS_COS</field>
+                        <field name="formulas">balance = sum.balance</field>
+                        <field name="parent_id" ref='account_financial_report_less_expenses0_cn_institutions'/>
+                        <field name="groupby">account_id</field>
+                        <field name="domain" eval="[('account_id.user_type_id', '=', ref('account.data_account_type_direct_costs'))]"/>
+                        <field name="level" eval="1" />
+                    </record>
+                    <record id="account_financial_report_5301_cn_institutions" model="account.financial.html.report.line">
+                        <field name="name">（四）资产处置费用</field>
+                        <field name="code">CN_INSTITUTIONS_5301</field>
+                        <field name="formulas">balance = sum.balance</field>
+                        <field name="parent_id" ref='account_financial_report_less_expenses0_cn_institutions'/>
+                        <field name="groupby">account_id</field>
+                        <field name="domain" eval="[('account_id.code', '=like', '5301%')]" />
+                        <field name="level" eval="1" />
+                    </record>
+                    <record id="account_financial_report_5401_cn_institutions" model="account.financial.html.report.line">
+                        <field name="name">（五）上缴上级费用</field>
+                        <field name="code">CN_INSTITUTIONS_5401</field>
+                        <field name="formulas">balance = sum.balance</field>
+                        <field name="parent_id" ref='account_financial_report_less_expenses0_cn_institutions'/>
+                        <field name="groupby">account_id</field>
+                        <field name="domain" eval="[('account_id.code', '=like', '5401%')]" />
+                        <field name="level" eval="1" />
+                    </record>
+                    <record id="account_financial_report_5501_cn_institutions" model="account.financial.html.report.line">
+                        <field name="name">（六）对附属单位补助费用</field>
+                        <field name="code">CN_INSTITUTIONS_5501</field>
+                        <field name="formulas">balance = sum.balance</field>
+                        <field name="parent_id" ref='account_financial_report_less_expenses0_cn_institutions'/>
+                        <field name="groupby">account_id</field>
+                        <field name="domain" eval="[('account_id.code', '=like', '5501%')]" />
+                        <field name="level" eval="1" />
+                    </record>
+                    <record id="account_financial_report_5801_cn_institutions" model="account.financial.html.report.line">
+                        <field name="name">（七）所得税费用</field>
+                        <field name="code">CN_INSTITUTIONS_5801</field>
+                        <field name="formulas">balance = sum.balance</field>
+                        <field name="parent_id" ref='account_financial_report_less_expenses0_cn_institutions'/>
+                        <field name="groupby">account_id</field>
+                        <field name="domain" eval="[('account_id.code', '=like', '5801%')]" />
+                        <field name="level" eval="1" />
+                    </record>
+                    <record id="account_financial_report_5901_cn_institutions" model="account.financial.html.report.line">
+                        <field name="name">（八）其他费用</field>
+                        <field name="code">CN_INSTITUTIONS_5901</field>
+                        <field name="formulas">balance = sum.balance</field>
+                        <field name="parent_id" ref='account_financial_report_less_expenses0_cn_institutions'/>
+                        <field name="groupby">account_id</field>
+                        <field name="domain" eval="[('account_id.code', '=like', '5901%')]" />
+                        <field name="level" eval="1" />
+                    </record>
+
+            <record id="account_financial_report_net_profit0_cn_institutions" model="account.financial.html.report.line">
+                <field name="name">三、本期盈余</field>
+                <field name="code">CN_INSTITUTIONS_NEP</field>
+                <field name="formulas">balance = CN_INSTITUTIONS_INC.balance - CN_INSTITUTIONS_LEX.balance</field>
+                <field name="financial_report_id" ref="income_and_expense"/>
+                <field name="level" eval="0" />
+            </record>
+    </data>
+</odoo>

@@ -9,6 +9,7 @@
     'depends': ['l10n_cn_base'],
     'data': [
         'data/l10n_cn_institution_coa.xml',
+        'data/account.account.tag.csv',
         'data/account.group.csv',
         'data/account.account.template.csv',
         'data/l10n_cn_institution_coa_post.xml',

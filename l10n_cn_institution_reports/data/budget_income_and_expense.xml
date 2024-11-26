@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="budget_income_and_expense" model="account.financial.html.report">
+        <field name="name">预算收入支出表</field>
+        <field name="analytic" eval="True"/>
+        <field name="unfold_all_filter" eval="True"/>
+        <field name="show_journal_filter" eval="True"/>
+        <field name='parent_id' ref='l10n_cn_institution_reports.account_reports_budget_statements_menu'/>
+    </record>
+
+            <record id="budget_income_and_expense_totalincome0" model="account.financial.html.report.line">
+                <field name="name">预算收入</field>
+                <field name="code">BIE_INC</field>
+                <field name="formulas">balance = BIE_6001.balance</field>
+                <field name="financial_report_id" ref="budget_income_and_expense"/>
+                <field name="level" eval="0" />
+            </record>
+
+                    <record id="budget_income_and_expense_6001" model="account.financial.html.report.line">
+                        <field name="name">财政拨款预算收入</field>
+                        <field name="code">BIE_6001</field>
+                        <field name="formulas">balance = sum.balance</field>
+                        <field name="parent_id" ref='budget_income_and_expense_totalincome0'/>
+                        <field name="groupby">account_id</field>
+                        <field name="domain" eval="[('account_id.code', '=like', '6001%')]" />
+                        <field name="level" eval="1" />
+                    </record>
+</odoo>
