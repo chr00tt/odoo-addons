@@ -6,11 +6,10 @@
     'author': "He Jian",
     'category': 'Accounting/Localizations',
     'website': 'https://github.com/chr00tt/odoo-addons',
-    'depends': ['l10n_cn_institution'],
+    'depends': ['account'],
     'data': [
         'views/account_account_views.xml',
         'views/account_move_views.xml',
     ],
-    'auto_install': True,
     'license': 'LGPL-3',
 }
