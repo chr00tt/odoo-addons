@@ -15,4 +15,11 @@
             <a role="menuitem" class="dropdown-item js_account_report_bool_filter" title="预算会计" data-filter="budget_account" groups="account.group_account_readonly">预算会计</a>
         </xpath>
     </template>
+
+    <template id="filter_extra_options_template" inherit_id="account_reports.filter_extra_options_template">
+        <xpath expr="//t[@t-if='report.filter_show_draft']" position="after">
+            <t t-if="options['financial_account'] != options['budget_account'] and options['financial_account']">, 财务会计</t>
+            <t t-if="options['financial_account'] != options['budget_account'] and options['budget_account']">, 预算会计</t>
+        </xpath>
+    </template>
 </odoo>
