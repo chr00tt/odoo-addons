@@ -27,3 +27,10 @@ class AccountAccount(models.Model):
                 record.is_budget = code in ['6', '7', '8']
             else:
                 record.is_budget = False
+
+    @api.depends('account_type')
+    def _compute_internal_group(self):
+        for account in self:
+            if account.account_type:
+                # 将预算科目类型设置为 off_balance 内部组
+                account.internal_group = 'off_balance' if account.account_type in ['off_balance', 'budget_income', 'budget_expense', 'budget_surplus'] else account.account_type.split('_')[0]
