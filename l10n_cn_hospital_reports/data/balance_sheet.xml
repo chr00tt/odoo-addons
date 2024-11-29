@@ -150,7 +150,7 @@
                                 <field name="code">cn_hospital_1602</field>
                                 <field name="groupby">account_id</field>
                                 <field name="foldable" eval="True"/>
-                                <field name="domain_formula">sum([('account_id.code', '=like', '1602%')])</field>
+                                <field name="domain_formula">-sum([('account_id.code', '=like', '1602%')])</field>
                             </record>
                             <record id="account_financial_report_1601_1602_cn_hospital" model="account.report.line">
                                 <field name="name">　固定资产净值</field>
@@ -183,7 +183,7 @@
                                 <field name="code">cn_hospital_1702</field>
                                 <field name="groupby">account_id</field>
                                 <field name="foldable" eval="True"/>
-                                <field name="domain_formula">sum([('account_id.code', '=like', '1702%')])</field>
+                                <field name="domain_formula">-sum([('account_id.code', '=like', '1702%')])</field>
                             </record>
                             <record id="account_financial_report_1701_1702_cn_hospital" model="account.report.line">
                                 <field name="name">　无形资产净值</field>
@@ -481,7 +481,7 @@
                                 <field name="code">cn_hospital_3101</field>
                                 <field name="groupby">account_id</field>
                                 <field name="foldable" eval="True"/>
-                                <field name="domain_formula">sum([('account_id.code', '=like', '3101%')])</field>
+                                <field name="domain_formula">-sum([('account_id.code', '=like', '3101%')])</field>
                             </record>
                             <record id="account_financial_report_3201_cn_hospital" model="account.report.line">
                                 <field name="name">权益法调整</field>
@@ -495,12 +495,12 @@
                                 <field name="code">cn_hospital_3401</field>
                                 <field name="groupby">account_id</field>
                                 <field name="foldable" eval="True"/>
-                                <field name="domain_formula">sum([('account_id.code', '=like', '3401%')])</field>
+                                <field name="domain_formula">-sum([('account_id.code', '=like', '3401%')])</field>
                             </record>
                             <record id="account_financial_current_year_earnings0_cn_hospital" model="account.report.line">
                                 <field name="name">本期盈余</field>
                                 <field name="code">cn_hospital_CURR_YEAR_EARNINGS</field>
-                                <field name="aggregation_formula">cn_hospital_PREV_YEAR_EARNINGS.CURR_YEAR_EARNINGS_PNL_balance + cn_hospital_PREV_YEAR_EARNINGS.CURR_YEAR_EARNINGS_ALLOC_balance</field>
+                                <field name="account_codes_formula">-4-5</field>
                             </record>
                         </field>
                     </record>
