@@ -181,15 +181,15 @@
                         <field name="groupby">account_id</field>
                         <field name="foldable" eval="True"/>
                     </record>
-                    <record id="account_financial_report_410102_cn_hospital" model="account.report.line">
+                    <record id="account_financial_report_410102education_cn_hospital" model="account.report.line">
                         <field name="name">　　　　　　科教经费</field>
-                        <field name="code">cn_hospital_410102</field>
+                        <field name="code">cn_hospital_410102education</field>
                         <field name="groupby">account_id</field>
                         <field name="foldable" eval="True"/>
                     </record>
-                    <record id="account_financial_report_410102_cn_hospital" model="account.report.line">
+                    <record id="account_financial_report_410102other_cn_hospital" model="account.report.line">
                         <field name="name">　　　　　　其他经费</field>
-                        <field name="code">cn_hospital_410102</field>
+                        <field name="code">cn_hospital_410102other</field>
                         <field name="groupby">account_id</field>
                         <field name="foldable" eval="True"/>
                     </record>
