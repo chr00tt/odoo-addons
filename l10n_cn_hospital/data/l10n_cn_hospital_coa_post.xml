@@ -54,6 +54,70 @@
                 }),
             ]"/>
         </record>
+        <record id="tax_template_hospital_sales_included_9" model="account.tax.template">
+            <field name="chart_template_id" ref="chart_template_hospital"/>
+            <field name="name">9%销项税(含)</field>
+            <field name="description">增值税销项税9%(价内税)</field>
+            <field name="amount">9</field>
+            <field name="amount_type">percent</field>
+            <field name="type_tax_use">sale</field>
+            <field name="price_include" eval="1"/>
+            <field name="tax_group_id" ref="l10n_cn.l10n_cn_tax_group_vat_9"/>
+            <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+                (0,0, {
+                    'factor_percent': 100,
+                    'repartition_type': 'base',
+                }),
+                (0,0, {
+                    'factor_percent': 100,
+                    'repartition_type': 'tax',
+                    'account_id': ref('account_template_hospital_21010105'),
+                }),
+            ]"/>
+            <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+                (0,0, {
+                    'factor_percent': 100,
+                    'repartition_type': 'base',
+                }),
+                (0,0, {
+                    'factor_percent': 100,
+                    'repartition_type': 'tax',
+                    'account_id': ref('account_template_hospital_21010105'),
+                }),
+            ]"/>
+        </record>
+        <record id="tax_template_hospital_sales_included_6" model="account.tax.template">
+            <field name="chart_template_id" ref="chart_template_hospital"/>
+            <field name="name">6%销项税(含)</field>
+            <field name="description">增值税销项税6%(价内税)</field>
+            <field name="amount">6</field>
+            <field name="amount_type">percent</field>
+            <field name="type_tax_use">sale</field>
+            <field name="price_include" eval="1"/>
+            <field name="tax_group_id" ref="l10n_cn.l10n_cn_tax_group_vat_6"/>
+            <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+                (0,0, {
+                    'factor_percent': 100,
+                    'repartition_type': 'base',
+                }),
+                (0,0, {
+                    'factor_percent': 100,
+                    'repartition_type': 'tax',
+                    'account_id': ref('account_template_hospital_21010105'),
+                }),
+            ]"/>
+            <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+                (0,0, {
+                    'factor_percent': 100,
+                    'repartition_type': 'base',
+                }),
+                (0,0, {
+                    'factor_percent': 100,
+                    'repartition_type': 'tax',
+                    'account_id': ref('account_template_hospital_21010105'),
+                }),
+            ]"/>
+        </record>
 
         <!-- sales tax excluded -->
         <record id="tax_template_hospital_sale_excluded_13" model="account.tax.template">
@@ -65,6 +129,70 @@
             <field name="type_tax_use">sale</field>
             <field name="price_include" eval="0"/>
             <field name="tax_group_id" ref="l10n_cn.l10n_cn_tax_group_vat_13"/>
+            <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+                (0,0, {
+                    'factor_percent': 100,
+                    'repartition_type': 'base',
+                }),
+                (0,0, {
+                    'factor_percent': 100,
+                    'repartition_type': 'tax',
+                    'account_id': ref('account_template_hospital_21010105'),
+                }),
+            ]"/>
+            <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+                (0,0, {
+                    'factor_percent': 100,
+                    'repartition_type': 'base',
+                }),
+                (0,0, {
+                    'factor_percent': 100,
+                    'repartition_type': 'tax',
+                    'account_id': ref('account_template_hospital_21010105'),
+                }),
+            ]"/>
+        </record>
+        <record id="tax_template_hospital_sale_excluded_9" model="account.tax.template">
+            <field name="chart_template_id" ref="chart_template_hospital"/>
+            <field name="name">9%销项税</field>
+            <field name="description">增值税销项税9%(价外税)</field>
+            <field name="amount">9</field>
+            <field name="amount_type">percent</field>
+            <field name="type_tax_use">sale</field>
+            <field name="price_include" eval="0"/>
+            <field name="tax_group_id" ref="l10n_cn.l10n_cn_tax_group_vat_9"/>
+            <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
+                (0,0, {
+                    'factor_percent': 100,
+                    'repartition_type': 'base',
+                }),
+                (0,0, {
+                    'factor_percent': 100,
+                    'repartition_type': 'tax',
+                    'account_id': ref('account_template_hospital_21010105'),
+                }),
+            ]"/>
+            <field name="refund_repartition_line_ids" eval="[(5, 0, 0),
+                (0,0, {
+                    'factor_percent': 100,
+                    'repartition_type': 'base',
+                }),
+                (0,0, {
+                    'factor_percent': 100,
+                    'repartition_type': 'tax',
+                    'account_id': ref('account_template_hospital_21010105'),
+                }),
+            ]"/>
+        </record>
+        <record id="tax_template_hospital_sale_excluded_6" model="account.tax.template">
+            <field name="chart_template_id" ref="chart_template_hospital"/>
+            <field name="name">6%销项税</field>
+            <field name="description">增值税销项税6%(价外税)</field>
+            <field name="amount">6</field>
+            <field name="amount_type">percent</field>
+            <field name="type_tax_use">sale</field>
+            <field name="price_include" eval="0"/>
+            <field name="tax_group_id" ref="l10n_cn.l10n_cn_tax_group_vat_6"/>
             <field name="invoice_repartition_line_ids" eval="[(5, 0, 0),
                 (0,0, {
                     'factor_percent': 100,
