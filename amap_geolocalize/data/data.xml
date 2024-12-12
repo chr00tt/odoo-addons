@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="geoprovider_amap" model="base.geo_provider">
+        <field name="tech_name">amap</field>
+        <field name="name">高德地图</field>
+    </record>
+</odoo>
