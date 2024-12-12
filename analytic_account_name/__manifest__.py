@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
     'name' : '分析 - 分析科目显示计划名称',
     'author': "He Jian",

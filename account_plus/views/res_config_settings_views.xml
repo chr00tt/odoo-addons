@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='track_costs_revenues']" position="after">
+                    <div class="col-12 col-lg-6 o_setting_box"
+                        id="analytic_account_name"
+                        title="分析科目显示计划名称."
+                        groups="account.group_account_user">
+                        <div class="o_setting_left_pane">
+                            <field name="module_analytic_account_name"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="module_analytic_account_name"/>
+                            <div class="text-muted">
+                                把计划名称作为分析科目名称的前缀。
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
