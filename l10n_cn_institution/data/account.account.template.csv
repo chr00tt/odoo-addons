@@ -42,7 +42,7 @@
 "account_template_administrative_institution_2101","应交增值税","2101","liability_current","中国 - 行政事业单位","","False"
 "account_template_administrative_institution_2102","其他应交税费","2102","liability_current","中国 - 行政事业单位","","False"
 "account_template_administrative_institution_2103","应缴财政款","2103","liability_current","中国 - 行政事业单位","","False"
-"account_template_administrative_institution_2201","应付职工薪酬","2201","liability_current","中国 - 行政事业单位","","True"
+"account_template_administrative_institution_2201","应付职工薪酬","2201","liability_payable","中国 - 行政事业单位","","True"
 "account_template_administrative_institution_2301","应付票据","2301","liability_payable","中国 - 行政事业单位","","True"
 "account_template_administrative_institution_2302","应付账款","2302","liability_payable","中国 - 行政事业单位","","True"
 "account_template_administrative_institution_2303","应付政府补贴款","2303","liability_payable","中国 - 行政事业单位","","True"
