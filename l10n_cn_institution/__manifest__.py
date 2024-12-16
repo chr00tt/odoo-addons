@@ -6,7 +6,10 @@
     'author': "He Jian",
     'category': 'Accounting/Localizations/Account Charts',
     'website': 'https://github.com/chr00tt/odoo-addons',
-    'depends': ['l10n_cn'],
+    'depends': [
+        'l10n_cn',
+        'l10n_cn_institution_budget',
+    ],
     'data': [
         'data/l10n_cn_institution_coa.xml',
         'data/account.account.tag.csv',

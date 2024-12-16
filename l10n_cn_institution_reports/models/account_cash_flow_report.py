@@ -11,11 +11,11 @@ class CashFlowReportCustomHandler(models.AbstractModel):
         return {
             'operating_1': self.env.ref('l10n_cn_institution.account_tag_operating_1').id,
             'operating_2': self.env.ref('l10n_cn_institution.account_tag_operating_2').id,
-            'operating': self.env.ref('l10n_cn_institution.account_tag_operating').id,
+            'operating': self.env.ref('account.account_tag_operating').id,
             'operating_4': self.env.ref('l10n_cn_institution.account_tag_operating_4').id,
             'operating_5': self.env.ref('l10n_cn_institution.account_tag_operating_5').id,
             'operating_6': self.env.ref('l10n_cn_institution.account_tag_operating_6').id,
-            'investing': self.env.ref('l10n_cn_institution.account_tag_investing').id,
+            'investing': self.env.ref('account.account_tag_investing').id,
             'investing_1': self.env.ref('l10n_cn_institution.account_tag_investing_1').id,
             'investing_2': self.env.ref('l10n_cn_institution.account_tag_investing_2').id,
             'investing_3': self.env.ref('l10n_cn_institution.account_tag_investing_3').id,

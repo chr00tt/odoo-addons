@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="model_form_view" model="ir.ui.view">
+        <field name="model">ir.model</field>
+        <field name="inherit_id" ref="base.view_model_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='field_id']//field[@name='related']" position="after">
+                <field name="definition" attrs="{'invisible': [('ttype','!=','properties')]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="field_form_view" model="ir.ui.view">
+        <field name="model">ir.model.fields</field>
+        <field name="inherit_id" ref="base.view_model_fields_form"/>
+        <field name="arch" type="xml">
+            <field name="related" position="after">
+                <field name="definition" attrs="{'invisible': [('ttype','!=','properties')]}"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
