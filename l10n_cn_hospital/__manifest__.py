@@ -12,9 +12,7 @@
         'data/account.group.csv',
         'data/account.account.template.csv',
         'data/l10n_cn_hospital_coa_post.xml',
-    ],
-    'demo': [
-        'demo/demo_company.xml',
+        'data/account_chart_template_data.xml',
     ],
     'license': 'LGPL-3',
 }
