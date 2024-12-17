@@ -10,7 +10,7 @@
         </record>
         <!-- Chart template -->
         <record id="cn_chart_template" model="account.chart.template">
-            <field name="name">中国 - 企业会计准则</field>
+            <field name="name">中国 - 企业</field>
             <field name="code_digits" eval="6" />
             <field name="cash_account_code_prefix">1001</field>
             <field name="bank_account_code_prefix">1002</field>
