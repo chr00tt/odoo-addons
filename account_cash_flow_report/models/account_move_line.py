@@ -11,4 +11,3 @@ class AccountMoveLine(models.Model):
         for record in self:
             if record.account_id:
                 record.tag_ids = record.account_id.tag_ids
-
