@@ -2,14 +2,10 @@
 <odoo>
     <record id="res_partner_cn_hospital" model="res.partner">
         <field name="name">xx医院</field>
+        <field name="company_type">company</field>
         <field name="street">江北区建新东路</field>
         <field name="city">重庆</field>
         <field name="country_id" ref="base.cn"/>
-        <field name="state_id" ref="base.state_cn_CQ"/>
-        <field name="zip">510375</field>
-        <field name="phone">+86 123 2345 6789</field>
-        <field name="email">info@company.example.com</field>
-        <field name="website">www.example.com</field>
     </record>
 
     <record id="res_company_cn_hospital" model="res.company">
