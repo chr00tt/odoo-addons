@@ -291,7 +291,6 @@ class GeneralLedgerCustomHandler(models.AbstractModel):
         # 添加本日合计、本月合计、本年累计行
         if options['daily_total'] or options['monthly_total'] or options['yearly_total']:
             self._add_period_total_lines(line_dict_id, groupby, options, next_progress, offset, unfold_all_batch_data, new_line, balance, lines, True)
-
         return {
             'lines': lines,
             'offset_increment': report.load_more_limit,
