@@ -78,7 +78,7 @@ class GeneralLedgerCustomHandler(models.AbstractModel):
             col_expr_label = column['expression_label']
 
             if col_expr_label == 'communication':
-                col_class = 'o_account_report_line_ellipsis'
+                col_class = 'o_account_report_line_ellipsis total'
                 col_value = title
                 formatted_value = report.format_value(col_value, figure_type=column['figure_type'])
             elif col_expr_label == 'balance':

@@ -14,4 +14,12 @@
     ],
     'auto_install': True,
     'license': 'LGPL-3',
+    'assets': {
+        'account_reports.assets_financial_report': [
+            'account_reports_total/static/src/scss/account_financial_report.scss',
+        ],
+        'web.assets_backend': [
+            'account_reports_total/static/src/scss/account_financial_report.scss',
+        ],
+    },
 }
