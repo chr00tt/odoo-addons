@@ -23,7 +23,7 @@
     </function>
 
     <function model="account.chart.template" name="try_loading">
-        <value eval="[ref('l10n_cn_institution.chart_template_administrative_institution')]"/>
+        <value eval="[ref('l10n_cn_institution.chart_template_institution')]"/>
         <value model="res.company" eval="obj().env.ref('l10n_cn_institution.res_company_cn_institution')"/>
     </function>
 </odoo>
