@@ -2,7 +2,7 @@
 <odoo>
     <template id="search_template_extra_options" inherit_id="account_reports.search_template_extra_options">
         <xpath expr="//div[hasclass('o_filter_menu')]" position="inside">
-            <div role="separator" class="dropdown-divider"/>
+            <div role="separator" class="dropdown-divider" t-if="report.show_daily_total or report.show_monthly_total or report.show_yearly_total"/>
             <a role="menuitem" class="dropdown-item js_account_report_bool_filter" t-if="report.show_daily_total" title="本日合计" data-filter="daily_total" groups="account.group_account_readonly">本日合计</a>
             <a role="menuitem" class="dropdown-item js_account_report_bool_filter" t-if="report.show_monthly_total" title="本月合计" data-filter="monthly_total" groups="account.group_account_readonly">本月合计</a>
             <a role="menuitem" class="dropdown-item js_account_report_bool_filter" t-if="report.show_yearly_total" title="本年累计" data-filter="yearly_total" groups="account.group_account_readonly">本年累计</a>
