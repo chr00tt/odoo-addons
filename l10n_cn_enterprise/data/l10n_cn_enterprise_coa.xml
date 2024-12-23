@@ -4,7 +4,7 @@
     <data>
         <!-- Chart template -->
         <record id="cn_chart_template" model="account.chart.template">
-            <field name="name">中国 - 企业会计准则</field>
+            <field name="name">中国 - 企业</field>
             <field name="code_digits" eval="4" />
             <field name="cash_account_code_prefix">10010</field>
             <field name="bank_account_code_prefix">10020</field>
