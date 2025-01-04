@@ -11,9 +11,9 @@
         <!-- Chart template -->
         <record id="chart_template_enterprise" model="account.chart.template">
             <field name="name">中国 - 企业</field>
-            <field name="code_digits" eval="6" />
-            <field name="cash_account_code_prefix">1001</field>
-            <field name="bank_account_code_prefix">1002</field>
+            <field name="code_digits" eval="4" />
+            <field name="cash_account_code_prefix">10010</field>
+            <field name="bank_account_code_prefix">10020</field>
             <field name="transfer_account_id" ref="account_1003"/>
             <field name="currency_id" ref="base.CNY" />
         </record>
