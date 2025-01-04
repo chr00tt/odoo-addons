@@ -9,7 +9,7 @@
             <field name="user_type_id" ref="account.data_account_type_current_assets" />
         </record>
         <!-- Chart template -->
-        <record id="cn_chart_template" model="account.chart.template">
+        <record id="chart_template_enterprise" model="account.chart.template">
             <field name="name">中国 - 企业</field>
             <field name="code_digits" eval="6" />
             <field name="cash_account_code_prefix">1001</field>
@@ -18,7 +18,7 @@
             <field name="currency_id" ref="base.CNY" />
         </record>
         <record id="account_1003" model="account.account.template">
-            <field name="chart_template_id" ref="cn_chart_template" />
+            <field name="chart_template_id" ref="chart_template_enterprise" />
         </record>
     </data>
 </odoo>

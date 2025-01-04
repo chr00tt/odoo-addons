@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <!-- Chart template account links -->
-        <record id="cn_chart_template" model="account.chart.template">
+        <record id="chart_template_enterprise" model="account.chart.template">
             <field name="use_anglo_saxon" eval="True"/>
             <field name="property_account_receivable_id" ref="account_1122"/>
             <field name="property_account_payable_id" ref="account_2202"/>
@@ -17,7 +17,7 @@
 
         <!-- sales tax included -->
         <record id="sales_included_13" model="account.tax.template">
-            <field name="chart_template_id" ref="cn_chart_template"/>
+            <field name="chart_template_id" ref="chart_template_enterprise"/>
             <field name="name">13%销项税(含)</field>
             <field name="description">增值税销项税13%(价内税)</field>
             <field name="amount">13</field>
@@ -49,7 +49,7 @@
             ]"/>
         </record>
         <record id="sale_included_9" model="account.tax.template">
-            <field name="chart_template_id" ref="cn_chart_template"/>
+            <field name="chart_template_id" ref="chart_template_enterprise"/>
             <field name="name">9%销项税(含)</field>
             <field name="description">增值税销项税9%(价内税)</field>
             <field name="amount">9</field>
@@ -81,7 +81,7 @@
             ]"/>
         </record>
         <record id="sales_included_6" model="account.tax.template">
-            <field name="chart_template_id" ref="cn_chart_template"/>
+            <field name="chart_template_id" ref="chart_template_enterprise"/>
             <field name="name">6%销项税(含)</field>
             <field name="description">增值税销项税6%(价内税)</field>
             <field name="amount">6</field>
@@ -115,7 +115,7 @@
 
         <!-- sales tax excluded -->
         <record id="sale_excluded_13" model="account.tax.template">
-            <field name="chart_template_id" ref="cn_chart_template"/>
+            <field name="chart_template_id" ref="chart_template_enterprise"/>
             <field name="name">13%销项税</field>
             <field name="description">增值税销项税13%(价外税)</field>
             <field name="amount">13</field>
@@ -147,7 +147,7 @@
             ]"/>
         </record>
         <record id="sale_excluded_9" model="account.tax.template">
-            <field name="chart_template_id" ref="cn_chart_template"/>
+            <field name="chart_template_id" ref="chart_template_enterprise"/>
             <field name="name">9%销项税</field>
             <field name="description">增值税销项税9%(价外税)</field>
             <field name="amount">9</field>
@@ -179,7 +179,7 @@
             ]"/>
         </record>
         <record id="sale_excluded_6" model="account.tax.template">
-            <field name="chart_template_id" ref="cn_chart_template"/>
+            <field name="chart_template_id" ref="chart_template_enterprise"/>
             <field name="name">6%销项税</field>
             <field name="description">增值税销项税6%(价外税)</field>
             <field name="amount">6</field>
@@ -213,7 +213,7 @@
 
         <!-- purchase tax excluded -->
         <record id="purchase_excluded_13" model="account.tax.template">
-            <field name="chart_template_id" ref="cn_chart_template"/>
+            <field name="chart_template_id" ref="chart_template_enterprise"/>
             <field name="name">13%进项税</field>
             <field name="description">增值税进项税13%(价外税)</field>
             <field name="amount">13</field>
@@ -245,7 +245,7 @@
             ]"/>
         </record>
         <record id="purchase_excluded_9" model="account.tax.template">
-            <field name="chart_template_id" ref="cn_chart_template"/>
+            <field name="chart_template_id" ref="chart_template_enterprise"/>
             <field name="name">9%进项税</field>
             <field name="description">增值税进项税9%(价外税)</field>
             <field name="amount">9</field>
@@ -278,7 +278,7 @@
         </record>
 
         <record id="purchase_excluded_6" model="account.tax.template">
-            <field name="chart_template_id" ref="cn_chart_template"/>
+            <field name="chart_template_id" ref="chart_template_enterprise"/>
             <field name="name">6%进项税</field>
             <field name="description">增值税进项税6%(价外税)</field>
             <field name="amount">6</field>
