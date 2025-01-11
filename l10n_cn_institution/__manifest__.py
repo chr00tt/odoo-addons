@@ -14,8 +14,5 @@
         'data/l10n_cn_institution_coa_post.xml',
         'data/account_chart_template_data.xml',
     ],
-    'demo': [
-        'demo/demo_company.xml',
-    ],
     'license': 'LGPL-3',
 }
