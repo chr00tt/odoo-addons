@@ -2,8 +2,10 @@
 
 {
     'name': 'Properties definition',
+    'author': 'He Jian',
     'version': '1.10',
     'category': 'Hidden',
+    'website': 'https://github.com/chr00tt/odoo-addons',
     'sequence': 145,
     'description': """
 Properties definition for Odoo field.
