@@ -18,10 +18,7 @@ patch(BarcodePickingModel.prototype, 'stock_barcode_production_date', {
         if (rule.type === 'production_date') {
             // convert to noon to avoid most timezone issues
             value.setHours(12, 0, 0);
-            result.expirationDate = moment.utc(value).format('YYYY-MM-DD HH:mm:ss');
-            result.match = true;
-        } else if (rule.type === 'use_date') {
-            result.useDate = value;
+            result.productionDate = moment.utc(value).format('YYYY-MM-DD HH:mm:ss');
             result.match = true;
         } else {
             return await this._super(...arguments);
@@ -29,23 +26,10 @@ patch(BarcodePickingModel.prototype, 'stock_barcode_production_date', {
         return result;
     },
 
-    async _parseBarcode(barcode, filters) {
-        const barcodeData = await this._super(...arguments);
-        const {product, useDate, expirationDate} = barcodeData;
-        if (product && useDate && !expirationDate) {
-            const value = new Date(useDate);
-            value.setDate(useDate.getDate() + product.use_time);
-            // convert to noon to avoid most timezone issues
-            value.setHours(12, 0, 0);
-            barcodeData.expirationDate = moment.utc(value).format('YYYY-MM-DD HH:mm:ss');
-        }
-        return barcodeData;
-    },
-
     _convertDataToFieldsParams(args) {
         const params = this._super(...arguments);
-        if (args.expirationDate) {
-            params.production_date = args.expirationDate;
+        if (args.productionDate) {
+            params.production_date = args.productionDate;
         }
         return params;
     },
