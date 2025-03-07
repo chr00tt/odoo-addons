@@ -6,11 +6,12 @@
     'author': 'He Jian',
     'website': 'https://github.com/chr00tt/odoo-addons',
     'category': 'Sales/Sales',
-    'depends': ['product'],
+    'depends': ['stock'],
     'data': [
         'security/ir.model.access.csv',
         'data/nhsa.consumables.csv',
         'views/nhsa_consumables_views.xml',
+        'views/nhsa_consumables_menu.xml',
     ],
     'license': 'LGPL-3',
 }
