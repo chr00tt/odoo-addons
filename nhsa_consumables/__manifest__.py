@@ -1,0 +1,14 @@
+# -*- coding: utf-8 -*-
+# Part of Odoo. See LICENSE file for full copyright and licensing details.
+
+{
+    'name': '国家医疗保障局 - 耗材数据',
+    'author': 'He Jian',
+    'website': 'https://github.com/chr00tt/odoo-addons',
+    'category': 'Sales/Sales',
+    'depends': ['product'],
+    'data': [
+        'data/nhsa.consumables.csv',
+    ],
+    'license': 'LGPL-3',
+}
