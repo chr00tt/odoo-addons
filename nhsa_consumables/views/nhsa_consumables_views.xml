@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+
     <record id="nhsa_consumables_list_view" model="ir.ui.view">
         <field name="name">nhsa.consumables.list</field>
         <field name="model">nhsa.consumables</field>
@@ -14,6 +15,23 @@
                 <field name="specifications"/>
                 <field name="enterprise"/>
             </tree>
+        </field>
+    </record>
+
+    <record id="nhsa_consumables_search_view" model="ir.ui.view">
+        <field name="name">nhsa.consumables.search</field>
+        <field name="model">nhsa.consumables</field>
+        <field name="arch" type="xml">
+            <search string="医保医用耗材分类与代码">
+                <field name="name"/>
+                <field name="primary"/>
+                <field name="secondary"/>
+                <field name="tertiary"/>
+                <field name="common_name"/>
+                <field name="material"/>
+                <field name="specifications"/>
+                <field name="enterprise"/>
+            </search>
         </field>
     </record>
 
