@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+    <record id="nhsa_consumables_list_view" model="ir.ui.view">
+        <field name="name">nhsa.consumables.list</field>
+        <field name="model">nhsa.consumables</field>
+        <field name="arch" type="xml">
+            <tree string="医保医用耗材分类与代码">
+                <field name="name"/>
+                <field name="primary"/>
+                <field name="secondary"/>
+                <field name="tertiary"/>
+                <field name="common_name"/>
+                <field name="material"/>
+                <field name="specifications"/>
+                <field name="enterprise"/>
+            </tree>
+        </field>
+    </record>
 
     <record id="nhsa_consumables_action" model="ir.actions.act_window">
         <field name="name">医保医用耗材分类与代码</field>
