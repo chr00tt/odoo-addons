@@ -8,7 +8,9 @@
     'category': 'Sales/Sales',
     'depends': ['product'],
     'data': [
+        'security/ir.model.access.csv',
         'data/nhsa.consumables.csv',
+        'views/nhsa_consumables_views.xml',
     ],
     'license': 'LGPL-3',
 }

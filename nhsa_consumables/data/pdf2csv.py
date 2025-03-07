@@ -12,7 +12,7 @@ def dynamic_pdf_to_csv(pdf_path, csv_path, chunk_size=100):
     print(f"检测到PDF总页数: {total_pages}")
 
     # 初始化CSV文件
-    with open(csv_path, 'w', newline='', encoding='utf-8-sig') as f:
+    with open(csv_path, 'w', newline='', encoding='utf-8') as f:
         f.write("")  # 创建空文件
 
     # 分块处理
@@ -25,7 +25,7 @@ def dynamic_pdf_to_csv(pdf_path, csv_path, chunk_size=100):
         
         # 每次重新打开PDF避免内存累积
         with pdfplumber.open(pdf_path) as pdf, \
-             open(temp_csv, 'w', newline='', encoding='utf-8-sig') as tmpfile:
+             open(temp_csv, 'w', newline='', encoding='utf-8') as tmpfile:
             
             writer = csv.writer(tmpfile)
             for page_num in range(chunk_start, chunk_end):
@@ -55,8 +55,8 @@ def dynamic_pdf_to_csv(pdf_path, csv_path, chunk_size=100):
                     continue
 
         # 追加到主文件
-        with open(csv_path, 'a', encoding='utf-8-sig') as mainfile:
-            with open(temp_csv, 'r', encoding='utf-8-sig') as tmpfile:
+        with open(csv_path, 'a', encoding='utf-8') as mainfile:
+            with open(temp_csv, 'r', encoding='utf-8') as tmpfile:
                 mainfile.write(tmpfile.read())
         os.remove(temp_csv)
 
