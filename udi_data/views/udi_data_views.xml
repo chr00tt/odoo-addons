@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="udi_data_action" model="ir.actions.act_window">
+        <field name="name">医疗器械唯一标识</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">udi.data</field>
+    </record>
+
+</odoo>

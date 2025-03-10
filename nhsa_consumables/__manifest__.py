@@ -5,7 +5,7 @@
     'name': '国家医疗保障局 - 耗材数据',
     'author': 'He Jian',
     'website': 'https://github.com/chr00tt/odoo-addons',
-    'category': 'Sales/Sales',
+    'category': 'Inventory/Inventory',
     'depends': ['stock', 'medical_consumables'],
     'data': [
         'security/ir.model.access.csv',
