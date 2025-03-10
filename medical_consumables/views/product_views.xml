@@ -10,7 +10,9 @@
                 <label for="is_medical_consumables"/>
             </div>
             <xpath expr="//notebook" position="inside">
-                <page string="医用耗材" name="medical_consumables">
+                <page string="医用耗材" name="medical_consumables" attrs="{'invisible': [('is_medical_consumables', '=', False)]}">
+                    <group>
+                    </group>
                 </page>
             </xpath>
         </field>
