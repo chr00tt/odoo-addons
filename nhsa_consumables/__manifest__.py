@@ -6,7 +6,7 @@
     'author': 'He Jian',
     'website': 'https://github.com/chr00tt/odoo-addons',
     'category': 'Sales/Sales',
-    'depends': ['stock'],
+    'depends': ['stock', 'medical_consumables'],
     'data': [
         'security/ir.model.access.csv',
         'data/nhsa.consumables.category.csv',
