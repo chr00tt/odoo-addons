@@ -6,8 +6,8 @@
         <field name="inherit_id" ref="product.product_template_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//page[@name='medical_consumables']" position="inside">
-                <field name="nhsa_consumable_id"/>
-                <field name="nhsa_consumable_categ_id"/>
+                <field name="nhsa_consumables_id"/>
+                <field name="nhsa_consumables_categ_id"/>
                 <field name="common_name"/>
                 <field name="material"/>
                 <field name="specification"/>
