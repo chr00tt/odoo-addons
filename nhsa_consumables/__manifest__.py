@@ -9,7 +9,9 @@
     'depends': ['stock'],
     'data': [
         'security/ir.model.access.csv',
-        'data/nhsa.consumables.csv',
+        'data/nhsa.consumables.category.csv',
+        #'data/nhsa.consumables.csv',
+        'views/nhsa_consumables_category_views.xml',
         'views/nhsa_consumables_views.xml',
         'views/stock_menu_views.xml',
     ],

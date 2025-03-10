@@ -4,6 +4,6 @@
 from odoo import api, fields, models, tools, _, SUPERUSER_ID
 
 class ProductTemplate(models.Model):
-    _name = "product.template"
+    _inherit = "product.template"
 
     nhsa_consumables_code = fields.Char(string='医保编码')

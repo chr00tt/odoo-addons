@@ -7,9 +7,7 @@
         <field name="arch" type="xml">
             <tree string="医保医用耗材分类与代码">
                 <field name="name"/>
-                <field name="primary"/>
-                <field name="secondary"/>
-                <field name="tertiary"/>
+                <field name="nhsa_consumables_categ_id"/>
                 <field name="common_name"/>
                 <field name="material"/>
                 <field name="specifications"/>
@@ -24,9 +22,7 @@
         <field name="arch" type="xml">
             <search string="医保医用耗材分类与代码">
                 <field name="name"/>
-                <field name="primary"/>
-                <field name="secondary"/>
-                <field name="tertiary"/>
+                <field name="nhsa_consumables_categ_id"/>
                 <field name="common_name"/>
                 <field name="material"/>
                 <field name="specifications"/>
