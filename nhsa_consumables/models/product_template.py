@@ -8,7 +8,7 @@ class ProductTemplate(models.Model):
 
     nhsa_consumables_id = fields.Many2one('nhsa.consumables', '医保代码')
 
-    nhsa_consumables_categ_id = fields.Many2one(related='nhsa_consumables_id.nhsa_consumables_categ_id', store=True)
-    common_name = fields.Char(related='nhsa_consumables_id.common_name')
-    material = fields.Char(related='nhsa_consumables_id.material')
-    specifications = fields.Char(related='nhsa_consumables_id.specifications')
+    nhsa_consumables_categ_id = fields.Many2one('nhsa.consumables.category', '医保耗材分类', related='nhsa_consumables_id.nhsa_consumables_categ_id', store=True)
+    nhsa_common_name = fields.Char('医保通用名', related='nhsa_consumables_id.common_name')
+    nhsa_material = fields.Char('医保材质', related='nhsa_consumables_id.material')
+    nhsa_specifications = fields.Char('医保规格', related='nhsa_consumables_id.specifications')

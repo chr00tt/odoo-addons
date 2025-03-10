@@ -9,9 +9,9 @@
                 <group string="医保">
                     <field name="nhsa_consumables_id"/>
                     <field name="nhsa_consumables_categ_id"/>
-                    <field name="common_name"/>
-                    <field name="material"/>
-                    <field name="specifications"/>
+                    <field name="nhsa_common_name"/>
+                    <field name="nhsa_material"/>
+                    <field name="nhsa_specifications"/>
                 </group>
             </xpath>
         </field>
