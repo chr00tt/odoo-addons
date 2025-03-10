@@ -10,7 +10,7 @@
                 <field name="nhsa_consumables_categ_id"/>
                 <field name="common_name"/>
                 <field name="material"/>
-                <field name="specification"/>
+                <field name="specifications"/>
             </xpath>
         </field>
     </record>
