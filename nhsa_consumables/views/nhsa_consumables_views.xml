@@ -28,7 +28,7 @@
                 <field name="specifications"/>
                 <field name="enterprise"/>
                 <searchpanel>
-                    <field name="nhsa_consumables_categ_id" enable_counters="1"/>
+                    <field name="nhsa_consumables_categ_id" enable_counters="1" limit="0"/>
                 </searchpanel>
             </search>
         </field>

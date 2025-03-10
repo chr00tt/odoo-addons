@@ -22,7 +22,7 @@ class NHSAConsumablesCategory(models.Model):
     product_count = fields.Integer(
         '# 耗材', compute='_compute_product_count')
 
-    code = fields.Char('', default="/", index=True)
+    code = fields.Char('编号', default="/", index=True)
 
     @api.depends('name', 'parent_id.complete_name')
     def _compute_complete_name(self):
@@ -54,3 +54,9 @@ class NHSAConsumablesCategory(models.Model):
         if not self.env.context.get('hierarchical_naming', True):
             return [(record.id, record.name) for record in self]
         return super().name_get()
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_except_default_category(self):
+        main_category = self.env.ref('nhsa_consumables.nhsa_consumables_category_all', raise_if_not_found=False)
+        if main_category and main_category in self:
+            raise UserError("不能删除此耗材类别，它是默认的常规类别。")
