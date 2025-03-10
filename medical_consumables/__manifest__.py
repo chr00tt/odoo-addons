@@ -8,7 +8,7 @@
     'category': 'Sales/Sales',
     'depends': ['product'],
     'data': [
-        'views/product_template_views.xml',
+        'views/product_views.xml',
     ],
     'license': 'LGPL-3',
 }
