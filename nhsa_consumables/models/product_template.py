@@ -6,4 +6,11 @@ from odoo import api, fields, models, tools, _, SUPERUSER_ID
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    nhsa_consumables_code = fields.Char(string='医保编码')
+    nhsa_consumables_id = fields.Many2one(
+        'nhsa.consumables', '医保代码',
+        required=True)
+
+    nhsa_consumables_categ_id = fields.Many2one(related='nhsa_consumables_id.nhsa_consumables_categ_id')
+    common_name = fields.Char(related='nhsa_consumables_id.common_name')
+    material = fields.Char(related='nhsa_consumables_id.material')
+    specifications = fields.Char(related='nhsa_consumables_id.specifications')
