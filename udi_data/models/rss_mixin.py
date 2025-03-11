@@ -12,6 +12,7 @@ from lxml import etree
 
 UDID_DAILY_RSS_URL = "https://udi.nmpa.gov.cn//rss/download.html?files=daily"
 UDID_WEEKLY_RSS_URL = "https://udi.nmpa.gov.cn/rss/download.html?files=weekly"
+UDID_MONTHLY_RSS_URL = "https://udi.nmpa.gov.cn/rss/download.html?files=monthly"
 
 class RssMixin(models.AbstractModel):
     _name = 'rss.mixin'
@@ -22,6 +23,9 @@ class RssMixin(models.AbstractModel):
 
     def do_weekly_update(self):
         self._do_update(UDID_WEEKLY_RSS_URL)
+
+    def do_monthly_update(self):
+        self._do_update(UDID_MONTHLY_RSS_URL)
 
     def _do_update(self, rss_url):
         try:
