@@ -5,11 +5,15 @@
     'name': '医疗器械唯一标识数据库',
     'author': 'He Jian',
     'website': 'https://github.com/chr00tt/odoo-addons',
-    'depends': ['stock'],
+    'depends': [
+        'stock',
+        'medical_consumables',
+        ],
     'category': 'Inventory/Inventory',
     'data': [
         'security/ir.model.access.csv',
         'data/ir_cron_data.xml',
+        'views/product_views.xml',
         'views/udi_data_views.xml',
         'views/stock_menu_views.xml',
     ],

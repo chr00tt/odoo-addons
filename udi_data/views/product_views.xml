@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='medical_consumables']/group" position="inside">
+                <group string="医疗器械唯一标识">
+                    <field name="udi_data_id"/>
+                    <field name="udi_zxxsdycpbs"/>
+                    <field name="udi_sydycpbs"/>
+                    <field name="udi_btcpbs"/>
+                    <field name="udi_cpmctymc"/>
+                    <field name="udi_spmc"/>
+                    <field name="udi_ggxh"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

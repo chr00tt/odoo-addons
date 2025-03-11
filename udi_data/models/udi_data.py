@@ -7,7 +7,7 @@ class UDIData(models.Model):
     _name = "udi.data"
     _inherit = ['rss.mixin']
     _description = "医疗器械唯一标识"
-    _rec_name = 'spmc'
+    _rec_name = 'zxxsdycpbs'
 
     zxxsdycpbs = fields.Char("最小销售单元产品标识")
     cpbsbmtxmc = fields.Char("产品标识编码体系名称")
