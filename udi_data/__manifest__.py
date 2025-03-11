@@ -9,6 +9,7 @@
     'category': 'Inventory/Inventory',
     'data': [
         'security/ir.model.access.csv',
+        'data/ir_cron_data.xml',
         'views/udi_data_views.xml',
         'views/stock_menu_views.xml',
     ],

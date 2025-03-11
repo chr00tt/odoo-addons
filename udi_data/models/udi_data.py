@@ -5,6 +5,7 @@ from odoo import api, fields, models, tools, _
 
 class UDIData(models.Model):
     _name = "udi.data"
+    _inherit = ['rss.mixin']
     _description = "医疗器械唯一标识"
 
     zxxsdycpbs = fields.Char("最小销售单元产品标识")
@@ -37,3 +38,4 @@ class UDIData(models.Model):
     versionNumber = fields.Integer("公开的版本号")
     tsrq = fields.Char("退市日期")
     versionTime = fields.Char("版本日期")
+
