@@ -7,7 +7,9 @@
     'website': 'https://github.com/chr00tt/odoo-addons',
     'depends': [
         'stock',
+
         'medical_consumables',
+        'nhsa_consumables',
         ],
     'category': 'Inventory/Inventory',
     'data': [
