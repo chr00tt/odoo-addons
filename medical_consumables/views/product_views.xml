@@ -12,6 +12,9 @@
             <xpath expr="//notebook" position="inside">
                 <page string="医用耗材" name="medical_consumables" attrs="{'invisible': [('is_medical_consumables', '=', False)]}">
                     <group>
+                        <group>
+                            <field name="ybbm"/>
+                        </group>
                     </group>
                 </page>
             </xpath>

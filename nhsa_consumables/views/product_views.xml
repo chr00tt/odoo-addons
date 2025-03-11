@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="product.product_template_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//page[@name='medical_consumables']/group" position="inside">
-                <group string="医保">
+                <group string="医保医用耗材分类">
                     <field name="nhsa_consumables_id"/>
                     <field name="nhsa_consumables_categ_id"/>
                     <field name="nhsa_common_name"/>
