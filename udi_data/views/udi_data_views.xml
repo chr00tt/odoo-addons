@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
+    <record id="udi_data_tree_view" model="ir.ui.view">
+        <field name="name">udi.data.tree</field>
+        <field name="model">udi.data</field>
+        <field name="arch" type="xml">
+            <tree string="医疗器械唯一标识">
+                <field name="zxxsdycpbs"/>
+                <field name="zxxsdyzsydydsl"/>
+                <field name="sydycpbs"/>
+                <field name="cpmctymc"/>
+                <field name="spmc"/>
+                <field name="ggxh"/>
+                <field name="flbm"/>
+                <field name="ybbm"/>
+                <field name="cplb"/>
+            </tree>
+        </field>
+    </record>
+
     <record id="udi_data_action" model="ir.actions.act_window">
         <field name="name">医疗器械唯一标识</field>
         <field name="type">ir.actions.act_window</field>
