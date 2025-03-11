@@ -19,6 +19,27 @@
         </field>
     </record>
 
+    <record id="udi_data_search_view" model="ir.ui.view">
+        <field name="name">udi.data.search</field>
+        <field name="model">udi.data</field>
+        <field name="arch" type="xml">
+            <search string="Search">
+                <field name="zxxsdycpbs"/>
+                <field name="zxxsdyzsydydsl"/>
+                <field name="sydycpbs"/>
+                <field name="cpmctymc"/>
+                <field name="spmc"/>
+                <field name="ggxh"/>
+                <field name="flbm"/>
+                <field name="ybbm"/>
+                <field name="cplb"/>
+                <searchpanel>
+                    <field name="nhsa_consumables_categ_id" enable_counters="1" limit="0"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
     <record id="udi_data_action" model="ir.actions.act_window">
         <field name="name">医疗器械唯一标识</field>
         <field name="type">ir.actions.act_window</field>

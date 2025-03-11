@@ -49,7 +49,7 @@ class UDIData(models.Model):
     versionNumber = fields.Integer("公开的版本号")
     versionTime = fields.Char("版本日期")
 
-    nhsa_consumables_id = fields.Many2one('nhsa.consumables', '医保医用耗材分类与代码', compute='_compute_nhsa_consumables_id')
+    nhsa_consumables_id = fields.Many2one('nhsa.consumables', '医保医用耗材分类与代码', compute='_compute_nhsa_consumables_id', store=True)
 
     nhsa_consumables_categ_id = fields.Many2one('nhsa.consumables.category', '医保耗材分类', related='nhsa_consumables_id.nhsa_consumables_categ_id', store=True)
     nhsa_common_name = fields.Char('医保通用名', related='nhsa_consumables_id.common_name')
@@ -57,7 +57,7 @@ class UDIData(models.Model):
     nhsa_specifications = fields.Char('医保规格', related='nhsa_consumables_id.specifications')
 
     @api.depends('ybbm')
-    def _conpute_nhsa_consumables_id(self):
+    def _compute_nhsa_consumables_id(self):
         for r in self:
             if r.ybbm:
                 # 从医保编码截取前20位
