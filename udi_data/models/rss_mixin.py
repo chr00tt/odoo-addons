@@ -82,7 +82,7 @@ class RssMixin(models.AbstractModel):
             'cpbsbmtxmc': elem.findtext('cpbsbmtxmc'),
             'cpbsfbrq': elem.findtext('cpbsfbrq'),
             'zxxsdyzsydydsl': elem.findtext('zxxsdyzsydydsl'),
-            'sydycpbs': True if elem.findtext('sydycpbs') == '是' else False,
+            'sydycpbs': elem.findtext('sydycpbs'),
             'sfybtzjbs': True if elem.findtext('sfybtzjbs') == '是' else False,
             'btcpbsyzxxsdycpbssfyz': True if elem.findtext('sfybtzjbs') == '是' else False,
             'btcpbs': elem.findtext('btcpbs'),
