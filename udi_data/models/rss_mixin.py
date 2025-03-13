@@ -34,11 +34,7 @@ class RssMixin(models.AbstractModel):
             link = entry.link
 
             zip_path = self._download_zip(link)
-
-            extract_dir = tempfile.mkdtemp()
-            with zipfile.ZipFile(zip_path) as zip_ref:
-                zip_ref.extractall(extract_dir)
-
+            extract_dir = self._extract_zip(zip_path)
             self._import_data_files(extract_dir)
             os.unlink(zip_path)
         except Exception as e:
@@ -52,12 +48,21 @@ class RssMixin(models.AbstractModel):
             tmp_file.close()
             return tmp_file.name
 
+    def _extract_zip(self, zip_path):
+        extract_dir = tempfile.mkdtemp()
+        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+            zip_ref.extractall(extract_dir)
+        return extract_dir
+
     def _import_data_files(self, directory):
         for root, _, files in os.walk(directory):
             for file in files:
                 if file.endswith('.xml'):
                     self._import_xml(os.path.join(root, file))
                     break
+                elif file.endswith('.zip'):
+                    extract_dir = self._extract_zip(directory + '/' + file)
+                    self._import_data_files(extract_dir)
 
     def _import_xml(self, file_path):
         udi_data_sudo = self.env['udi.data'].sudo()
@@ -80,6 +85,8 @@ class RssMixin(models.AbstractModel):
         flbm = elem.findtext('flbm')
         if flbm:
             category = self.env['medical.device.category'].search([('code', '=', flbm)], limit=1)
+            if not category:
+                logging.warning("医疗器械分类编码 %s 未找到" % flbm)
             flbm = category.id if category else None
         return {
             'zxxsdycpbs': elem.findtext('zxxsdycpbs'),
