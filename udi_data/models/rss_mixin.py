@@ -9,6 +9,7 @@ import tempfile
 import os
 import zipfile
 from lxml import etree
+import re
 
 UDID_DAILY_RSS_URL = "https://udi.nmpa.gov.cn//rss/download.html?files=daily"
 UDID_WEEKLY_RSS_URL = "https://udi.nmpa.gov.cn/rss/download.html?files=weekly"
@@ -85,6 +86,11 @@ class RssMixin(models.AbstractModel):
         flbm = elem.findtext('flbm')
         if flbm:
             category = self.env['medical.device.category'].search([('code', '=', flbm)], limit=1)
+            if not category:
+                flbm_fixed = re.sub(r'-000$', '', flbm)
+                flbm_fixed = re.sub(r'-00$', '', flbm_fixed)
+                if flbm_fixed != flbm:
+                    category = self.env['medical.device.category'].search([('code', '=', flbm_fixed)], limit=1)
             if not category:
                 logging.warning("医疗器械分类编码 %s 未找到" % flbm)
             flbm = category.id if category else None
