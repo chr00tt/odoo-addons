@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+
+    <record id="medical_device_category_list_view" model="ir.ui.view">
+        <field name="name">medical.device.category.list</field>
+        <field name="model">medical.device.category</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree string="医疗器械分类">
+                <field name="display_name" string="医疗器械分类"/>
+                <field name="code"/>
+                <field name="cpms" optional="hide"/>
+                <field name="yqyt" optional="hide"/>
+                <field name="pmjl" optional="hide"/>
+                <field name="gllb"/>
+            </tree>
+        </field>
+    </record>
+
     <record id="medical_device_category_search_view" model="ir.ui.view">
         <field name="name">medical.device.category.search</field>
         <field name="model">medical.device.category</field>
@@ -7,6 +24,9 @@
             <search string="医疗器械分类">
                 <field name="name" string="医保医用耗材分类"/>
                 <field name="parent_id"/>
+                <searchpanel>
+                    <field name="gllb" enable_counters="1" select="multi"/>
+                </searchpanel>
             </search>
         </field>
     </record>

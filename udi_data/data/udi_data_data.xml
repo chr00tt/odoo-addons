@@ -8,7 +8,7 @@
         </record>
 
         <record id="medical_device_category_all" model="medical.device.category">
-            <field name="name">所有</field>
+            <field name="name">医疗器械</field>
         </record>
         <record id="medical_device_category_6840" model="medical.device.category">
             <field name="name">体外诊断试剂</field>
