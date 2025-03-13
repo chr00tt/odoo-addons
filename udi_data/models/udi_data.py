@@ -26,7 +26,6 @@ class UDIData(models.Model):
     yflbm = fields.Char("原器械目录代码")
     flbm = fields.Many2one(
         'medical.device.category', '分类编码',
-        change_default=True, default=_get_default_category_id, group_expand='_read_group_categ_id',
         required=True)
     tyshxydm = fields.Char("统一社会信息代码")
     zczbhhzbapzbh = fields.Char("注册证编号或者备案凭证编号")

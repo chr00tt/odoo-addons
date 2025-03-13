@@ -25,6 +25,11 @@ class MedicalDeficeCategory(models.Model):
 
     code = fields.Char('编号', default="/", index=True)
 
+    cpms = fields.Char('产品描述')
+    yqyt = fields.Char('预期用途')
+    pmjl = fields.Char('品名举例')
+    gllb = fields.Selection([('1', 'Ⅰ'), ('2', 'Ⅱ'), ('3', 'Ⅲ')], string='管理类别')
+
     @api.depends('name', 'parent_id.complete_name')
     def _compute_complete_name(self):
         for category in self:
