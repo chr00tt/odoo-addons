@@ -20,8 +20,8 @@ class MedicalDeficeCategory(models.Model):
     parent_id = fields.Many2one('medical.device.category', '上级分类', index=True, ondelete='cascade')
     parent_path = fields.Char(index=True, unaccent=False)
     child_id = fields.One2many('medical.device.category', 'parent_id', '下级分类')
-    product_count = fields.Integer(
-        '# 医疗器械', compute='_compute_product_count')
+    udi_data_count = fields.Integer(
+        '# 唯一标识', compute='_compute_udi_data_count')
 
     code = fields.Char('编号', default="/", index=True)
 
@@ -38,14 +38,14 @@ class MedicalDeficeCategory(models.Model):
             else:
                 category.complete_name = category.name
 
-    def _compute_product_count(self):
+    def _compute_udi_data_count(self):
         read_group_res = self.env['udi.data'].read_group([('flbm', 'child_of', self.ids)], ['flbm'], ['flbm'])
         group_data = dict((data['flbm'][0], data['flbm_count']) for data in read_group_res)
         for categ in self:
-            product_count = 0
+            udi_data_count = 0
             for sub_categ_id in categ.search([('id', 'child_of', categ.ids)]).ids:
-                product_count += group_data.get(sub_categ_id, 0)
-            categ.product_count = product_count
+                udi_data_count += group_data.get(sub_categ_id, 0)
+            categ.udi_data_count = udi_data_count
 
     @api.constrains('parent_id')
     def _check_category_recursion(self):
