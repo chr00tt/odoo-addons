@@ -51,6 +51,8 @@ class UDIData(models.Model):
     versionNumber = fields.Integer("公开的版本号")
     versionTime = fields.Char("版本日期")
 
+    gllb = fields.Selection('管理类别', related='flbm.gllb')
+
     nhsa_consumables_id = fields.Many2one('nhsa.consumables', '医保医用耗材分类与代码', compute='_compute_nhsa_consumables_id', store=True)
 
     nhsa_consumables_categ_id = fields.Many2one('nhsa.consumables.category', '医保耗材分类', related='nhsa_consumables_id.nhsa_consumables_categ_id', store=True)
