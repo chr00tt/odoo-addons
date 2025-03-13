@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
+        <!-- 开启产品包装 -->
+        <record model="res.groups" id="base.group_user">
+            <field name="implied_ids" eval="[
+                (4, ref('product.group_stock_packaging'))]"/>
+        </record>
+
         <record id="medical_device_category_all" model="medical.device.category">
             <field name="name">所有</field>
         </record>
