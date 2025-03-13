@@ -77,6 +77,10 @@ class RssMixin(models.AbstractModel):
             udi_data_sudo.create(udi_data_list)
             
     def _create_record(self, elem):
+        flbm = elem.findtext('flbm')
+        if flbm:
+            category = self.env['medical.device.category'].search([('code', '=', flbm)], limit=1)
+            flbm = category.id if category else None
         return {
             'zxxsdycpbs': elem.findtext('zxxsdycpbs'),
             'cpbsbmtxmc': elem.findtext('cpbsbmtxmc'),
@@ -93,7 +97,7 @@ class RssMixin(models.AbstractModel):
             'cpms': elem.findtext('cpms'),
             'cphhhbh': elem.findtext('cphhhbh'),
             'yflbm': elem.findtext('yflbm'),
-            'flbm': elem.findtext('flbm'),
+            'flbm': flbm,
             'ylqxzcrbarmc': elem.findtext('ylqxzcrbarmc'),
             'ylqxzcrbarywmc': elem.findtext('ylqxzcrbarywmc'),
             'tyshxydm': elem.findtext('tyshxydm'),
