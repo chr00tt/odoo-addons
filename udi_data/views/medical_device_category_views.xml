@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="medical_device_category_search_view" model="ir.ui.view">
+        <field name="name">medical.device.category.search</field>
+        <field name="model">medical.device.category</field>
+        <field name="arch" type="xml">
+            <search string="医疗器械分类">
+                <field name="name" string="医保医用耗材分类"/>
+                <field name="parent_id"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="medical_device_category_action_form" model="ir.actions.act_window">
+        <field name="name">医疗器械分类</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">medical.device.category</field>
+    </record>
+
+</odoo>
