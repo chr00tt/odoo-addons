@@ -18,9 +18,11 @@ class ProductTemplate(models.Model):
     @api.onchange('ybbm')
     def _ybbm_to_udi_data(self):
         if self.ybbm:
-            udi_data = self.env['udi.data'].search([('ybbm', '=', self.ybbm)], limit=1)
-            if udi_data:
-                self.udi_data_id = udi_data.id
+            # 设置医疗器械唯一标识
+            if not self.udi_data_id:
+                udi_data = self.env['udi.data'].search([('ybbm', '=', self.ybbm)], limit=1)
+                if udi_data:
+                    self.udi_data_id = udi_data.id
 
     @api.onchange('udi_data_id')
     def _onchange_udi_data_id(self):
@@ -35,6 +37,12 @@ class ProductTemplate(models.Model):
             # 设置条码
             if not self.barcode:
                 self.barcode = self.udi_data_id.sydycpbs if self.udi_data_id.sydycpbs else self.udi_data_id.zxxsdycpbs
+
+            # 设置追溯
+            if self.udi_data_id.scbssfbhxlh:
+                self.tracking = 'serial'
+            elif self.udi_data_id.scbssfbhph and self.tracking != 'serial':
+                self.tracking = 'lot'
 
             # 设置产品包装
             if self.udi_data_id.sydycpbs:
