@@ -92,6 +92,7 @@ class RssMixin(models.AbstractModel):
             category = self.env['medical.device.category'].search([('code', '=', flbm)], limit=1)
             if not category:
                 flbm_fixed = re.sub(r'-000$', '', flbm)
+                flbm_fixed = re.sub(r'-00-00$', '', flbm_fixed)
                 flbm_fixed = re.sub(r'-00$', '', flbm_fixed)
                 if flbm_fixed != flbm:
                     category = self.env['medical.device.category'].search([('code', '=', flbm_fixed)], limit=1)
