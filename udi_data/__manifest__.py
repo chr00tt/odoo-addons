@@ -17,10 +17,10 @@
         'data/ir_cron_data.xml',
         'data/udi_data_data.xml',
         'data/medical.device.category.csv',
-        'views/medical_device_category_views.xml',
         'views/product_views.xml',
         'views/udi_data_views.xml',
         'views/stock_menu_views.xml',
+        'views/medical_device_category_views.xml',
     ],
     'license': 'LGPL-3',
 }
