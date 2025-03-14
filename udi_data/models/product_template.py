@@ -38,11 +38,21 @@ class ProductTemplate(models.Model):
             if not self.barcode:
                 self.barcode = self.udi_data_id.sydycpbs if self.udi_data_id.sydycpbs else self.udi_data_id.zxxsdycpbs
 
+            # 设置规格
+            if not self.specifications and self.udi_data_id.ggxh:
+                self.specifications = self.udi_data_id.ggxh
+
             # 设置追溯
             if self.udi_data_id.scbssfbhxlh:
                 self.tracking = 'serial'
             elif self.udi_data_id.scbssfbhph and self.tracking != 'serial':
                 self.tracking = 'lot'
+            if self.udi_data_id.scbssfbhsxrq:
+                self.use_expiration_date = True
+
+            # 设置内部说明
+            if not self.description and self.udi_data_id.cpms:
+                self.description = self.udi_data_id.cpms
 
             # 设置产品包装
             if self.udi_data_id.sydycpbs:
