@@ -7,14 +7,27 @@
         <field name="arch" type="xml">
             <tree string="医疗器械唯一标识">
                 <field name="zxxsdycpbs"/>
-                <field name="zxxsdyzsydydsl"/>
+                <field name="cpbsbmtxmc" string="编码体系" optional="hide"/>
+                <field name="cpbsfbrq" optional="hide"/>
+                <field name="zxxsdyzsydydsl" string="包装数量"/>
                 <field name="sydycpbs"/>
+                <field name="btcpbs" optional="hide"/>
                 <field name="cpmctymc"/>
                 <field name="spmc"/>
                 <field name="ggxh"/>
-                <field name="flbm"/>
+                <field name="cpms" optional="hide"/>
+                <field name="cphhhbh" optional="hide"/>
+                <field name="flbm" optional="show"/>
+                <field name="gllb" optional="show"/>
                 <field name="ybbm"/>
-                <field name="cplb"/>
+                <field name="nhsa_consumables_categ_id" optional="hide"/>
+                <field name="nhsa_common_name" optional="hide"/>
+                <field name="nhsa_material" optional="hide"/>
+                <field name="nhsa_specifications" optional="hide"/>
+                <field name="cplb" optional="hide"/>
+                <field name="mjfs" optional="hide"/>
+                <field name="scbssfbhph" string="批号" optional="hide"/>
+                <field name="scbssfbhxlh" string="序列号" optional="show"/>
             </tree>
         </field>
     </record>

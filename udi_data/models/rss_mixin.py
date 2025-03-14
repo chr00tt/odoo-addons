@@ -11,7 +11,7 @@ import zipfile
 from lxml import etree
 import re
 
-UDID_DAILY_RSS_URL = "https://udi.nmpa.gov.cn//rss/download.html?files=daily"
+UDID_DAILY_RSS_URL = "https://udi.nmpa.gov.cn/rss/download.html?files=daily"
 UDID_WEEKLY_RSS_URL = "https://udi.nmpa.gov.cn/rss/download.html?files=weekly"
 UDID_MONTHLY_RSS_URL = "https://udi.nmpa.gov.cn/rss/download.html?files=monthly"
 
