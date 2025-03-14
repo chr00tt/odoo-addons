@@ -37,4 +37,15 @@
         <field name="code">model.do_monthly_update()</field>
     </record>
 
+    <record forcecreate="True" id="udi_data_full_update" model="ir.cron">
+        <field name="name">医疗器械唯一标识全量更新</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="model_udi_data"/>
+        <field name="state">code</field>
+        <field name="code">model.do_full_update()</field>
+    </record>
 </odoo>
