@@ -38,6 +38,10 @@ class ProductTemplate(models.Model):
 
             # 设置产品包装
             if self.udi_data_id.sydycpbs:
+                # 避免占用包装的条码
+                if self.barcode != self.udi_data_id.sydycpbs:
+                    self.barcode = self.udi_data_id.sydycpbs
+
                 product_packaging = self.env['product.packaging'].search([('barcode', '=', self.udi_data_id.zxxsdycpbs)], limit=1)
                 if not product_packaging:
                     product_packaging = self.env['product.packaging'].create({
