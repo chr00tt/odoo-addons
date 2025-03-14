@@ -37,9 +37,8 @@
         <field name="model">udi.data</field>
         <field name="arch" type="xml">
             <search string="Search">
-                <field name="zxxsdycpbs"/>
-                <field name="zxxsdyzsydydsl"/>
-                <field name="sydycpbs"/>
+                <field name="zxxsdycpbs" string="唯一标识"
+                    filter_domain="['|', '|', ('zxxsdycpbs', 'ilike', self), ('sydycpbs', 'ilike', self), ('btcpbs', 'ilike', self)]"/>
                 <field name="cpmctymc"/>
                 <field name="spmc"/>
                 <field name="ggxh"/>
