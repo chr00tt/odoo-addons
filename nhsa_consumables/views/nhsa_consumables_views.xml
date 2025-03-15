@@ -7,11 +7,11 @@
         <field name="arch" type="xml">
             <tree string="医保医用耗材分类与代码">
                 <field name="name"/>
-                <field name="nhsa_consumables_categ_id"/>
+                <field name="nhsa_consumables_categ_id" optional="show"/>
                 <field name="common_name"/>
                 <field name="material"/>
                 <field name="specifications"/>
-                <field name="enterprise"/>
+                <field name="enterprise" optional="hide"/>
             </tree>
         </field>
     </record>
