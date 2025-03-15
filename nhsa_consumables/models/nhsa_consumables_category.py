@@ -10,7 +10,7 @@ class NHSAConsumablesCategory(models.Model):
     _parent_name = "parent_id"
     _parent_store = True
     _rec_name = 'complete_name'
-    _order = 'complete_name'
+    _order = 'code'
 
     name = fields.Char('名称', index='trigram', required=True)
     complete_name = fields.Char(

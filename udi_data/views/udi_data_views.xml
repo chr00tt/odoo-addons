@@ -9,12 +9,12 @@
                 <field name="zxxsdycpbs"/>
                 <field name="cpbsbmtxmc" string="编码体系" optional="hide"/>
                 <field name="cpbsfbrq" optional="hide"/>
-                <field name="zxxsdyzsydydsl" string="包装数量"/>
-                <field name="sydycpbs"/>
+                <field name="zxxsdyzsydydsl" string="包装数量" optional="hide"/>
+                <field name="sydycpbs" optoinal="show"/>
                 <field name="btcpbs" optional="hide"/>
                 <field name="cpmctymc"/>
                 <field name="spmc"/>
-                <field name="ggxh"/>
+                <field name="ggxh" optional="show"/>
                 <field name="cpms" optional="hide"/>
                 <field name="cphhhbh" optional="hide"/>
                 <field name="flbm" optional="show"/>

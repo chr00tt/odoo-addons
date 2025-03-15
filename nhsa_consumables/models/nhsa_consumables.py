@@ -12,6 +12,8 @@ class NHSAConsumables(models.Model):
     nhsa_consumables_categ_id = fields.Many2one(
         'nhsa.consumables.category', '耗材分类',
         required=True)
+    nhsa_consumables_categ_code = fields.Char('分类码',
+        related='nhsa_consumables_categ_id.code')
 
     common_name = fields.Char('通用名', required=True)
     material = fields.Char('材质', required=True)
