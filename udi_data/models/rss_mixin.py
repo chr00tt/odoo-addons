@@ -10,6 +10,7 @@ import os
 import zipfile
 from lxml import etree
 import re
+from odoo.modules import get_module_path, get_module_resource
 
 UDID_DAILY_RSS_URL = "https://udi.nmpa.gov.cn/rss/download.html?files=daily"
 UDID_WEEKLY_RSS_URL = "https://udi.nmpa.gov.cn/rss/download.html?files=weekly"
@@ -30,7 +31,12 @@ class RssMixin(models.AbstractModel):
         self._do_update(UDID_MONTHLY_RSS_URL)
 
     def do_full_update(self):
-        self._do_update(UDID_FULL_RSS_URL)
+        # 文件太大，下载会报错
+        # self._do_update(UDID_FULL_RSS_URL)
+        # 直接使用下载好的文件
+        zip_path = get_module_path('udi_data') + '/data/UDID_FULL_RELEASE_20250302.zip'
+        extract_dir = self._extract_zip(zip_path)
+        self._import_data_files(extract_dir)        
 
     def _do_update(self, rss_url):
         try:

@@ -1,5 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+    <record id="udi_data_form_view" model="ir.ui.view">
+        <field name="name">udi.data.form</field>
+        <field name="model">udi.data</field>
+        <field name="arch" type="xml">
+            <form class="oe_form_configuration">
+                <field name="product_template_id" invisible="1"/>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button"
+                            name="action_view_product_template"
+                            string="耗材"
+                            icon="fa-th-list"
+                            type="object"
+                            attrs="{'invisible': [('product_template_id', '=', False)]}"
+                            />
+                    </div>
+                    <div class="oe_title">
+                        <label for="zxxsdycpbs" string="最小销售单元产品标识"/>
+                        <h1><field name="zxxsdycpbs"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="cpbsbmtxmc"/>
+                            <field name="cpbsfbrq"/>
+                            <field name="zxxsdyzsydydsl"/>
+                            <field name="sydycpbs"/>
+                            <field name="sfybtzjbs"/>
+                            <field name="btcpbsyzxxsdycpbssfyz"/>
+                            <field name="btcpbs"/>
+                            <field name="cpmctymc"/>
+                            <field name="spmc"/>
+                            <field name="ggxh"/>
+                            <field name="sfwblztlcp"/>
+                            <field name="cpms"/>
+                            <field name="cphhhbh"/>
+                            <field name="yflbm"/>
+                            <field name="tyshxydm"/>
+                            <field name="zczbhhzbapzbh"/>
+                            <field name="ylqxzcrbarmc"/>
+                            <field name="ylqxzcrbarywmc"/>
+                        </group>
+                        <group>
+                            <field name="cgzmraqxgxx"/>
+                            <field name="sfbjwycxsy"/>
+                            <field name="zdcfsycs"/>
+                            <field name="sfwwjbz"/>
+                            <field name="syqsfxyjxmj"/>
+                            <field name="mjfs"/>
+                            <field name="qtxxdwzlj"/>
+                            <field name="tsrq"/>
+                            <field name="scbssfbhph"/>
+                            <field name="scbssfbhxlh"/>
+                            <field name="scbssfbhscrq"/>
+                            <field name="scbssfbhsxrq"/>
+                            <field name="tscchcztj"/>
+                            <field name="tsccsm"/>
+                            <field name="deviceRecordKey"/>
+                            <field name="versionNumber"/>
+                            <field name="tscchcztj"/>
+                            <field name="tscchcztj"/>
+                        </group>
+                        <group string="医疗器械分类">
+                            <field name="flbm"/>
+                            <field name="gllb"/>
+                        </group>
+                        <group string="医保医用耗材分类与代码">
+                            <field name="ybbm"/>
+                            <field name="nhsa_consumables_id"/>
+                            <field name="nhsa_consumables_categ_id"/>
+                            <field name="nhsa_common_name"/>
+                            <field name="nhsa_material"/>
+                            <field name="nhsa_specifications"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
     <record id="udi_data_tree_view" model="ir.ui.view">
         <field name="name">udi.data.tree</field>

@@ -27,6 +27,9 @@ class ProductTemplate(models.Model):
     @api.onchange('udi_data_id')
     def _onchange_udi_data_id(self):
         if self.udi_data_id:
+            # 让医用耗材唯一标识关联本产品
+            self.udi_data_id.sudo().write({'product_template_id': self.id})
+
             # 设置医用耗材标志
             self.is_medical_consumables = self.udi_data_id.cplb == '耗材'
 
@@ -72,7 +75,7 @@ class ProductTemplate(models.Model):
     @api.onchange('barcode')
     def _barcode_to_udi_data(self):
         # 设置医疗器械唯一标识
-        if self.barcode and not self.udi_data_id:
+        if self.barcode and self.is_medical_consumables:
             udi_data = self.env['udi.data'].search(['|', ('zxxsdycpbs', '=', self.barcode), ('sydycpbs', '=', self.barcode)], limit=1)
             if udi_data:
                 self.udi_data_id = udi_data.id

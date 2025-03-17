@@ -7,6 +7,7 @@ class UDIData(models.Model):
     _name = "udi.data"
     _inherit = ['rss.mixin']
     _description = "医疗器械唯一标识"
+    _rec_name = 'zxxsdycpbs'
     _rec_names_search = ['zxxsdycpbs', 'sydycpbs', 'btcpbs']
     _order = 'deviceRecordKey desc'
 
@@ -59,6 +60,8 @@ class UDIData(models.Model):
     nhsa_material = fields.Char('医保材质', related='nhsa_consumables_id.material')
     nhsa_specifications = fields.Char('医保规格', related='nhsa_consumables_id.specifications')
 
+    product_template_id = fields.Many2one('product.template', '耗材', readonly=True)
+
     @api.depends('ybbm')
     def _compute_nhsa_consumables_id(self):
         for r in self:
@@ -68,3 +71,12 @@ class UDIData(models.Model):
                 nhsa_consumables = self.env['nhsa.consumables'].search([('name', '=', nhsa_consumables_name)], limit=1)
                 if nhsa_consumables:
                     r.nhsa_consumables_id = nhsa_consumables.id
+
+    def action_view_product_template(self):
+        return {
+            'name': '耗材',
+            'view_mode': 'form',
+            'res_model': 'product.template',
+            'type': 'ir.actions.act_window',
+            'res_id': self.product_template_id.id,
+        }
