@@ -78,7 +78,7 @@ class RssMixin(models.AbstractModel):
         udi_data_sudo = self.env['udi.data'].sudo()
         udi_data_list = []
 
-        content = etree.iterparse(file_path, events=('end',), tag='device')
+        content = etree.iterparse(file_path, events=('end',), tag='device', recover=True)
         for _, elem in content:
             key = elem.findtext('zxxsdycpbs')
             record = udi_data_sudo.search([('zxxsdycpbs', '=', key)])

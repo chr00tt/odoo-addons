@@ -28,7 +28,7 @@ class ProductTemplate(models.Model):
     def _onchange_udi_data_id(self):
         if self.udi_data_id:
             # 让医用耗材唯一标识关联本产品
-            self.udi_data_id.sudo().write({'product_template_id': self.id})
+            self.udi_data_id.sudo().write({'product_template_id': self._origin.id})
 
             # 设置医用耗材标志
             self.is_medical_consumables = self.udi_data_id.cplb == '耗材'
