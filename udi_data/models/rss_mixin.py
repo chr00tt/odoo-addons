@@ -85,6 +85,8 @@ class RssMixin(models.AbstractModel):
 
         if udi_data_list:
             udi_data_sudo.create(udi_data_list)
+
+        logging.info("文件 %s 导入完成" % file_path)
             
     def _create_record(self, elem):
         flbm = elem.findtext('flbm')
