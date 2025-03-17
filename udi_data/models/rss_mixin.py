@@ -37,13 +37,13 @@ class RssMixin(models.AbstractModel):
             rss = feedparser.parse(rss_url)
             entry = rss.entries[0]
             link = entry.link
-
-            zip_path = self._download_zip(link)
-            extract_dir = self._extract_zip(zip_path)
-            self._import_data_files(extract_dir)
-            os.unlink(zip_path)
         except Exception as e:
             logging.error("医疗器械唯一标识数据更新错误: %s" % str(e))
+
+        zip_path = self._download_zip(link)
+        extract_dir = self._extract_zip(zip_path)
+        self._import_data_files(extract_dir)
+        os.unlink(zip_path)
 
     def _download_zip(self, link):
         response = requests.get(link)
