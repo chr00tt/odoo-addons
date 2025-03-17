@@ -70,7 +70,6 @@ class RssMixin(models.AbstractModel):
             for file in files:
                 if file.endswith('.xml'):
                     self._import_xml(os.path.join(root, file))
-                    break
                 elif file.endswith('.zip'):
                     extract_dir = self._extract_zip(directory + '/' + file)
                     self._import_data_files(extract_dir)
