@@ -9,4 +9,4 @@ class SupplierInfo(models.Model):
 
     udi_data_id = fields.Many2one('udi.data', related='product_id.udi_data_id', store=True)
 
-    udi_flbm = fields.Many2one('medical.device.category', related='udi_data_id.flbm')
+    udi_flbm = fields.Many2one('medical.device.category', related='udi_data_id.flbm', store=True)

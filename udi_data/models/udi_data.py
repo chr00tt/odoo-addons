@@ -89,8 +89,16 @@ class UDIData(models.Model):
 
     def _get_product_template_values(self):
         self.ensure_one()
+        name = self.spmc
+        if not name:
+            name = self.cpmctymc
+            if self.ggxh:
+                name += ' ' + self.ggxh
         values = {
-            'name': self.spmc,
+            'name': name,
+            'is_medical_consumables': True,
+            'detailed_type': 'product',
+
             'specifications': self.ggxh,
             'default_code': self.zxxsdycpbs,
             'barcode': self.sydycpbs if self.sydycpbs else self.zxxsdycpbs,
@@ -98,7 +106,6 @@ class UDIData(models.Model):
             'tracking': 'serial' if self.scbssfbhxlh else 'lot',
             'use_expiration_date': self.scbssfbhsxrq,
 
-            'is_medical_consumables': True,
             'udi_data_id': self.id,
             'nhsa_consumables_id': self.nhsa_consumables_id.id if self.nhsa_consumables_id else None,
         }
