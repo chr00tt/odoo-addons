@@ -94,13 +94,24 @@ class UDIData(models.Model):
 
             'is_medical_consumables': True,
             'udi_data_id': self.id,
-            'nhsa_consumables_id': self.nhsa_consumables_id,
+            'nhsa_consumables_id': self.nhsa_consumables_id.id if self.nhsa_consumables_id else None,
         }
         return values
 
     def action_generate_product(self):
         product_template_model = self.env['product.template'].sudo()
+        product_count = 0
         for record in self.sudo():
             if not record.product_template_id:
                 product_template_id = product_template_model.create(record._get_product_template_values())
                 record.product_template_id = product_template_id
+                product_count += 1
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {
+                'title': '生成产品',
+                'message': '已成功生成 %s 个产品.' % product_count,
+                'type': 'success',
+            }
+        }

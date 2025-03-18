@@ -95,7 +95,7 @@ class RssMixin(models.AbstractModel):
         self.env.cr.flush()
         self.env.invalidate_all()
 
-        logging.info("文件 %s 导入完成" % file_path)
+        logging.info("从 %s 导入了 %s 个医疗器械唯一标识", file_path, len(udi_data_list))
 
     def _create_record(self, elem):
         flbm = elem.findtext('flbm')
