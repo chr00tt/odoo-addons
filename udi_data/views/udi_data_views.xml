@@ -123,6 +123,7 @@
                 <field name="flbm"/>
                 <field name="ybbm"/>
                 <field name="cplb"/>
+                <field name="nhsa_consumables_categ_id"/>
                 <searchpanel>
                     <field name="gllb" enable_counters="1" select="multi"/>
                     <field name="flbm" enable_counters="1" limit="0" string="医疗器械分类"/>

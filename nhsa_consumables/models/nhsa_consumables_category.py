@@ -21,6 +21,8 @@ class NHSAConsumablesCategory(models.Model):
     child_id = fields.One2many('nhsa.consumables.category', 'parent_id', '下级分类')
     nhsa_consumables_count = fields.Integer(
         '# 耗材', compute='_compute_nhsa_consumables_count')
+    product_count = fields.Integer(
+        '# 产品', compute='_compute_product_count')
 
     code = fields.Char('编号', default="/", index=True)
 
@@ -40,6 +42,15 @@ class NHSAConsumablesCategory(models.Model):
             for sub_categ_id in categ.search([('id', 'child_of', categ.ids)]).ids:
                 nhsa_consumables_count += group_data.get(sub_categ_id, 0)
             categ.nhsa_consumables_count = nhsa_consumables_count
+
+    def _compute_product_count(self):
+        read_group_res = self.env['product.template'].read_group([('nhsa_consumables_categ_id', 'child_of', self.ids)], ['nhsa_consumables_categ_id'], ['nhsa_consumables_categ_id'])
+        group_data = dict((data['nhsa_consumables_categ_id'][0], data['nhsa_consumables_categ_id_count']) for data in read_group_res)
+        for categ in self:
+            product_count = 0
+            for sub_categ_id in categ.search([('id', 'child_of', categ.ids)]).ids:
+                product_count += group_data.get(sub_categ_id, 0)
+            categ.product_count = product_count
 
     @api.constrains('parent_id')
     def _check_category_recursion(self):

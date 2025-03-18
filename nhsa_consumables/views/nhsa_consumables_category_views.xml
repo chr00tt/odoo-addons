@@ -17,6 +17,16 @@
                                 <span class="o_stat_text"> 耗材</span>
                             </div>
                         </button>
+                        <button class="oe_stat_button"
+                            name="%(product.product_template_action_all)d"
+                            icon="fa-th-list"
+                            type="action"
+                            context="{'search_default_nhsa_consumables_categ_id': active_id, 'default_nhsa_consumables_categ_id': active_id, 'group_expand': True}">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value"><field name="product_count"/></span>
+                                <span class="o_stat_text"> 产品</span>
+                            </div>
+                        </button>
                     </div>
                     <div class="oe_title">
                         <label for="name" string="分类"/>
@@ -42,6 +52,7 @@
                 <field name="display_name" string="医保医用耗材分类"/>
                 <field name="code"/>
                 <field name="nhsa_consumables_count" optional="hide"/>
+                <field name="product_count" optional="hide"/>
             </tree>
         </field>
     </record>
