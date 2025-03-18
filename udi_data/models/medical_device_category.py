@@ -61,8 +61,8 @@ class MedicalDeficeCategory(models.Model):
             categ.product_count = product_count
 
     def _compute_supplier_count(self):
-        read_group_res = self.env['product.supplierinfo'].read_group([('flbm', 'child_of', self.ids)], ['flbm'], ['flbm'])
-        group_data = dict((data['flbm'][0], data['flbm_count']) for data in read_group_res)
+        read_group_res = self.env['product.supplierinfo'].read_group([('udi_flbm', 'child_of', self.ids)], ['udi_flbm'], ['udi_flbm'])
+        group_data = dict((data['udi_flbm'][0], data['udi_flbm_count']) for data in read_group_res)
         for categ in self:
             supplier_count = 0
             for sub_categ_id in categ.search([('id', 'child_of', categ.ids)]).ids:
