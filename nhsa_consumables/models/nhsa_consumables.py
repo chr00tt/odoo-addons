@@ -5,7 +5,7 @@ from odoo import api, fields, models, _
 
 class NHSAConsumables(models.Model):
     _name = "nhsa.consumables"
-    _description = "医保医用耗材分类与代码"
+    _description = "医保医用耗材代码"
 
     name = fields.Char('耗材代码', index='trigram', required=True)
 
@@ -28,17 +28,11 @@ class NHSAConsumables(models.Model):
     def _compute_product_count(self):
         read_group_res = self.env['product.template'].read_group([('nhsa_consumables_id', 'in', self.ids)], ['nhsa_consumables_id'], ['nhsa_consumables_id'])
         group_data = dict((data['nhsa_consumables_id'][0], data['nhsa_consumables_id_count']) for data in read_group_res)
-        for categ in self:
-            product_count = 0
-            for sub_categ_id in categ.search([('id', 'in', categ.ids)]).ids:
-                product_count += group_data.get(sub_categ_id, 0)
-            categ.product_count = product_count
+        for record in self:
+            record.product_count = group_data.get(record.id, 0)
 
     def _compute_supplier_count(self):
         read_group_res = self.env['product.supplierinfo'].read_group([('nhsa_consumables_id', 'in', self.ids)], ['nhsa_consumables_id'], ['nhsa_consumables_id'])
         group_data = dict((data['nhsa_consumables_id'][0], data['nhsa_consumables_id_count']) for data in read_group_res)
-        for categ in self:
-            supplier_count = 0
-            for sub_categ_id in categ.search([('id', 'child_of', categ.ids)]).ids:
-                supplier_count += group_data.get(sub_categ_id, 0)
-            categ.supplier_count = supplier_count
+        for record in self:
+            record.supplier_count = group_data.get(record.id, 0)

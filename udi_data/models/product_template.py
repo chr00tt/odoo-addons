@@ -8,7 +8,7 @@ class ProductTemplate(models.Model):
 
     udi_data_id = fields.Many2one('udi.data', '医疗器械唯一标识')
 
-    udi_flbm = fields.Many2one('medical.device.category', related='udi_data_id.flbm')
+    udi_flbm = fields.Many2one('medical.device.category', related='udi_data_id.flbm', store=True)
 
     udi_zxxsdycpbs = fields.Char(related='udi_data_id.zxxsdycpbs')
     udi_sydycpbs = fields.Char(related='udi_data_id.sydycpbs')
@@ -29,9 +29,6 @@ class ProductTemplate(models.Model):
     @api.onchange('udi_data_id')
     def _onchange_udi_data_id(self):
         if self.udi_data_id:
-            # 让医用耗材唯一标识关联本产品
-            self.udi_data_id.sudo().write({'product_template_id': self._origin.id})
-
             # 设置医用耗材标志
             self.is_medical_consumables = self.udi_data_id.cplb == '耗材'
 

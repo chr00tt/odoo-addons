@@ -60,7 +60,7 @@ class UDIData(models.Model):
     nhsa_material = fields.Char('医保材质', related='nhsa_consumables_id.material')
     nhsa_specifications = fields.Char('医保规格', related='nhsa_consumables_id.specifications')
 
-    product_template_id = fields.Many2one('product.template', '耗材', readonly=True)
+    product_template_id = fields.Many2one('product.template', '产品', compute='_compute_product_template_id')
 
     @api.depends('ybbm')
     def _compute_nhsa_consumables_id(self):
@@ -71,6 +71,12 @@ class UDIData(models.Model):
                 nhsa_consumables = self.env['nhsa.consumables'].search([('name', '=', nhsa_consumables_name)], limit=1)
                 if nhsa_consumables:
                     r.nhsa_consumables_id = nhsa_consumables.id
+
+    def _compute_product_template_id(self):
+        product_template_ids = self.env['product.template'].search([('udi_data_id', 'in', self.ids)])
+        data = dict((record.udi_data_id.id, record.id) for record in product_template_ids)
+        for record in self:
+            record.product_template_id = data.get(record.id, None)
 
     def action_view_product_template(self):
         return {
@@ -99,19 +105,18 @@ class UDIData(models.Model):
         return values
 
     def action_generate_product(self):
-        product_template_model = self.env['product.template'].sudo()
-        product_count = 0
-        for record in self.sudo():
+        vals_list = []
+        for record in self:
             if not record.product_template_id:
-                product_template_id = product_template_model.create(record._get_product_template_values())
-                record.product_template_id = product_template_id
-                product_count += 1
+                vals_list.append(record._get_product_template_values())
+        self.env['product.template'].create(vals_list)
+
         return {
             'type': 'ir.actions.client',
             'tag': 'display_notification',
             'params': {
                 'title': '生成产品',
-                'message': '已成功生成 %s 个产品.' % product_count,
+                'message': '已成功生成 %s 个产品.' % len(vals_list),
                 'type': 'success',
             }
         }
