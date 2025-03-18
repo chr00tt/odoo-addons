@@ -100,7 +100,7 @@ class UDIData(models.Model):
 
     def action_generate_product(self):
         product_template_model = self.env['product.template'].sudo()
-        for record in self:
+        for record in self.sudo():
             if not record.product_template_id:
                 product_template_id = product_template_model.create(record._get_product_template_values())
                 record.product_template_id = product_template_id
