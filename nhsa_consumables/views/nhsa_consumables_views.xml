@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
+    <record id="nhsa_consumables_form_view" model="ir.ui.view">
+        <field name="name">nhsa.consumables.form</field>
+        <field name="model">nhsa.consumables</field>
+        <field name="arch" type="xml">
+            <form string="医保医用耗材分类与代码">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button"
+                            name="%(product.product_template_action_all)d"
+                            icon="fa-th-list"
+                            type="action"
+                            context="{'search_default_nhsa_consumables_id': active_id, 'default_nhsa_consumables_id': active_id, 'group_expand': True}">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value"><field name="product_count"/></span>
+                                <span class="o_stat_text"> 产品</span>
+                            </div>
+                        </button>
+                        <button class="oe_stat_button"
+                            name="%(product.product_supplierinfo_type_action)d"
+                            icon="fa-th-list"
+                            type="action"
+                            context="{'search_default_nhsa_consumables_id': active_id, 'default_nhsa_consumables_id': active_id, 'group_expand': True}">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value"><field name="supplier_count"/></span>
+                                <span class="o_stat_text"> 供应</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" string="医保医用耗材"/>
+                        <h1><field name="name" placeholder="例如：一次性注射器"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="common_name"/>
+                            <field name="material"/>
+                            <field name="specifications"/>
+                            <field name="enterprise"/>
+                        </group>
+                        <group>
+                            <field name="nhsa_consumables_categ_code"/>
+                            <field name="nhsa_consumables_categ_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
     <record id="nhsa_consumables_list_view" model="ir.ui.view">
         <field name="name">nhsa.consumables.list</field>
         <field name="model">nhsa.consumables</field>
@@ -13,6 +62,8 @@
                 <field name="material"/>
                 <field name="specifications"/>
                 <field name="enterprise" optional="hide"/>
+                <field name="product_count" optional="hide"/>
+                <field name="supplier_count" optional="hide"/>
             </tree>
         </field>
     </record>
