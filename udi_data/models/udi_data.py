@@ -80,3 +80,27 @@ class UDIData(models.Model):
             'type': 'ir.actions.act_window',
             'res_id': self.product_template_id.id,
         }
+
+    def _get_product_template_values(self):
+        self.ensure_one()
+        values = {
+            'name': self.spmc,
+            'specifications': self.ggxh,
+            'default_code': self.zxxsdycpbs,
+            'barcode': self.sydycpbs if self.sydycpbs else self.zxxsdycpbs,
+            'description': self.cpms,
+            'tracking': 'serial' if self.scbssfbhxlh else 'lot',
+            'use_expiration_date': self.scbssfbhsxrq,
+
+            'is_medical_consumables': True,
+            'udi_data_id': self.id,
+            'nhsa_consumables_id': self.nhsa_consumables_id,
+        }
+        return values
+
+    def action_generate_product(self):
+        product_template_model = self.env['product.template'].sudo()
+        for record in self:
+            if not record.product_template_id:
+                product_template_id = product_template_model.create(record._get_product_template_values())
+                record.product_template_id = product_template_id
