@@ -5,3 +5,4 @@ from . import rss_mixin
 from . import udi_data
 from . import product_template
 from . import nhsa_consumables_category
+from . import product_supplierinfo

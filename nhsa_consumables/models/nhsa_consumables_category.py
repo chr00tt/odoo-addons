@@ -55,8 +55,8 @@ class NHSAConsumablesCategory(models.Model):
             categ.product_count = product_count
 
     def _compute_supplier_count(self):
-        read_group_res = self.env['product.supplierinfo'].read_group([('categ_id', 'child_of', self.ids)], ['categ_id'], ['categ_id'])
-        group_data = dict((data['categ_id'][0], data['categ_id_count']) for data in read_group_res)
+        read_group_res = self.env['product.supplierinfo'].read_group([('nhsa_consumables_categ_id', 'child_of', self.ids)], ['nhsa_consumables_categ_id'], ['nhsa_consumables_categ_id'])
+        group_data = dict((data['nhsa_consumables_categ_id'][0], data['nhsa_consumables_categ_id_count']) for data in read_group_res)
         for categ in self:
             supplier_count = 0
             for sub_categ_id in categ.search([('id', 'child_of', categ.ids)]).ids:

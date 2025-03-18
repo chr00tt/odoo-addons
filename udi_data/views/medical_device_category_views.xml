@@ -54,6 +54,9 @@
                 <field name="yqyt" optional="hide"/>
                 <field name="pmjl" optional="hide"/>
                 <field name="gllb"/>
+                <field name="udi_data_count" optional="hide"/>
+                <field name="product_count" optional="hide"/>
+                <field name="supplier_count" optional="hide"/>
             </tree>
         </field>
     </record>

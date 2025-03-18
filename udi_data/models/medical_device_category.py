@@ -22,6 +22,10 @@ class MedicalDeficeCategory(models.Model):
     child_id = fields.One2many('medical.device.category', 'parent_id', '下级分类')
     udi_data_count = fields.Integer(
         '# 唯一标识', compute='_compute_udi_data_count')
+    product_count = fields.Integer(
+        '# 产品', compute='_compute_product_count')
+    supplier_count = fields.Integer(
+        '# 供应', compute='_compute_supplier_count')
 
     code = fields.Char('编号', default="/", index=True)
 
@@ -46,6 +50,24 @@ class MedicalDeficeCategory(models.Model):
             for sub_categ_id in categ.search([('id', 'child_of', categ.ids)]).ids:
                 udi_data_count += group_data.get(sub_categ_id, 0)
             categ.udi_data_count = udi_data_count
+
+    def _compute_product_count(self):
+        read_group_res = self.env['product.template'].read_group([('udi_flbm', 'child_of', self.ids)], ['udi_flbm'], ['udi_flbm'])
+        group_data = dict((data['udi_flbm'][0], data['udi_flbm_count']) for data in read_group_res)
+        for categ in self:
+            product_count = 0
+            for sub_categ_id in categ.search([('id', 'child_of', categ.ids)]).ids:
+                product_count += group_data.get(sub_categ_id, 0)
+            categ.product_count = product_count
+
+    def _compute_supplier_count(self):
+        read_group_res = self.env['product.supplierinfo'].read_group([('flbm', 'child_of', self.ids)], ['flbm'], ['flbm'])
+        group_data = dict((data['flbm'][0], data['flbm_count']) for data in read_group_res)
+        for categ in self:
+            supplier_count = 0
+            for sub_categ_id in categ.search([('id', 'child_of', categ.ids)]).ids:
+                supplier_count += group_data.get(sub_categ_id, 0)
+            categ.supplier_count = supplier_count
 
     @api.constrains('parent_id')
     def _check_category_recursion(self):
