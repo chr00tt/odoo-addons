@@ -14,7 +14,7 @@
                             context="{'search_default_nhsa_consumables_categ_id': active_id, 'default_nhsa_consumables_categ_id': active_id, 'group_expand': True}">
                             <div class="o_field_widget o_stat_info">
                                 <span class="o_stat_value"><field name="nhsa_consumables_count"/></span>
-                                <span class="o_stat_text"> 医保医用耗材</span>
+                                <span class="o_stat_text"> 耗材</span>
                             </div>
                         </button>
                     </div>
@@ -41,6 +41,7 @@
             <tree string="医保医用耗材分类">
                 <field name="display_name" string="医保医用耗材分类"/>
                 <field name="code"/>
+                <field name="nhsa_consumables_count" optional="hide"/>
             </tree>
         </field>
     </record>

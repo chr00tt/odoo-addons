@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="nhsa_consumables_category_form_view" model="ir.ui.view">
+        <field name="model">nhsa.consumables.category</field>
+        <field name="inherit_id" ref="nhsa_consumables.nhsa_consumables_category_form_view"/>
+        <field name="arch" type="xml">
+            <button name="%(nhsa_consumables_action)d" position="after">
+                <button class="oe_stat_button"
+                    name="%(udi_data_action)d"
+                    icon="fa-th-list"
+                    type="action"
+                    context="{'search_default_nhsa_consumables_categ_id': active_id, 'default_nhsa_consumables_categ_id': active_id, 'group_expand': True}">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value"><field name="nhsa_consumables_count"/></span>
+                        <span class="o_stat_text"> 唯一标识</span>
+                    </div>
+                </button>
+            </button>
+        </field>
+    </record>
+
+    <record id="nhsa_consumables_category_list_view" model="ir.ui.view">
+        <field name="model">nhsa.consumables.category</field>
+        <field name="inherit_id" ref="nhsa_consumables.nhsa_consumables_category_list_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="udi_data_count" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
