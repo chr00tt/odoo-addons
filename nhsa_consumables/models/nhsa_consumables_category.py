@@ -23,6 +23,8 @@ class NHSAConsumablesCategory(models.Model):
         '# 耗材', compute='_compute_nhsa_consumables_count')
     product_count = fields.Integer(
         '# 产品', compute='_compute_product_count')
+    supplier_count = fields.Integer(
+        '# 供应', compute='_compute_supplier_count')
 
     code = fields.Char('编号', default="/", index=True)
 
@@ -51,6 +53,15 @@ class NHSAConsumablesCategory(models.Model):
             for sub_categ_id in categ.search([('id', 'child_of', categ.ids)]).ids:
                 product_count += group_data.get(sub_categ_id, 0)
             categ.product_count = product_count
+
+    def _compute_supplier_count(self):
+        read_group_res = self.env['product.supplierinfo'].read_group([('categ_id', 'child_of', self.ids)], ['categ_id'], ['categ_id'])
+        group_data = dict((data['categ_id'][0], data['categ_id_count']) for data in read_group_res)
+        for categ in self:
+            supplier_count = 0
+            for sub_categ_id in categ.search([('id', 'child_of', categ.ids)]).ids:
+                supplier_count += group_data.get(sub_categ_id, 0)
+            categ.supplier_count = supplier_count
 
     @api.constrains('parent_id')
     def _check_category_recursion(self):

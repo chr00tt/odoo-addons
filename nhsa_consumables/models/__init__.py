@@ -4,3 +4,4 @@
 from . import nhsa_consumables_category
 from . import nhsa_consumables
 from . import product_template
+from . import product_supplierinfo
