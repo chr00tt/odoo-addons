@@ -97,6 +97,10 @@
                 <field name="cphhhbh" optional="hide"/>
                 <field name="flbm" optional="show"/>
                 <field name="gllb" optional="show"/>
+                <field name="tyshxydm" optional="hide"/>
+                <field name="zczbhhzbapzbh" optional="hide"/>
+                <field name="ylqxzcrbarmc" optional="hide"/>
+                <field name="ylqxzcrbarywmc" optional="hide"/>
                 <field name="ybbm"/>
                 <field name="nhsa_consumables_categ_id" optional="hide"/>
                 <field name="nhsa_common_name" optional="hide"/>

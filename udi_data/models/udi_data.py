@@ -73,10 +73,9 @@ class UDIData(models.Model):
                     r.nhsa_consumables_id = nhsa_consumables.id
 
     def _compute_product_template_id(self):
-        product_template_ids = self.env['product.template'].search([('udi_data_id', 'in', self.ids)])
-        data = dict((record.udi_data_id.id, record.id) for record in product_template_ids)
         for record in self:
-            record.product_template_id = data.get(record.id, None)
+            barcode = self.sydycpbs if self.sydycpbs else self.zxxsdycpbs
+            record.product_template_id = self.env['product.template'].search([('barcode', '=', barcode)], limit=1)
 
     def action_view_product_template(self):
         return {
@@ -89,19 +88,15 @@ class UDIData(models.Model):
 
     def _get_product_template_values(self):
         self.ensure_one()
-        name = self.spmc
-        if not name:
-            name = self.cpmctymc
-            if self.ggxh:
-                name += ' ' + self.ggxh
+        barcode = self.sydycpbs if self.sydycpbs else self.zxxsdycpbs
         values = {
-            'name': name,
+            'name': self.cpmctymc,
             'is_medical_consumables': True,
             'detailed_type': 'product',
 
             'specifications': self.ggxh,
-            'default_code': self.zxxsdycpbs,
-            'barcode': self.sydycpbs if self.sydycpbs else self.zxxsdycpbs,
+            'default_code': barcode,
+            'barcode': barcode,
             'description': self.cpms,
             'tracking': 'serial' if self.scbssfbhxlh else 'lot',
             'use_expiration_date': self.scbssfbhsxrq,
@@ -112,11 +107,25 @@ class UDIData(models.Model):
         return values
 
     def action_generate_product(self):
+        product_template_model = self.env['product.template']
+
         vals_list = []
         for record in self:
-            if not record.product_template_id:
-                vals_list.append(record._get_product_template_values())
-        self.env['product.template'].create(vals_list)
+            barcode = record.sydycpbs if record.sydycpbs else record.zxxsdycpbs
+            product_template = product_template_model.search([('barcode', '=', barcode)], limit=1)
+            if not product_template:
+                product_template = product_template_model.create(record._get_product_template_values())
+
+            if barcode != record.zxxsdycpbs:
+                product_packaging_model = self.env['product.packaging']
+                product_packaging = product_packaging_model.search([('barcode', '=', record.zxxsdycpbs)], limit=1)
+                if not product_packaging:
+                    product_packaging_model.create({
+                        'name': '%d %s' % (record.zxxsdyzsydydsl, product_template.uom_id.name),
+                        'product_id': product_template.product_variant_id.id,
+                        'qty': record.zxxsdyzsydydsl,
+                        'barcode': record.zxxsdycpbs,
+                    })
 
         return {
             'type': 'ir.actions.client',
