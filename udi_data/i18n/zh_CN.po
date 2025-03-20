@@ -1,0 +1,35 @@
+#. module: udi_data
+#: model:ir.model.fields,field_description:udi_data.field_medical_device_category__create_uid
+#: model:ir.model.fields,field_description:udi_data.field_udi_data__create_uid
+msgid "Created by"
+msgstr "创建人"
+
+#. module: udi_data
+#: model:ir.model.fields,field_description:udi_data.field_medical_device_category__create_date
+#: model:ir.model.fields,field_description:udi_data.field_udi_data__create_date
+msgid "Created on"
+msgstr "创建时间"
+
+#. module: udi_data
+#: model:ir.model.fields,field_description:udi_data.field_medical_device_category__display_name
+#: model:ir.model.fields,field_description:udi_data.field_udi_data__display_name
+msgid "Display Name"
+msgstr "显示名称"
+
+#. module: udi_data
+#: model:ir.model.fields,field_description:udi_data.field_medical_device_category____last_update
+#: model:ir.model.fields,field_description:udi_data.field_udi_data____last_update
+msgid "Last Modified on"
+msgstr "最后修改时间"
+
+#. module: udi_data
+#: model:ir.model.fields,field_description:udi_data.field_medical_device_category__write_uid
+#: model:ir.model.fields,field_description:udi_data.field_udi_data__write_uid
+msgid "Last Updated by"
+msgstr "最后更新人"
+
+#. module: udi_data
+#: model:ir.model.fields,field_description:udi_data.field_medical_device_category__write_date
+#: model:ir.model.fields,field_description:udi_data.field_udi_data__write_date
+msgid "Last Updated on"
+msgstr "最后更新时间"
