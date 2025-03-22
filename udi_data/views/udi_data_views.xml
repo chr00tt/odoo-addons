@@ -91,7 +91,7 @@
                 <field name="sydycpbs" optional="show"/>
                 <field name="btcpbs" optional="hide"/>
                 <field name="cpmctymc"/>
-                <field name="spmc"/>
+                <field name="spmc" optional="show"/>
                 <field name="ggxh" optional="show"/>
                 <field name="cpms" optional="hide"/>
                 <field name="cphhhbh" optional="hide"/>
@@ -101,7 +101,7 @@
                 <field name="zczbhhzbapzbh" optional="hide"/>
                 <field name="ylqxzcrbarmc" optional="hide"/>
                 <field name="ylqxzcrbarywmc" optional="hide"/>
-                <field name="ybbm"/>
+                <field name="ybbm" optional="show"/>
                 <field name="nhsa_consumables_categ_id" optional="hide"/>
                 <field name="nhsa_common_name" optional="hide"/>
                 <field name="nhsa_material" optional="hide"/>
@@ -139,8 +139,8 @@
 
     <record id="udi_data_action" model="ir.actions.act_window">
         <field name="name">医疗器械唯一标识</field>
-        <field name="type">ir.actions.act_window</field>
         <field name="res_model">udi.data</field>
+        <field name="view_mode">tree,kanban,form,pivot,graph</field>
     </record>
 
     <!-- 为选择的医疗器械唯一标识生成产品 -->
