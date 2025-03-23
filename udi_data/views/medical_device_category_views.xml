@@ -69,7 +69,7 @@
         <field name="arch" type="xml">
             <tree string="医疗器械分类">
                 <field name="display_name" string="医疗器械分类"/>
-                <field name="code"/>
+                <field name="code" optional="show"/>
                 <field name="cpms" optional="hide"/>
                 <field name="yqyt" optional="hide"/>
                 <field name="pmjl" optional="hide"/>
@@ -90,6 +90,7 @@
                 <field name="parent_id"/>
                 <searchpanel>
                     <field name="gllb" enable_counters="1" select="multi"/>
+                    <field name="parent_id" enable_counters="1" limit="0"/>
                 </searchpanel>
             </search>
         </field>
