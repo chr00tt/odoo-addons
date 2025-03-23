@@ -3,10 +3,22 @@ import ast
 from graphviz import Digraph
 import sys
 
-def get_module_dependencies(manifest_path):
+def get_module_dependencies(addons_path, module_name):
     """
     从 __manifest__.py 文件中解析模块的依赖关系
     """
+    module_path = os.path.join(addons_path, module_name)
+    if not os.path.exists(module_path):
+        print(f"Module {module_name} not found")
+        return []
+    manifest_path = os.path.join(module_path, '__manifest__.py')
+    if not os.path.exists(manifest_path):
+        print(f"__manifest__.py not found in {module_name}")
+        manifest_path = os.path.join(addons_path, module_name, '__openerp__.py')
+        print(f"manifest_path: {manifest_path}")
+    if not os.path.exists(manifest_path):
+        return []
+
     try:
         with open(manifest_path, 'r', encoding='utf-8') as file:
             manifest_content = file.read()
@@ -23,22 +35,13 @@ def get_includes(addons_path, module_name):
     includes = [module_name]
 
     # 获取 module_name 依赖的模块
-    module_path = os.path.join(addons_path, module_name)
-    if os.path.isdir(module_path):
-        manifest_path = os.path.join(module_path, '__manifest__.py')
-        if os.path.exists(manifest_path):
-            dependencies = get_module_dependencies(manifest_path)
-            includes.extend(dependencies)
+    includes.extend(get_module_dependencies(addons_path, module_name))
 
     # 获取依赖 module_name 的模块
     for module in os.listdir(addons_path):
-        module_path = os.path.join(addons_path, module)
-        if os.path.isdir(module_path):
-            manifest_path = os.path.join(module_path, '__manifest__.py')
-            if os.path.exists(manifest_path):
-                dependencies = get_module_dependencies(manifest_path)
-                if module_name in dependencies:
-                    includes.append(module)
+        dependencies = get_module_dependencies(addons_path, module)
+        if module_name in dependencies:
+            includes.append(module)
 
     print(f"includes: {includes}")
 
@@ -55,6 +58,7 @@ def generate_dependency_graph(addons_path, module_name, output_file='dependency_
     
     includes = get_includes(addons_path, module_name)
     excludes = [
+        'google_',
         'l10n_',
         'test_',
     ]
@@ -70,11 +74,13 @@ def generate_dependency_graph(addons_path, module_name, output_file='dependency_
         module_path = os.path.join(addons_path, module)
         if os.path.isdir(module_path):
             manifest_path = os.path.join(module_path, '__manifest__.py')
+            if not os.path.exists(manifest_path):
+                manifest_path = os.path.join(module_path, '__openerp__.py')
             if os.path.exists(manifest_path):
                 # 添加模块节点
                 dot.node(module, module)
                 # 获取模块依赖
-                dependencies = get_module_dependencies(manifest_path)
+                dependencies = get_module_dependencies(addons_path, module)
                 for dependency in dependencies:
                     # 添加依赖边
                     dot.edge(dependency, module)
