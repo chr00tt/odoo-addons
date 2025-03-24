@@ -6,7 +6,11 @@
     'author': 'He Jian',
     'website': 'https://github.com/chr00tt/odoo-addons',
     'category': 'Inventory/Inventory',
-    'depends': ['stock', 'medical_consumables'],
+    'depends': [
+        'stock',
+
+        'medical_consumables_product',
+        ],
     'data': [
         'security/ir.model.access.csv',
         'data/nhsa_consumables_data.xml',

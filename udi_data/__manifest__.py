@@ -8,7 +8,7 @@
     'depends': [
         'stock',
 
-        'medical_consumables',
+        'medical_consumables_product',
         'nhsa_consumables',
         ],
     'category': 'Inventory/Inventory',
