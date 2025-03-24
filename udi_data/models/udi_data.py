@@ -109,7 +109,7 @@ class UDIData(models.Model):
     def action_generate_product(self):
         product_template_model = self.env['product.template']
 
-        vals_list = []
+        product_count = 0
         for record in self:
             barcode = record.sydycpbs if record.sydycpbs else record.zxxsdycpbs
             product_template = product_template_model.search([('barcode', '=', barcode)], limit=1)
@@ -126,13 +126,14 @@ class UDIData(models.Model):
                         'qty': record.zxxsdyzsydydsl,
                         'barcode': record.zxxsdycpbs,
                     })
+                    product_count += 1
 
         return {
             'type': 'ir.actions.client',
             'tag': 'display_notification',
             'params': {
                 'title': '生成产品',
-                'message': '已成功生成 %s 个产品.' % len(vals_list),
+                'message': '已成功生成 %s 个产品.' % product_count,
                 'type': 'success',
             }
         }
