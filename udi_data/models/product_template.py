@@ -41,8 +41,8 @@ class ProductTemplate(models.Model):
                 self.barcode = self.udi_data_id.sydycpbs if self.udi_data_id.sydycpbs else self.udi_data_id.zxxsdycpbs
 
             # 设置规格
-            if not self.specifications and self.udi_data_id.ggxh:
-                self.specifications = self.udi_data_id.ggxh
+            if not self.ggxh and self.udi_data_id.ggxh:
+                self.ggxh = self.udi_data_id.ggxh
 
             # 设置追溯
             if self.udi_data_id.scbssfbhxlh:

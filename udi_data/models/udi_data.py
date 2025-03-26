@@ -94,7 +94,7 @@ class UDIData(models.Model):
             'is_medical_consumables': True,
             'detailed_type': 'product',
 
-            'specifications': self.ggxh,
+            'ggxh': self.ggxh,
             'default_code': barcode,
             'barcode': barcode,
             'description': self.cpms,

@@ -9,6 +9,7 @@ class ProductTemplate(models.Model):
     is_medical_consumables = fields.Boolean('医用耗材', compute='_compute_is_medical_consumables',
         store=True, readonly=False)
 
+    ggxh = fields.Char("规格/型号")
     ybbm = fields.Char("医保耗材分类编码")
 
     @api.depends('type')

@@ -9,6 +9,9 @@
                 <field name="is_medical_consumables"/>
                 <label for="is_medical_consumables"/>
             </div>
+            <field name="uom_id" position="before">
+                <field name="ggxh"/>
+            </field>
             <xpath expr="//notebook" position="inside">
                 <page string="医用耗材" name="medical_consumables" attrs="{'invisible': [('is_medical_consumables', '=', False)]}">
                     <group>
