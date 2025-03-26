@@ -102,6 +102,7 @@ class UDIData(models.Model):
             'use_expiration_date': self.scbssfbhsxrq,
 
             'udi_data_id': self.id,
+            'ybbm': self.ybbm,
             'nhsa_consumables_id': self.nhsa_consumables_id.id if self.nhsa_consumables_id else None,
         }
         return values
