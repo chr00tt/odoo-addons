@@ -1,9 +1,9 @@
 /** @odoo-module **/
 
 import BarcodePickingModel from '@stock_barcode/models/barcode_picking_model';
-import { patch } from 'web.utils';
+import { patch } from "@web/core/utils/patch";
 
-patch(BarcodePickingModel.prototype, 'stock_barcode_production_date', {
+patch(BarcodePickingModel.prototype, {
 
     async updateLine(line, args) {
         this._super(...arguments);

@@ -6,7 +6,11 @@
     'author': 'He Jian',
     'website': 'https://github.com/chr00tt/odoo-addons',
     'category': 'Inventory/Inventory',
-    'depends': ['stock_barcode', 'stock_lot_production_date'],
+    'depends': [
+        'stock_barcode',
+
+        'stock_lot_production_date',
+    ],
     'auto_install': True,
     'license': 'LGPL-3',
     'assets': {
