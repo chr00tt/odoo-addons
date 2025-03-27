@@ -110,6 +110,16 @@ class RssMixin(models.AbstractModel):
             if not category:
                 logging.warning("医疗器械分类编码 %s 未找到" % flbm)
             flbm = category.id if category else None
+
+        ylqxzcrbarmc = elem.findtext('ylqxzcrbarmc')
+        manufacturer = self.env['res.partner'].search([('name', '=', ylqxzcrbarmc)], limit=1)
+        if not manufacturer:
+            manufacturer = self.env['res.partner'].create({
+                'name': ylqxzcrbarmc,
+                'company_type': 'company',
+                'category_id/id': [self.env.ref('nhsa_consumables.res_partner_manufacturer').id],
+            })
+
         return {
             'zxxsdycpbs': elem.findtext('zxxsdycpbs'),
             'cpbsbmtxmc': elem.findtext('cpbsbmtxmc'),
@@ -127,7 +137,7 @@ class RssMixin(models.AbstractModel):
             'cphhhbh': elem.findtext('cphhhbh'),
             'yflbm': elem.findtext('yflbm'),
             'flbm': flbm,
-            'ylqxzcrbarmc': elem.findtext('ylqxzcrbarmc'),
+            'ylqxzcrbarmc': manufacturer.id,
             'ylqxzcrbarywmc': elem.findtext('ylqxzcrbarywmc'),
             'tyshxydm': elem.findtext('tyshxydm'),
             'zczbhhzbapzbh': elem.findtext('zczbhhzbapzbh'),

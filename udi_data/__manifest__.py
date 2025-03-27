@@ -8,6 +8,8 @@
     'depends': [
         'stock',
 
+        'product_manufacturer',
+
         'medical_consumables_product',
         'nhsa_consumables',
         ],
