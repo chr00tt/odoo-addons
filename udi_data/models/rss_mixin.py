@@ -117,7 +117,7 @@ class RssMixin(models.AbstractModel):
             manufacturer = self.env['res.partner'].create({
                 'name': ylqxzcrbarmc,
                 'company_type': 'company',
-                'category_id/id': [self.env.ref('nhsa_consumables.res_partner_manufacturer').id],
+                'category_id': [self.env.ref('nhsa_consumables.res_partner_manufacturer').id],
             })
 
         return {
