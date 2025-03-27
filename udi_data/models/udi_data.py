@@ -93,20 +93,28 @@ class UDIData(models.Model):
         self.ensure_one()
         barcode = self.sydycpbs if self.sydycpbs else self.zxxsdycpbs
         values = {
+            # product 信息
             'name': self.cpmctymc,
-            'is_medical_consumables': True,
             'detailed_type': 'product',
-
-            'ggxh': self.ggxh,
             'default_code': barcode,
             'barcode': barcode,
             'description': self.cpms,
             'tracking': 'serial' if self.scbssfbhxlh else 'lot',
             'use_expiration_date': self.scbssfbhsxrq,
 
-            'udi_data_id': self.id,
+            # product_manufacturer 信息
+            'manufacturer_id': self.nhsa_consumables_id.enterprise if self.nhsa_consumables_id else self.ylqxzcrbarmc,
+
+            # medical_consumables_product 信息
+            'is_medical_consumables': True,
+            'ggxh': self.ggxh,
             'ybbm': self.ybbm,
+
+            # nhsa_consumables 信息
             'nhsa_consumables_id': self.nhsa_consumables_id.id if self.nhsa_consumables_id else None,
+
+            # udi_data 信息
+            'udi_data_id': self.id,
         }
         return values
 
