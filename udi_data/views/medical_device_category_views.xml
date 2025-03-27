@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="medical_device_category_form_view" model="ir.ui.view">
+        <field name="name">medical.device.category.form</field>
+        <field name="model">medical.device.category</field>
+        <field name="arch" type="xml">
+            <form class="oe_form_configuration">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button"
+                            name="%(udi_data_action)d"
+                            icon="fa-th-list"
+                            type="action"
+                            context="{'search_default_flbm': active_id, 'default_flbm': active_id, 'group_expand': True}">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value"><field name="udi_data_count"/></span>
+                                <span class="o_stat_text"> 唯一标识</span>
+                            </div>
+                        </button>
+                        <button class="oe_stat_button"
+                            name="%(product.product_template_action_all)d"
+                            icon="fa-th-list"
+                            type="action"
+                            context="{'search_default_udi_flbm': active_id, 'default_udi_flbm': active_id, 'group_expand': True}">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value"><field name="product_count"/></span>
+                                <span class="o_stat_text"> 产品</span>
+                            </div>
+                        </button>
+                        <button class="oe_stat_button"
+                            name="%(product.product_supplierinfo_type_action)d"
+                            icon="fa-th-list"
+                            type="action"
+                            context="{'search_default_udi_flbm': active_id, 'default_udi_flbm': active_id, 'group_expand': True}">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value"><field name="supplier_count"/></span>
+                                <span class="o_stat_text"> 供应</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" string="分类"/>
+                        <h1><field name="name" placeholder="例如：骨科手术器械"/></h1>
+                    </div>
+                    <group name="first" col="2">
+                        <field name="parent_id" class="oe_inline"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="cpms"/>
+                            <field name="yqyt"/>
+                            <field name="pmjl"/>
+                        </group>
+                        <group>
+                            <field name="gllb"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="medical_device_category_list_view" model="ir.ui.view">
+        <field name="name">medical.device.category.list</field>
+        <field name="model">medical.device.category</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree string="医疗器械分类">
+                <field name="display_name" string="医疗器械分类"/>
+                <field name="code" optional="show"/>
+                <field name="cpms" optional="hide"/>
+                <field name="yqyt" optional="hide"/>
+                <field name="pmjl" optional="hide"/>
+                <field name="gllb"/>
+                <field name="udi_data_count" optional="hide"/>
+                <field name="product_count" optional="hide"/>
+                <field name="supplier_count" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="medical_device_category_search_view" model="ir.ui.view">
+        <field name="name">medical.device.category.search</field>
+        <field name="model">medical.device.category</field>
+        <field name="arch" type="xml">
+            <search string="医疗器械分类">
+                <field name="name" string="医保医用耗材分类"/>
+                <field name="parent_id"/>
+                <searchpanel>
+                    <field name="gllb" enable_counters="1" select="multi"/>
+                    <field name="parent_id" enable_counters="1" limit="0"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record id="medical_device_category_action_form" model="ir.actions.act_window">
+        <field name="name">医疗器械分类</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">medical.device.category</field>
+    </record>
+
+</odoo>

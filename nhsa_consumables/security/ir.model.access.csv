@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_nhsa_consumables_user,nhsa.consumables.user,model_nhsa_consumables,base.group_user,1,0,0,0
+access_nhsa_consumables_manager,nhsa.consumables.manager,model_nhsa_consumables,base.group_system,1,1,1,1
+access_nhsa_consumables_category_user,nhsa.consumables.category.user,model_nhsa_consumables_category,base.group_user,1,0,0,0
+access_nhsa_consumables_category_manager,nhsa.consumables.category.manager,model_nhsa_consumables_category,base.group_system,1,1,1,1

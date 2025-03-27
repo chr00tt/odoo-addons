@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+        action="medical_device_category_action_form" id="menu_medical_device_category_action_form"
+        parent="stock.menu_product_in_config_stock" sequence="2"/>
+    <menuitem
+        action="udi_data_action" id="menu_udi_data"
+        parent="stock.menu_product_in_config_stock" sequence="2"/>
+</odoo>

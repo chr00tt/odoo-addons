@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="nhsa_consumables_category_all" model="nhsa.consumables.category">
+            <field name="name">所有</field>
+        </record>
+    </data>
+</odoo>

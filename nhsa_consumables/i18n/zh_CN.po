@@ -1,0 +1,35 @@
+#. module: nhsa_consumables
+#: model:ir.model.fields,field_description:nhsa_consumables.field_nhsa_consumables__create_uid
+#: model:ir.model.fields,field_description:nhsa_consumables.field_nhsa_consumables_category__create_uid
+msgid "Created by"
+msgstr "创建人"
+
+#. module: nhsa_consumables
+#: model:ir.model.fields,field_description:nhsa_consumables.field_nhsa_consumables__create_date
+#: model:ir.model.fields,field_description:nhsa_consumables.field_nhsa_consumables_category__create_date
+msgid "Created on"
+msgstr "创建时间"
+
+#. module: nhsa_consumables
+#: model:ir.model.fields,field_description:nhsa_consumables.field_nhsa_consumables__display_name
+#: model:ir.model.fields,field_description:nhsa_consumables.field_nhsa_consumables_category__display_name
+msgid "Display Name"
+msgstr "显示名称"
+
+#. module: nhsa_consumables
+#: model:ir.model.fields,field_description:nhsa_consumables.field_nhsa_consumables____last_update
+#: model:ir.model.fields,field_description:nhsa_consumables.field_nhsa_consumables_category____last_update
+msgid "Last Modified on"
+msgstr "最后修改时间"
+
+#. module: nhsa_consumables
+#: model:ir.model.fields,field_description:nhsa_consumables.field_nhsa_consumables__write_uid
+#: model:ir.model.fields,field_description:nhsa_consumables.field_nhsa_consumables_category__write_uid
+msgid "Last Updated by"
+msgstr "最后更新人"
+
+#. module: nhsa_consumables
+#: model:ir.model.fields,field_description:nhsa_consumables.field_nhsa_consumables__write_date
+#: model:ir.model.fields,field_description:nhsa_consumables.field_nhsa_consumables_category__write_date
+msgid "Last Updated on"
+msgstr "最后更新时间"
