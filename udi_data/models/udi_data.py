@@ -31,8 +31,7 @@ class UDIData(models.Model):
     zczbhhzbapzbh = fields.Char("注册证编号或者备案凭证编号")
     ylqxzcrbarmc = fields.Many2one(
         'res.partner', '医疗器械注册人/备案人名称',
-        required=True,
-        check_company=True)
+        required=True)
     ylqxzcrbarywmc = fields.Char("医疗器械注册人/备案人英文名称")
     ybbm = fields.Char("医保耗材分类编码")
     cplb = fields.Char("产品类别")

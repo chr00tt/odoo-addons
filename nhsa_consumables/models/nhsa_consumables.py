@@ -20,8 +20,7 @@ class NHSAConsumables(models.Model):
     specifications = fields.Char('规格', required=True)
     enterprise = fields.Many2one(
         'res.partner', '企业',
-        required=True,
-        check_company=True)
+        required=True)
 
     product_count = fields.Integer(
         '# 产品', compute='_compute_product_count')
