@@ -13,7 +13,7 @@
                             string="耗材"
                             icon="fa-th-list"
                             type="object"
-                            attrs="{'invisible': [('product_template_id', '=', False)]}"
+                            invisible="not product_template_id"
                             />
                     </div>
                     <div class="oe_title">

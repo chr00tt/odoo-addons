@@ -13,7 +13,7 @@
                 <field name="ggxh"/>
             </field>
             <xpath expr="//notebook" position="inside">
-                <page string="医用耗材" name="medical_consumables" attrs="{'invisible': [('is_medical_consumables', '=', False)]}">
+                <page string="医用耗材" name="medical_consumables" invisible="not is_medical_consumables">
                     <group>
                         <group>
                             <field name="ybbm"/>
