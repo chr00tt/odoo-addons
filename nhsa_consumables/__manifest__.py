@@ -13,8 +13,10 @@
         ],
     'data': [
         'security/ir.model.access.csv',
+        'data/res_partner_category_data.xml',
         'data/nhsa_consumables_data.xml',
         'data/nhsa.consumables.category.csv',
+        'data/res.partner.csv',
         'data/nhsa.consumables.csv',
         'views/nhsa_consumables_views.xml',
         'views/nhsa_consumables_category_views.xml',

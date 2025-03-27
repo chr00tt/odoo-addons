@@ -18,7 +18,10 @@ class NHSAConsumables(models.Model):
     common_name = fields.Char('通用名', required=True)
     material = fields.Char('材质', required=True)
     specifications = fields.Char('规格', required=True)
-    enterprise = fields.Char('企业', required=True)
+    enterprise = fields.Many2one(
+        'res.partner', '企业',
+        required=True,
+        check_company=True)
 
     product_count = fields.Integer(
         '# 产品', compute='_compute_product_count')
