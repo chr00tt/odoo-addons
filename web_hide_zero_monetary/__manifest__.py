@@ -3,7 +3,7 @@
 
 {
     'name': 'Web hide zero monetary',
-    'website': 'https://github.com/chr00tt/web_hide_zero_monetary',
+    'website': 'https://github.com/chr00tt/odoo-addons',
     'author': "He Jian",
     'category': 'Hidden',
     'depends': ['web'],

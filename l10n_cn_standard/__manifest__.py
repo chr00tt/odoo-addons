@@ -7,7 +7,7 @@
     'countries': ['cn'],
     'category': 'Accounting/Localizations/Account Charts',
     'author': 'He Jian',
-    'website': 'https://github.com/chr00tt/l10n_cn_standard',
+    'website': 'https://github.com/chr00tt/odoo-addons',
     'depends': [
         'account',
     ],
