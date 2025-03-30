@@ -102,7 +102,7 @@ class UDIData(models.Model):
             'use_expiration_date': self.scbssfbhsxrq,
 
             # product_manufacturer 信息
-            'manufacturer_id': self.nhsa_consumables_id.enterprise if self.nhsa_consumables_id else self.ylqxzcrbarmc,
+            'manufacturer_id': self.nhsa_consumables_id.enterprise.id if self.nhsa_consumables_id else self.ylqxzcrbarmc.id,
 
             # medical_consumables_product 信息
             'is_medical_consumables': True,
