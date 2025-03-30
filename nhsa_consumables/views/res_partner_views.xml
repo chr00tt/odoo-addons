@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_partner_form" model="ir.ui.view">
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form">
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button"
+                        name="%(nhsa_consumables_action)d"
+                        icon="fa-th-list"
+                        type="action"
+                        context="{'search_default_manufacturer': active_id, 'default_manufacturer': active_id}">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value"><field name="nhsa_consumables_count"/></span>
+                            <span class="o_stat_text"> 耗材</span>
+                        </div>
+                    </button>
+                </div>
+            </field>
+        </record>
+
+       <record id="view_res_partner_filter" model="ir.ui.view">
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter">
+            <field name="arch" type="xml">
+                <filter name="type_company" position="after">
+                    <separator/>
+                    <filter name="is_manufacturer" string="生产厂家" domain="[('is_manufacturer', '=', True)]"/>
+                </filter>
+            </field>
+        </record>
+
+        <record id="res_partner_action_manufacturer" model="ir.actions.act_window">
+            <field name="name">生产厂家</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{'search_default_manufacturer': 1,'res_partner_search_mode': 'manufacturer', 'default_is_company': True}</field>
+        </record>
+
+        <menuitem id="menu_res_partner_action_manufacturer" name="生产厂家"
+            parent="stock.menu_product_in_config_stock"
+            action="nhsa_consumables.res_partner_action_manufacturer" sequence="2"/>
+    </data>
+</odoo>

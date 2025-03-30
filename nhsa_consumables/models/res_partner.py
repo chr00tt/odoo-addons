@@ -8,6 +8,9 @@ class Partner(models.Model):
 
     is_manufacturer = fields.Boolean(compute='_compute_is_manufacturer', store=True)
 
+    nhsa_consumables_count = fields.Integer(
+        '# 耗材', compute='_compute_nhsa_consumables_count')
+
     @api.depends('category_id')
     def _compute_is_manufacturer(self):
         manufacturer_category_id = self.env.ref('nhsa_consumables.res_partner_category_manufacturer', raise_if_not_found=False)
@@ -25,3 +28,9 @@ class Partner(models.Model):
             for vals in vals_list:
                 vals['category_id'] = [Command.link(category_id.id)]
         return super().create(vals_list)
+
+    def _compute_nhsa_consumables_count(self):
+        read_group_res = self.env['nhsa.consumables'].read_group([('enterprise', 'in', self.ids)], ['enterprise'], ['enterprise'])
+        group_data = dict((data['enterprise'][0], data['enterprise_count']) for data in read_group_res)
+        for record in self:
+            record.nhsa_consumables_count = group_data.get(record.id, 0)
