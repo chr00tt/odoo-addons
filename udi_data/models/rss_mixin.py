@@ -45,6 +45,7 @@ class RssMixin(models.AbstractModel):
             link = entry.link
         except Exception as e:
             logging.error("医疗器械唯一标识数据更新错误: %s" % str(e))
+            return
 
         zip_path = self._download_zip(link)
         extract_dir = self._extract_zip(zip_path)
@@ -117,7 +118,7 @@ class RssMixin(models.AbstractModel):
             manufacturer = self.env['res.partner'].create({
                 'name': ylqxzcrbarmc,
                 'company_type': 'company',
-                'category_id': [self.env.ref('nhsa_consumables.res_partner_manufacturer').id],
+                'category_id': [self.env.ref('nhsa_consumables.res_partner_category_manufacturer').id],
             })
 
         return {

@@ -22,6 +22,7 @@
         'views/nhsa_consumables_category_views.xml',
         'views/product_views.xml',
         'views/stock_menu_views.xml',
+        'views/partner_view.xml',
         'views/product_supplierinfo_views.xml',
     ],
     'license': 'LGPL-3',
