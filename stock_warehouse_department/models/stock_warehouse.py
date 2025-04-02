@@ -8,5 +8,9 @@ class Warehouse(models.Model):
 
     responsible_id = fields.Many2one(
         'res.users', string='负责人', company_dependent=True, check_company=True)
-    department_id = fields.Many2one('hr.department', '部门', related='responsible_id.department_id')
-    
+    department_id = fields.Many2one('hr.department', '部门', compute='_compute_department_id', store=True, readonly=False)
+
+    @api.depends('responsible_id')
+    def _compute_department_id(self):
+        for record in self:
+            record.department_id = self.responsible_id.department_id.id if self.responsible_id else False
