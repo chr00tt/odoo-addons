@@ -9,6 +9,8 @@
     'depends': [
         'stock',
 
+        #'base_import_async',
+
         'medical_consumables_product',
         ],
     'data': [
@@ -17,7 +19,7 @@
         'data/nhsa_consumables_data.xml',
         'data/nhsa.consumables.category.csv',
         'data/res.partner.csv',
-        'data/nhsa.consumables.csv',
+        'data/nhsa.consumables.csv', # 采用异步导入
         'views/nhsa_consumables_views.xml',
         'views/nhsa_consumables_category_views.xml',
         'views/product_views.xml',
@@ -25,5 +27,6 @@
         'views/stock_menu_views.xml',
         'views/product_supplierinfo_views.xml',
     ],
+    # 'post_init_hook': '_import_nhsa_consumables',
     'license': 'LGPL-3',
 }
