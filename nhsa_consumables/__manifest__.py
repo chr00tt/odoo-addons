@@ -9,7 +9,7 @@
     'depends': [
         'stock',
 
-        #'base_import_async',
+        'base_import_async',
 
         'medical_consumables_product',
         ],
