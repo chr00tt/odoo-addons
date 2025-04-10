@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 {
     'name': '国家医疗保障局 - 耗材数据',
@@ -19,7 +18,7 @@
         'data/nhsa_consumables_data.xml',
         'data/nhsa.consumables.category.csv',
         'data/res.partner.csv',
-        'data/nhsa.consumables.csv', # 采用异步导入
+        # 'data/nhsa.consumables.csv', # 采用异步导入
         'views/nhsa_consumables_views.xml',
         'views/nhsa_consumables_category_views.xml',
         'views/product_views.xml',
@@ -27,6 +26,6 @@
         'views/stock_menu_views.xml',
         'views/product_supplierinfo_views.xml',
     ],
-    # 'post_init_hook': '_import_nhsa_consumables',
+    'post_init_hook': '_import_nhsa_consumables',
     'license': 'LGPL-3',
 }
