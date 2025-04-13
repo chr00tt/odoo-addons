@@ -50,7 +50,8 @@ class RssMixin(models.AbstractModel):
         zip_path = self._download_zip(link)
         extract_dir = self._extract_zip(zip_path)
         self._import_data_files(extract_dir)
-        os.unlink(zip_path)
+        # 有可能是异步导入，不删除文件
+        # os.unlink(zip_path)
 
     def _download_zip(self, link):
         response = requests.get(link)
