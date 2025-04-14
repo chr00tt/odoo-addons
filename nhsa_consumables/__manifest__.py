@@ -17,7 +17,7 @@
         'data/res_partner_category_data.xml',
         'data/nhsa_consumables_data.xml',
         'data/nhsa.consumables.category.csv',
-        'data/res.partner.csv',
+        # 'data/res.partner.csv', # 采用异步导入
         # 'data/nhsa.consumables.csv', # 采用异步导入
         'views/nhsa_consumables_views.xml',
         'views/nhsa_consumables_category_views.xml',
