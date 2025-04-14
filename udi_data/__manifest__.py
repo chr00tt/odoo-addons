@@ -7,8 +7,8 @@
     'depends': [
         'stock',
 
-        'job_queue',
         'product_manufacturer',
+        'queue_job',
 
         'medical_consumables_product',
         'nhsa_consumables',
