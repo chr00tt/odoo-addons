@@ -14,5 +14,9 @@
             <field name="name">体外诊断试剂</field>
             <field name="code">6840</field>
         </record>
+        <record id="medical_device_category_6840_old" model="medical.device.category">
+            <field name="name">体外诊断试剂(旧)</field>
+            <field name="code">6840-old</field>
+        </record>
     </data>
 </odoo>

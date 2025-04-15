@@ -19,7 +19,7 @@ def _import_nhsa_consumables(env):
         import_obj.execute_import(
             ['id', 'name', 'ref', 'company_type', 'category_id/id'],
             ['id', 'name', 'ref', 'company_type', 'category_id/id'],
-            {'has_headers': True, 'encoding': 'utf-8', 'separator': ',', 'quoting': '"', 'use_queue': True, 'chunk_size': 10000, 'priority': 10}
+            {'has_headers': True, 'encoding': 'utf-8', 'separator': ',', 'quoting': '"', 'use_queue': True, 'chunk_size': 1000, 'priority': 10}
         )
 
     # 导入耗材代码
