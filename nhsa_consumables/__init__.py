@@ -2,9 +2,9 @@
 
 from . import models
 
-from odoo.modules import get_module_path
-
 def _import_nhsa_consumables(env):
+    from odoo.modules import get_module_path
+
     # 导入生产厂家
     file_path = get_module_path('nhsa_consumables') + '/data/res.partner.csv'
     with open(file_path, 'r', encoding='utf-8') as file:
@@ -19,7 +19,10 @@ def _import_nhsa_consumables(env):
         import_obj.execute_import(
             ['id', 'name', 'ref', 'company_type', 'category_id/id'],
             ['id', 'name', 'ref', 'company_type', 'category_id/id'],
-            {'has_headers': True, 'encoding': 'utf-8', 'separator': ',', 'quoting': '"', 'use_queue': True, 'chunk_size': 1000, 'priority': 10}
+            {
+                'has_headers': True, 'encoding': 'utf-8', 'separator': ',', 'quoting': '"',
+                'use_queue': True, 'chunk_size': 1000, 'priority': 100,
+            }
         )
 
     # 导入耗材代码
@@ -36,5 +39,8 @@ def _import_nhsa_consumables(env):
         import_obj.execute_import(
             ['id', 'name', 'nhsa_consumables_categ_id/id','common_name','material','specifications','enterprise'],
             ['id', 'name', 'nhsa_consumables_categ_id/id','common_name','material','specifications','enterprise'],
-            {'has_headers': True, 'encoding': 'utf-8', 'separator': ',', 'quoting': '"', 'use_queue': True, 'chunk_size': 10000, 'priority': 20}
+            {
+                'has_headers': True, 'encoding': 'utf-8', 'separator': ',', 'quoting': '"',
+                'use_queue': True, 'chunk_size': 10000, 'priority': 200,
+            }
         )
