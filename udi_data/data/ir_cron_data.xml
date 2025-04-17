@@ -47,5 +47,6 @@
         <field name="model_id" ref="model_udi_data"/>
         <field name="state">code</field>
         <field name="code">model.do_full_update()</field>
+        <field name="active">False</field>
     </record>
 </odoo>
