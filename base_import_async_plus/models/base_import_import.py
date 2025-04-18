@@ -8,8 +8,10 @@ class BaseImportImport(models.TransientModel):
     _inherit = "base_import.import"
 
     def _import_one_chunk(self, model_name, attachment, options):
+        # 支持在 options 里设置 context
         model = self.env[self.res_model].with_context(options.get('context', {}))
 
+        # 支持在 options 里设置 name_create_enabled_fields 等
         name_create_enabled_fields = options.pop('name_create_enabled_fields', {})
         import_limit = options.pop('limit', None)
         model = model.with_context(

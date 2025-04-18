@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import api, fields, models, tools, _, SUPERUSER_ID
 
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    udi_data_id = fields.Many2one('udi.data', '医疗器械唯一标识')
+    udi_data_id = fields.Many2one('udi.data', '医疗器械唯一标识', compute='_compute_udi_data_id', store=True)
 
     udi_flbm = fields.Many2one('medical.device.category', related='udi_data_id.flbm', store=True)
 
@@ -17,14 +16,13 @@ class ProductTemplate(models.Model):
     udi_spmc = fields.Char(related='udi_data_id.spmc')
     udi_ggxh = fields.Char(related='udi_data_id.ggxh')
 
-    @api.onchange('ybbm')
-    def _ybbm_to_udi_data(self):
-        if self.ybbm:
-            # 设置医疗器械唯一标识
-            if not self.udi_data_id:
-                udi_data = self.env['udi.data'].search([('ybbm', '=', self.ybbm)], limit=1)
+    @api.depends('ybbm')
+    def _compute_udi_data_id(self):
+        for template in self:
+            if template.ybbm:
+                udi_data = self.env['udi.data'].search([('ybbm', '=', template.yybm)], limit=1)
                 if udi_data:
-                    self.udi_data_id = udi_data.id
+                    template.udi_data_id = udi_data.id
 
     @api.onchange('udi_data_id')
     def _onchange_udi_data_id(self):
