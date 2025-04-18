@@ -20,7 +20,7 @@ class ProductTemplate(models.Model):
     def _compute_udi_data_id(self):
         for template in self:
             if template.ybbm:
-                udi_data = self.env['udi.data'].search([('ybbm', '=', template.yybm)], limit=1)
+                udi_data = self.env['udi.data'].search([('ybbm', '=', template.ybbm)], limit=1)
                 if udi_data:
                     template.udi_data_id = udi_data.id
 

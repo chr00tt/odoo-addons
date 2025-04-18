@@ -17,8 +17,8 @@ class ProductTemplate(models.Model):
     def _compute_nhsa_consumables_id(self):
         for template in self:
             if template.ybbm:
-                yybm = template.ybbm[:20]
-                nhsa_consumables = self.env['nhsa.consumables'].search([('code', '=', yybm)], limit=1)
+                ybbm = template.ybbm[:20]
+                nhsa_consumables = self.env['nhsa.consumables'].search([('name', '=', ybbm)], limit=1)
                 if nhsa_consumables:
                     template.nhsa_consumables_id = nhsa_consumables
                 else:
