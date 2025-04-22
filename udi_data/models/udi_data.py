@@ -149,3 +149,15 @@ class UDIData(models.Model):
                 'type': 'success',
             }
         }
+
+    # 创建 udi.data 后自动关联 product.template
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super(UDIData, self).create(vals_list)
+        for record in records:
+            if record.ybbm:
+                product_template_model = self.env['product.template']
+                product_template = product_template_model.search([('ybbm', '=', record.ybbm)], limit=1)
+                if product_template and product_template.udi_data_id.id != record.id:
+                    product_template.udi_data_id = record
+        return records
