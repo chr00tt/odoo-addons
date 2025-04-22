@@ -160,4 +160,5 @@ class UDIData(models.Model):
                 product_template = product_template_model.search([('ybbm', '=', record.ybbm)], limit=1)
                 if product_template and product_template.udi_data_id.id != record.id:
                     product_template.udi_data_id = record
+                    product_template.gllb = record.gllb
         return records

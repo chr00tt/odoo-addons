@@ -5,6 +5,9 @@
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_form_view"/>
         <field name="arch" type="xml">
+            <xpath expr="//field[@name='ybbm']" position="before">
+                <field name="gllb"/>
+            </xpath>
             <xpath expr="//page[@name='medical_consumables']/group" position="inside">
                 <group string="医疗器械唯一标识">
                     <field name="udi_data_id"/>

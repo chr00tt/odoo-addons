@@ -7,6 +7,8 @@ class ProductTemplate(models.Model):
 
     udi_data_id = fields.Many2one('udi.data', '医疗器械唯一标识', compute='_compute_udi_data_id', store=True)
 
+    gllb = fields.Selection([('1', 'Ⅰ'), ('2', 'Ⅱ'), ('3', 'Ⅲ')], string='管理类别')
+
     udi_flbm = fields.Many2one('medical.device.category', related='udi_data_id.flbm', store=True)
 
     udi_zxxsdycpbs = fields.Char(related='udi_data_id.zxxsdycpbs')
