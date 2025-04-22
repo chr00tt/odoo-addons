@@ -6,4 +6,4 @@ from odoo import api, fields, models, _
 class SupplierInfo(models.Model):
     _inherit = "product.supplierinfo"
 
-    product_ggxh = fields.Char('规格/型号', related="product_id.ggxh")
+    product_ggxh = fields.Char('规格/型号', related="product_tmpl_id.ggxh")
