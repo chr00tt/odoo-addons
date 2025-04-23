@@ -27,7 +27,7 @@
             <field name="arch" type="xml">
                 <filter name="type_company" position="after">
                     <separator/>
-                    <filter name="is_manufacturer" string="生产厂家" domain="[('is_manufacturer', '=', True)]"/>
+                    <filter name="manufacturer" string="生产厂家" domain="[('is_manufacturer', '=', True)]"/>
                 </filter>
             </field>
         </record>
