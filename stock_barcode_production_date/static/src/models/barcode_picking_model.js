@@ -6,7 +6,7 @@ import { patch } from "@web/core/utils/patch";
 patch(BarcodePickingModel.prototype, {
 
     async updateLine(line, args) {
-        this._super(...arguments);
+        super.updateLine(...arguments);
         if (args.production_date) {
             line.production_date = args.production_date;
         }
@@ -21,13 +21,13 @@ patch(BarcodePickingModel.prototype, {
             result.productionDate = moment.utc(value).format('YYYY-MM-DD HH:mm:ss');
             result.match = true;
         } else {
-            return await this._super(...arguments);
+            return await super._processGs1Data(...arguments);
         }
         return result;
     },
 
     _convertDataToFieldsParams(args) {
-        const params = this._super(...arguments);
+        const params = super._convertDataToFieldsParams(...arguments);
         if (args.productionDate) {
             params.production_date = args.productionDate;
         }
@@ -35,13 +35,13 @@ patch(BarcodePickingModel.prototype, {
     },
 
     _getFieldToWrite() {
-        const fields = this._super(...arguments);
+        const fields = super._getFieldToWrite(...arguments);
         fields.push('production_date');
         return fields;
     },
 
     _createCommandVals(line) {
-        const values = this._super(...arguments);
+        const values = super._createCommandVals(...arguments);
         values.production_date = line.production_date;
         return values;
     },
