@@ -161,4 +161,5 @@ class UDIData(models.Model):
                 if product_template and product_template.udi_data_id.id != record.id:
                     product_template.udi_data_id = record
                     product_template.gllb = record.gllb
+                    product_template.barcode = record.sydycpbs if record.sydycpbs else record.zxxsdycpbs
         return records
