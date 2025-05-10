@@ -120,7 +120,6 @@ class UDIData(models.Model):
         product_template_model = self.env['product.template']
 
         product_count = 0
-        package_count = 0
         for record in self:
             barcode = record.sydycpbs if record.sydycpbs else record.zxxsdycpbs
             product_template = product_template_model.search([('barcode', '=', barcode)], limit=1)
@@ -129,26 +128,28 @@ class UDIData(models.Model):
                 product_count += 1
 
             if barcode != record.zxxsdycpbs:
-                product_packaging_model = self.env['product.packaging']
-                product_packaging = product_packaging_model.search([('barcode', '=', record.zxxsdycpbs)], limit=1)
-                if not product_packaging:
-                    product_packaging_model.create({
-                        'name': '%d %s' % (record.zxxsdyzsydydsl, product_template.uom_id.name),
-                        'product_id': product_template.product_variant_id.id,
-                        'qty': record.zxxsdyzsydydsl,
-                        'barcode': record.zxxsdycpbs,
-                    })
-                    package_count += 1
+                record.create_product_packaging(product_template)
 
         return {
             'type': 'ir.actions.client',
             'tag': 'display_notification',
             'params': {
                 'title': '生成产品',
-                'message': '已成功生成 %s 个产品, %s 个包装.' % (product_count, package_count),
+                'message': '已成功生成 %s 个产品.' % (product_count),
                 'type': 'success',
             }
         }
+
+    def create_product_packaging(self, product_template):
+        product_packaging_model = self.env['product.packaging']
+        product_packaging = product_packaging_model.search([('barcode', '=', self.zxxsdycpbs)], limit=1)
+        if not product_packaging:
+            product_packaging_model.create({
+                'name': '%d %s' % (self.zxxsdyzsydydsl, product_template.uom_id.name),
+                'product_id': product_template.product_variant_id.id,
+                'qty': self.zxxsdyzsydydsl,
+                'barcode': self.zxxsdycpbs,
+            })
 
     # 创建 udi.data 后自动关联 product.template
     @api.model_create_multi
@@ -158,8 +159,12 @@ class UDIData(models.Model):
             if record.ybbm:
                 product_template_model = self.env['product.template']
                 product_template = product_template_model.search([('ybbm', '=', record.ybbm)], limit=1)
-                if product_template and product_template.udi_data_id.id != record.id:
+                if product_template and not product_template.udi_data_id.id:
                     product_template.udi_data_id = record
                     product_template.gllb = record.gllb
-                    product_template.barcode = record.sydycpbs if record.sydycpbs else record.zxxsdycpbs
+                    if record.sydycpbs and record.sydycpbs != record.zxxsdycpbs:
+                        product_template.barcode = record.sydycpbs
+                        record.create_product_packaging(product_template)
+                    else:
+                        product_template.barcode = record.zxxsdycpbs
         return records
