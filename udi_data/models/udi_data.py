@@ -156,15 +156,18 @@ class UDIData(models.Model):
     def create(self, vals_list):
         records = super(UDIData, self).create(vals_list)
         for record in records:
+            product_template_model = self.env['product.template']
             if record.ybbm:
-                product_template_model = self.env['product.template']
                 product_template = product_template_model.search([('ybbm', '=', record.ybbm)], limit=1)
-                if product_template and not product_template.udi_data_id.id:
-                    product_template.udi_data_id = record
-                    product_template.gllb = record.gllb
-                    if record.sydycpbs and record.sydycpbs != record.zxxsdycpbs:
-                        product_template.barcode = record.sydycpbs
-                        record.create_product_packaging(product_template)
-                    else:
-                        product_template.barcode = record.zxxsdycpbs
+            else:
+                product_template = product_template_model.search([('name', '=', record.cpmctymc), ('ggxh', '=', record.ggxh)], limit=1)
+            if product_template and not product_template.udi_data_id.id:
+                product_template.udi_data_id = record
+                product_template.gllb = record.gllb
+                if record.sydycpbs and record.sydycpbs != record.zxxsdycpbs:
+                    product_template.barcode = record.sydycpbs
+                    record.create_product_packaging(product_template)
+                else:
+                    product_template.barcode = record.zxxsdycpbs
+
         return records
