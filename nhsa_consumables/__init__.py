@@ -22,6 +22,9 @@ def _import_nhsa_consumables(env):
             {
                 'has_headers': True, 'encoding': 'utf-8', 'separator': ',', 'quoting': '"',
                 'use_queue': True, 'chunk_size': 1000, 'priority': 100,
+                'context': {
+                    'res_partner_search_mode': 'manufacturer',
+                },
             }
         )
 
