@@ -10,7 +10,7 @@ class ProductTemplate(models.Model):
         store=True, readonly=False)
 
     ggxh = fields.Char("规格/型号")
-    ybbm = fields.Char("医保耗材分类编码")
+    ybbm = fields.Char("医保耗材编码")
 
     @api.depends('type')
     def _compute_is_medical_consumables(self):
