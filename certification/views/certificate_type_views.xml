@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_certificate_type_form" model="ir.ui.view">
+        <field name="name">certificate.type.form</field>
+        <field name="model">certificate.type</field>
+        <field name="arch" type="xml">
+            <form string="资质类型">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_certificate_type_tree" model="ir.ui.view">
+        <field name="name">certificate.type.tree</field>
+        <field name="model">certificate.type</field>
+        <field name="arch" type="xml">
+            <tree string="资质类型">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="certificate_type_action" model="ir.actions.act_window">
+        <field name="name">资质类型</field>
+        <field name="res_model">certificate.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_certificate_type_tree"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                还没有创建任何资质类型。
+            </p>
+            <p>
+                点击创建按钮来添加新的资质类型。
+            </p>
+        </field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="search_view_id" ref="view_certificate_type_tree"/>
+    </record>
+</odoo>
