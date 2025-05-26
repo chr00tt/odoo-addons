@@ -46,4 +46,11 @@
         <field name="domain">[]</field>
         <field name="search_view_id" ref="view_certificate_type_tree"/>
     </record>
+
+    <menuitem id="certificate_type_action_menu"
+        name="资质类型"
+        parent="base.menu_custom"
+        action="certificate_type_action"
+        sequence="10"/>
+
 </odoo>

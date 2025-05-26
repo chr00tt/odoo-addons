@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_partner_form" model="ir.ui.view">
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='internal_notes']" position="after">
+                    <page string="资质">
+                        <field name="certificate_ids" mode="tree,kanban">
+                            <tree editable="1">
+                                <field name="partner_id" column_invisible="True"/>
+                                <field name="certificate_type_id"/>
+                                <field name="certificate_number"/>
+                                <field name="issue_date"/>
+                                <field name="expiry_date"/>
+                                <field name="attachment_id" widget="many2many_binary"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
