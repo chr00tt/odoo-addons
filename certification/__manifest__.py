@@ -9,6 +9,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/certificate_type_views.xml',
+        'views/certificate_views.xml',
     ],
     'license': 'LGPL-3',
 }

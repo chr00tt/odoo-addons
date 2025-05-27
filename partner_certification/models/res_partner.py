@@ -23,7 +23,7 @@ class ResPartner(models.Model):
             'res_model': 'certificate',
             'view_mode': 'kanban,tree,form',
             'context': {
-                'default_res_mode': self._name,
+                'default_res_model': self._name,
                 'default_res_id': self.id,
                 'default_company_id': self.company_id.id,
             },

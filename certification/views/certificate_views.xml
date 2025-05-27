@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="certificate_form" model="ir.ui.view">
+        <field name="name">certificate.form</field>
+        <field name="model">certificate</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="res_model" invisible="True"/>
+                    <label for="name"/>
+                    <h1>
+                        <field name="name" readonly="not datas and type != 'url'"/>
+                    </h1>
+                    <group>
+                        <field name="certificate_type_id"/>
+                        <field name="certificate_number"/>
+                        <field name="issue_date"/>
+                        <field name="expiry_date"/>
+                    </group>
+                    <group>
+                        <field name="type" readonly="datas or id" class="oe_inline"/>
+                        <field name="datas"
+                               filename="name"
+                               invisible="type == 'url'"
+                               required="type == 'binary'"
+                               class="oe_inline"/>
+                        <field name="url" widget="url" invisible="type == 'binary'" required="type == 'url'"/>
+                    </group>
+                    <group string="附加于" groups="base.group_no_one">
+                        <field name="res_name"/>
+                        <field name="company_id"
+                               groups="base.group_multi_company"
+                               options="{'no_create': True}"
+                               class="oe_inline"/>
+                    </group>
+                    <group string="历史" groups="base.group_no_one" invisible="not create_date">
+                        <label for="create_uid" string="创建"/>
+                        <div name="creation_div">
+                            <field name="create_uid" readonly="1" class="oe_inline"/> on
+                            <field name="create_date" readonly="1" class="oe_inline"/>
+                        </div>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>
