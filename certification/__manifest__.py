@@ -5,7 +5,7 @@
     'author': 'He Jian',
     'website': 'https://github.com/chr00tt/odoo-addons',
     'category': 'Hidden',
-    'depends': ['web'],
+    'depends': ['base'],
     'data': [
         'security/ir.model.access.csv',
         'views/certificate_type_views.xml',

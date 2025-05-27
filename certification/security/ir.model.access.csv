@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_certificate_type_user,certificate.type.user,model_certificate_type,base.group_user,1,0,0,0
 access_certificate_type_manager,certificate.type.manager,model_certificate_type,base.group_system,1,1,1,1
+access_certificate_user,certificate.user,model_certificate,base.group_user,1,0,0,0
+access_certificate_manager,certificate.manager,model_certificate,base.group_system,1,1,1,1
