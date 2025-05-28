@@ -120,6 +120,7 @@
             <search>
                 <field name="name"/>
                 <field name="certificate_number"/>
+                <filter name="expired" string="已过期" domain="[('expiry_date', '&lt;', context_today())]"/>
                 <filter name="expiry_date" date="expiry_date" string="到期日期"/>
                 <group expand="0">
                     <filter name="certificate_type_id" string="资质类型" context="{'group_by': 'certificate_type_id'}"/>
