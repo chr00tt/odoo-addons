@@ -98,4 +98,18 @@
         </field>
     </record>
 
+    <record id="certificate_list" model="ir.ui.view">
+        <field name="name">certificate.list</field>
+        <field name="model">certificate</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="res_name"/>
+                <field name="name"/>
+                <field name="certificate_type_id"/>
+                <field name="certificate_number"/>
+                <field name="issue_date"/>
+                <field name="expiry_date"/>
+            </tree>
+        </field>
+    </record>
 </odoo>
