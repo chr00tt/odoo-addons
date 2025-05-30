@@ -1,11 +1,13 @@
+# -*- coding: utf-8 -*-
+
 from odoo import models
 from odoo.addons.account.models.chart_template import template
 
 class AccountChartTemplate(models.AbstractModel):
     _inherit = "account.chart.template"
 
-    @template('cn_standard')
-    def _get_cn_standard_template_data(self):
+    @template('cn_enterprise')
+    def _get_cn_enterprise_template_data(self):
         """Return the data necessary for the chart template.
 
         :return: all the values that are not stored but are used to instancieate
@@ -27,8 +29,8 @@ class AccountChartTemplate(models.AbstractModel):
             # 'property_stock_account_production_cost_id': 'cost_of_production',
         }
 
-    @template('cn_standard', 'res.company')
-    def _get_cn_standard_res_company(self):
+    @template('cn_enterprise', 'res.company')
+    def _get_cn_enterprise_res_company(self):
         """Return the data to be written on the company.
 
         The data is a mapping the XMLID to the create/write values of a record.

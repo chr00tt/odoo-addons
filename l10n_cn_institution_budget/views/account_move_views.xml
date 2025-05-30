@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_move_form" model="ir.ui.view">
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='line_ids']" position="after">
+                                <group name="budget_move_group" string="预算会计">
+                                </group>
+                                <field name="budget_line_ids"
+                                       widget="section_and_note_one2many"
+                                       mode="tree,kanban"
+                                       context="{
+                                           'default_move_type': context.get('default_move_type'),
+                                           'journal_id': journal_id,
+                                           'default_partner_id': commercial_partner_id,
+                                           'default_currency_id': currency_id or company_currency_id,
+                                           'default_is_budget': True,
+                                       }"
+                                       invisible="payment_state == 'invoicing_legacy' and move_type != 'entry'"
+                                       readonly="state != 'draft'">
+                                    <tree editable="bottom" string="预算会计项目" decoration-muted="display_type in ('line_section', 'line_note')" default_order="sequence, id">
+                                        <!-- Displayed fields -->
+                                        <field name="account_id"
+                                               invisible="display_type in ('line_section', 'line_note')"
+                                               required="display_type not in ('line_section', 'line_note')"
+                                               domain="[('deprecated', '=', False), ('company_id', '=', parent.company_id), ('is_budget', '=', True)]" />
+                                        <field name="partner_id"
+                                               optional="show"
+                                               domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]"
+                                               column_invisible="parent.move_type != 'entry'"/>
+                                        <field name="name" widget="section_and_note_text" optional="show"/>
+                                        <field name="analytic_distribution" widget="analytic_distribution"
+                                               groups="analytic.group_analytic_accounting"
+                                               optional="show"
+                                               options="{'account_field': 'account_id'}"
+                                               business_domain_compute="parent.move_type in ['out_invoice', 'out_refund', 'out_receipt'] and 'invoice' or parent.move_type in ['in_invoice', 'in_refund', 'in_receipt'] and 'bill' or 'general'"/>
+                                        <field name="date_maturity"
+                                               optional="hide"
+                                               invisible="context.get('view_no_maturity')"
+                                               column_invisible="context.get('view_no_maturity')"/>
+                                        <field name="amount_currency"
+                                               groups="base.group_multi_currency"
+                                               optional="hide"/>
+                                        <field name="currency_id" options="{'no_create': True}"
+                                               optional="hide" groups="base.group_multi_currency"
+                                               column_invisible="parent.move_type != 'entry'"/>
+                                        <field name="tax_ids" widget="autosave_many2many_tags"
+                                               optional="hide"
+                                               domain="[('type_tax_use', '=?', parent.invoice_filter_type_domain)]"
+                                               context="{'append_type_to_tax_name': not parent.invoice_filter_type_domain}"
+                                               options="{'no_create': True}"
+                                               force_save="1"
+                                               readonly="display_type in ('line_section', 'line_note') or tax_line_id or (parent.move_type in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt') and account_type in ('asset_receivable', 'liability_payable'))"/>
+                                        <field name="debit"
+                                               sum="Total Debit"
+                                               invisible="display_type in ('line_section', 'line_note')"
+                                               readonly="parent.move_type in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt') and display_type in ('line_section', 'line_note', 'product')"/>
+                                        <field name="credit"
+                                               sum="Total Credit"
+                                               invisible="display_type in ('line_section', 'line_note')"
+                                               readonly="parent.move_type in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt') and display_type in ('line_section', 'line_note', 'product')"/>
+                                        <field name="balance" column_invisible="True"/>
+                                        <field name="discount_date"
+                                               string="折扣日期"
+                                               optional="hide"
+                                        />
+                                        <field name="discount_amount_currency"
+                                               string="折扣金额"
+                                               optional="hide"
+                                        />
+
+                                        <field name="tax_tag_ids"
+                                               widget="many2many_tags"
+                                               string="税网格"
+                                               optional="hide"
+                                               options="{'no_create': True}"
+                                               domain="[
+                                                    ('applicability', '=', 'taxes'),
+                                                    '|', ('country_id', '=', parent.tax_country_id),
+                                                    ('country_id', '=', False),
+                                                ]"/>
+
+                                        <field name="tax_tag_invert" readonly="1" optional="hide" groups="base.group_no_one"/>
+
+                                        <field name="is_budget" optional="hide"/>
+
+                                        <!-- Buttons -->
+                                        <button name="action_automatic_entry"
+                                                type="object"
+                                                icon="fa-calendar"
+                                                string="Cut-Off"
+                                                aria-label="Change Period"
+                                                class="float-end"
+                                                column_invisible="parent.move_type == 'entry' or parent.state != 'posted'"
+                                                invisible="account_internal_group not in ('income', 'expense')"
+                                                context="{'hide_automatic_options': 1, 'default_action': 'change_period'}"/>
+
+                                        <!-- Others fields -->
+                                        <field name="tax_line_id" column_invisible="True"/>
+                                        <field name="company_currency_id" column_invisible="True"/>
+                                        <field name="display_type" force_save="1" column_invisible="True"/>
+                                        <field name="company_id" column_invisible="True"/>
+                                        <field name="sequence" column_invisible="True"/>
+                                        <field name="id" column_invisible="True"/>
+                                        <field name="account_internal_group" column_invisible="True"/>
+                                        <field name="account_type" column_invisible="True"/>
+                                    </tree>
+                                    <!-- Form view to cover mobile use -->
+                                    <form>
+                                      <group>
+                                        <field name="account_id" domain="[('company_id', '=', parent.company_id), ('deprecated', '=', False), ('is_budget', '=', True)]"/>
+                                        <field name="partner_id" domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]"/>
+                                        <field name="name"/>
+                                        <field name="analytic_distribution" widget="analytic_distribution" groups="analytic.group_analytic_accounting"/>
+                                        <field name="amount_currency" groups="base.group_multi_currency"/>
+                                        <field name="company_currency_id" invisible="1"/>
+                                        <field name="company_id" invisible="1"/>
+                                        <field name="currency_id" options="{'no_create': True}" groups="base.group_multi_currency"/>
+                                        <field name="debit" sum="Total Debit"/>
+                                        <field name="credit" sum="Total Credit"/>
+                                        <field name="balance" invisible="1"/>
+                                        <field name="tax_ids" string="Taxes Applied" widget="autosave_many2many_tags" options="{'no_create': True}"/>
+                                        <field name="date_maturity" required="0" invisible="context.get('view_no_maturity', False)"/>
+                                      </group>
+                                    </form>
+                                </field>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_move_line_filter" model="ir.ui.view">
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+            <field name="arch" type="xml">
+                <filter name="posted" position="after">
+                    <separator/>
+                    <filter string="财务会计" name="financial_accounting" domain="[('account_id.is_budget', '=', False)]"/>
+                    <filter string="预算会计" name="budget_accounting" domain="[('account_id.is_budget', '=', True)]"/>
+                </filter>
+            </field>
+        </record>
+    </data>
+</odoo>
