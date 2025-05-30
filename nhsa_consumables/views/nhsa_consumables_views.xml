@@ -78,7 +78,7 @@
                 <field name="common_name"/>
                 <field name="material"/>
                 <field name="specifications"/>
-                <field name="enterprise"/>
+                <filter name="enterprise" string="当前企业" domain="[('enterprise','=',active_id)]"/>
                 <searchpanel>
                     <field name="nhsa_consumables_categ_id" enable_counters="1" limit="0"/>
                 </searchpanel>
@@ -90,6 +90,7 @@
         <field name="name">医保医用耗材分类与代码</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">nhsa.consumables</field>
+        <field name="context">{"search_default_enterprise":1}</field>
     </record>
 
 </odoo>
