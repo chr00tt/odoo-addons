@@ -13,7 +13,7 @@ class Partner(models.Model):
 
     @api.depends('category_id')
     def _compute_is_manufacturer(self):
-        manufacturer_category_id = self.env.ref('nhsa_consumables.res_partner_category_manufacturer', raise_if_not_found=False)
+        manufacturer_category_id = self.env.ref('nhsa_hc.res_partner_category_manufacturer', raise_if_not_found=False)
         if not manufacturer_category_id:
             return
         for record in self:
@@ -24,7 +24,7 @@ class Partner(models.Model):
     def create(self, vals_list):
         search_partner_mode = self.env.context.get('res_partner_search_mode')
         if search_partner_mode == 'manufacturer':
-            category_id = self.env.ref('nhsa_consumables.res_partner_category_manufacturer')
+            category_id = self.env.ref('nhsa_hc.res_partner_category_manufacturer')
             for vals in vals_list:
                 # 设置为机构
                 if not vals.get('company_type'):
@@ -68,7 +68,7 @@ class Partner(models.Model):
                 create_values['company_type'] = 'company'
             # 添加生产厂家标签
             if not create_values.get('category_id'):
-                manufacturer_category = self.env.ref('nhsa_consumables.res_partner_category_manufacturer')
+                manufacturer_category = self.env.ref('nhsa_hc.res_partner_category_manufacturer')
                 create_values['category_id'] = [(4, manufacturer_category.id)]
 
         partner = self.create(create_values)

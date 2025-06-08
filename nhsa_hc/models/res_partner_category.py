@@ -9,6 +9,6 @@ class PartnerCategory(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _unlink_except_default_category(self):
-        patient_category = self.env.ref('nhsa_consumables.res_partner_category_manufacturer', raise_if_not_found=False)
+        patient_category = self.env.ref('nhsa_hc.res_partner_category_manufacturer', raise_if_not_found=False)
         if patient_category and patient_category in self:
             raise UserError(_("不能删除 %s 标签！", patient_category.name))

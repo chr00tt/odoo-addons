@@ -6,7 +6,7 @@
     'website': 'https://github.com/chr00tt/odoo-addons',
     'category': 'Inventory/Inventory',
     'depends': [
-        'nhsa_consumables',
+        'nhsa_hc',
     ],
     'data': [
         'data/gz.medical.consumable.csv',

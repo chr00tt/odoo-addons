@@ -11,7 +11,7 @@
         'queue_job',
 
         'medical_consumables_product',
-        'nhsa_consumables',
+        'nhsa_hc',
         ],
     'category': 'Inventory/Inventory',
     'data': [

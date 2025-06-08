@@ -26,6 +26,6 @@
         'views/stock_menu_views.xml',
         'views/product_supplierinfo_views.xml',
     ],
-    'post_init_hook': '_import_nhsa_consumables',
+    'post_init_hook': '_import_nhsa_hc',
     'license': 'LGPL-3',
 }

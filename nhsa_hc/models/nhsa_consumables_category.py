@@ -79,6 +79,6 @@ class NHSAConsumablesCategory(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _unlink_except_default_category(self):
-        main_category = self.env.ref('nhsa_consumables.nhsa_consumables_category_all', raise_if_not_found=False)
+        main_category = self.env.ref('nhsa_hc.nhsa_consumables_category_all', raise_if_not_found=False)
         if main_category and main_category in self:
             raise UserError("不能删除此耗材类别，它是默认的常规类别。")

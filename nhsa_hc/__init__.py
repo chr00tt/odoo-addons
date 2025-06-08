@@ -2,11 +2,11 @@
 
 from . import models
 
-def _import_nhsa_consumables(env):
+def _import_nhsa_hc(env):
     from odoo.modules import get_module_path
 
     # 导入生产厂家
-    file_path = get_module_path('nhsa_consumables') + '/data/res.partner.csv'
+    file_path = get_module_path('nhsa_hc') + '/data/res.partner.csv'
     with open(file_path, 'r', encoding='utf-8') as file:
         file_content = file.read()
 
@@ -29,7 +29,7 @@ def _import_nhsa_consumables(env):
         )
 
     # 导入耗材代码
-    file_path = get_module_path('nhsa_consumables') + '/data/nhsa.consumables.csv'
+    file_path = get_module_path('nhsa_hc') + '/data/nhsa.consumables.csv'
     with open(file_path, 'r', encoding='utf-8') as file:
         file_content = file.read()
 

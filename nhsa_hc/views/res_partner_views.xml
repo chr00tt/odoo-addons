@@ -41,6 +41,6 @@
 
         <menuitem id="menu_res_partner_action_manufacturer" name="生产厂家"
             parent="stock.menu_product_in_config_stock"
-            action="nhsa_consumables.res_partner_action_manufacturer" sequence="2"/>
+            action="nhsa_hc.res_partner_action_manufacturer" sequence="2"/>
     </data>
 </odoo>
