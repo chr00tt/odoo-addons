@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_nhsa_jbzd_tree">
+        <field name="name">nhsa.jbzd.tree</field>
+        <field name="model">nhsa.jbzd</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="master_code"/>
+                <field name="name"/>
+                <field name="category"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

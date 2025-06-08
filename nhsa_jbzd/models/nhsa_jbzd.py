@@ -10,9 +10,8 @@ class NhsaJbzd(models.Model):
     master_code = fields.Boolean('主要编码', default=False)
     name = fields.Char('名称', index='trigram', required=True)
     category = fields.Selection([
-        ('1', '治疗性操作'),
-        ('2', '操作'),
-        ('3', '检查'),
-        ('4', '治疗'),
-        ('5', '其他'),
+        ('1', '介入治疗'),
+        ('2', '手术'),
+        ('3', '治疗性操作'),
+        ('4', '诊断性操作'),
     ], string='类别', required=True, default='1')
