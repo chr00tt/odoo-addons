@@ -12,4 +12,11 @@
             </tree>
         </field>
     </record>
+
+    <record model="ir.actions.act_window" id="action_nhsa_jbzd">
+        <field name="name">手术操作代码</field>
+        <field name="res_model">nhsa.jbzd</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
 </odoo>
