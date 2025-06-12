@@ -2,6 +2,7 @@
 
 import LineComponent from '@stock_barcode/components/line';
 import { patch } from "@web/core/utils/patch";
+import { parseDateTime } from "@web/core/l10n/dates";
 
 patch(LineComponent.prototype, {
     get productionDate() {
@@ -9,6 +10,7 @@ patch(LineComponent.prototype, {
         if (!dateTimeStrUTC) {
             return '';
         }
-        return moment.utc(dateTimeStrUTC).toDate().toLocaleDateString();
+        const dateTimeLocal = parseDateTime(dateTimeStrUTC).toJSDate();
+        return dateTimeLocal.toLocaleDateString();
     },
 });
