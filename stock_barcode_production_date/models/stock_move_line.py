@@ -14,6 +14,8 @@ class StockMoveLine(models.Model):
         for move_line in self:
             if move_line.lot_id.production_date:
                 move_line.production_date = move_line.lot_id.production_date
+            elif move_line.production_date:
+                continue
             else:
                 move_line.production_date = False
 
