@@ -50,7 +50,7 @@
         <field name="name">certificate.kanban</field>
         <field name="model">certificate</field>
         <field name="arch" type="xml">
-            <kanban js_class="certificates_kanban">
+            <kanban js_class="product_documents_kanban">
                 <field name="ir_attachment_id"/>
                 <field name="mimetype"/>
                 <field name="type"/>
