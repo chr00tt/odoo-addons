@@ -64,32 +64,47 @@
                         <a t-attf-href="/web/content/#{record.ir_attachment_id.raw_value}?download=true" download="" class="dropdown-item">下载</a>
                     </t>
                     <t t-name="kanban-box">
-                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                        <div class="oe_kanban_global_area o_kanban_attachment">
                             <field name="res_model" invisible="True"/>
-                            <div class="o_kanban_record_top mb16">
-                                <div class="o_kanban_record_headings ms-1">
-                                    <strong class="o_kanban_record_title"><span><t t-esc="record.name.value"/></span></strong>
+                            <div class="ribbon ribbon-top-right" invisible="active">
+                                <span class="text-bg-danger">禁用</span>
+                            </div>
+                            <div class="o_kanban_image">
+                                <t t-set="webimage" t-value="new RegExp('image.*(gif|jpeg|jpg|png|webp)').test(record.mimetype.value)"/>
+                                <t t-set="binaryPreviewable"
+                                   t-value="new RegExp('(image|video|application/pdf|text)').test(record.mimetype.value) &amp;&amp; record.type.raw_value === 'binary'"/>
+                                <div t-attf-class="o_kanban_image_wrapper #{(webimage or binaryPreviewable) ? 'o_kanban_previewer' : ''}">
+                                    <div t-if="record.type.raw_value == 'url'" class="o_url_image fa fa-link fa-3x text-muted" aria-label="Image is a link"/>
+                                    <img t-elif="webimage" t-attf-src="/web/image/#{record.ir_attachment_id.raw_value}" width="100" height="100" alt="Document" class="o_attachment_image"/>
+                                    <div t-else="" class="o_image o_image_thumbnail" t-att-data-mimetype="record.mimetype.value"/>
                                 </div>
-                                <strong><field name="certificate_type_id"/></strong>
                             </div>
-                            <div class="o_kanban_details">
-                                <div class="o_kanban_record_body"
-                                        name="body"
-                                        t-if="record.type.raw_value == 'url'">
-                                    <field name="url" widget="url" invisible="type == 'binary'"/>
+                            <div class="o_kanban_details h-100">
+                                <div class="o_kanban_details_wrapper h-100 justify-content-between">
+                                    <div>
+                                        <field name="certificate_type_id"/>
+                                    </div>
+                                    <div class="o_kanban_record_title">
+                                        <field name="name" class="o_text_overflow"/>
+                                    </div>
+                                    <div class="o_kanban_record_body"
+                                            name="body"
+                                            t-if="record.type.raw_value == 'url'">
+                                        <field name="url" widget="url" invisible="type == 'binary'"/>
+                                    </div>
+                                    <div>
+                                        <span>证书编号:</span>
+                                        <field name="certificate_number"/>
+                                    </div>
+                                    <div>
+                                        <span>发证日期:</span>
+                                        <field name="issue_date" widget="date"/>
+                                    </div>
+                                    <div>
+                                        <span>到期日期:</span>
+                                        <field name="expiry_date" widget="date"/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div>
-                                <span>证书编号:</span>
-                                <field name="certificate_number"/>
-                            </div>
-                            <div>
-                                <span>发证日期:</span>
-                                <field name="issue_date" widget="date"/>
-                            </div>
-                            <div>
-                                <span>到期日期:</span>
-                                <field name="expiry_date" widget="date"/>
                             </div>
                         </div>
                     </t>

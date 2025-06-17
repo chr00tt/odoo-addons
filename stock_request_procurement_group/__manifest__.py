@@ -2,7 +2,7 @@
 
 {
     "name": "库存申请 - 补货组",
-    "summary": "I自动创建补货组",
+    "summary": "自动创建补货组",
     "license": "LGPL-3",
     'website': 'https://github.com/chr00tt/odoo-addons',
     'author': 'He Jian',
