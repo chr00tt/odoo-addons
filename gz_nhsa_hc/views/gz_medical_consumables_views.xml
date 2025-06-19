@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="gz_medical_consumables_action" model="ir.actions.act_window">
+        <field name="name">贵州省医保医用耗材目录</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">gz.medical.consumables</field>
+    </record>
+
+</odoo>

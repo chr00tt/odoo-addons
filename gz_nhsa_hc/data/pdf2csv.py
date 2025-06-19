@@ -61,4 +61,4 @@ def dynamic_pdf_to_csv(pdf_path, csv_path, chunk_size=100):
         os.remove(temp_csv)
 
 # 使用示例
-dynamic_pdf_to_csv("贵州省基本医疗保险医用耗材目录（2025年）（试行）.pdf", "output.csv", chunk_size=200)  # 可调节分块大小
+dynamic_pdf_to_csv("附件：贵州省基本医疗保险医用耗材目录（试行）.pdf", "output.csv", chunk_size=200)  # 可调节分块大小

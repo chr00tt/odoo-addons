@@ -3,8 +3,8 @@
 
 from odoo import api, fields, models
 
-class GzMedicalConsumable(models.Model):
-    _name = "gz.medical.consumable"
+class GzMedicalConsumables(models.Model):
+    _name = "gz.medical.consumables"
     _description = "贵州医用耗材目录"
 
     name = fields.Char('医用耗材代码', index='trigram', required=True)
