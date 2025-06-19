@@ -5,7 +5,7 @@ from odoo import api, fields, models
 
 class GzMedicalConsumables(models.Model):
     _name = "gz.medical.consumables"
-    _description = "贵州医用耗材目录"
+    _description = "贵州医保医用耗材目录"
 
     name = fields.Char('医用耗材代码', index='trigram', required=True)
     primary_classification = fields.Char('一级分类', required=True)

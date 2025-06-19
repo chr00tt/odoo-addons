@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+    <record id="gz_medical_consumables_list_view" model="ir.ui.view">
+        <field name="name">gz.medical.consumables.list</field>
+        <field name="model">gz.medical.consumables</field>
+        <field name="arch" type="xml">
+            <tree string="贵州医保医用耗材目录">
+                <field name="name"/>
+                <field name="nhsa_consumables_categ_id" optional="show"/>
+                <field name="common_name"/>
+                <field name="material"/>
+                <field name="characteristics"/>
+                <field name="payment_category" optional="hide"/>
+                <field name="payment_standard" optional="show"/>
+            </tree>
+        </field>
+    </record>
 
     <record id="gz_medical_consumables_action" model="ir.actions.act_window">
-        <field name="name">贵州省医保医用耗材目录</field>
+        <field name="name">贵州医保医用耗材目录</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">gz.medical.consumables</field>
     </record>
