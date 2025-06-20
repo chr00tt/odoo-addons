@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='ybbm']" position="after">
                 <field name="zczbhhzbapzbh"/>
+                <field name="syqsfxyjxmj"/>
                 <field name="gllb"/>
             </xpath>
             <xpath expr="//page[@name='medical_consumables']/group" position="inside">

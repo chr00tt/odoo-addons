@@ -44,6 +44,6 @@ def _import_nhsa_hc(env):
             ['id', 'name', 'nhsa_consumables_categ_id/id','common_name','material','specifications','enterprise'],
             {
                 'has_headers': True, 'encoding': 'utf-8', 'separator': ',', 'quoting': '"',
-                'use_queue': True, 'chunk_size': 10000, 'priority': 200,
+                'use_queue': True, 'chunk_size': 1000, 'priority': 200,
             }
         )
