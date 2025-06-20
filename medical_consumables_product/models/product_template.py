@@ -12,6 +12,8 @@ class ProductTemplate(models.Model):
     ggxh = fields.Char("规格/型号")
     ybbm = fields.Char("医保耗材编码")
 
+
+
     @api.depends('type')
     def _compute_is_medical_consumables(self):
         self.filtered(lambda p: p.type not in ['product']).update({'is_medical_consumables': False})
