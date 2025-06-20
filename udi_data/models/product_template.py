@@ -11,6 +11,7 @@ class ProductTemplate(models.Model):
     product_origin = fields.Selection([
         ('domestic', '国产'),
         ('imported', '进口'),
+        ('hongkong_macao_taiwan', '港澳台'),
     ], string='产品来源', default='domestic')
     syqsfxyjxmj = fields.Boolean("使用前是否需要进行灭菌")
     gllb = fields.Selection([('1', 'Ⅰ'), ('2', 'Ⅱ'), ('3', 'Ⅲ')], string='管理类别', default='1')

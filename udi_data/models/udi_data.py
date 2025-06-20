@@ -4,7 +4,7 @@ from odoo import api, fields, models, tools, _
 
 class UDIData(models.Model):
     _name = "udi.data"
-    _inherit = ['rss.mixin']
+    _inherit = ['rss.mixin', 'parse.registration.number']
     _description = "医疗器械唯一标识"
     _rec_name = 'zxxsdycpbs'
     _rec_names_search = ['zxxsdycpbs', 'sydycpbs', 'btcpbs']
@@ -163,7 +163,11 @@ class UDIData(models.Model):
                 product_template = product_template_model.search([('name', '=', record.cpmctymc), ('ggxh', '=', record.ggxh)], limit=1)
             if product_template and not product_template.udi_data_id.id:
                 product_template.udi_data_id = record
-                product_template.zczbhhzbapzbh = record.zczbhhzbapzbh
+                if record.zczbhhzbapzbh:
+                    product_template.zczbhhzbapzbh = record.zczbhhzbapzbh
+                    parse_res = record.parse_registration_number()
+                    if parse_res['product_origin']:
+                        product_template.product_origin = parse_res['product_origin']
                 product_template.syqsfxyjxmj = record.syqsfxyjxmj
                 product_template.gllb = record.gllb
                 if record.sydycpbs and record.sydycpbs != record.zxxsdycpbs:
