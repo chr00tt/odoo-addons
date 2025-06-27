@@ -12,7 +12,12 @@ class ProductTemplate(models.Model):
     ggxh = fields.Char("规格/型号")
     ybbm = fields.Char("医保耗材编码")
 
-
+    registration_number = fields.Char("注册证编号或者备案凭证编号")
+    product_origin = fields.Selection([
+        ('domestic', '国产'),
+        ('imported', '进口'),
+        ('hongkong_macao_taiwan', '港澳台'),
+    ], string='产品来源', default='domestic')
 
     @api.depends('type')
     def _compute_is_medical_consumables(self):
