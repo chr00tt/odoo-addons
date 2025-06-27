@@ -4,7 +4,7 @@ from odoo import api, fields, models, tools, _
 
 class UDIData(models.Model):
     _name = "udi.data"
-    _inherit = ['rss.mixin', 'parse.registration.number']
+    _inherit = ['rss.mixin']
     _description = "医疗器械唯一标识"
     _rec_name = 'zxxsdycpbs'
     _rec_names_search = ['zxxsdycpbs', 'sydycpbs', 'btcpbs']

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
+
+import re
 
 from odoo import api, fields, models
 
@@ -17,8 +18,31 @@ class ProductTemplate(models.Model):
         ('domestic', '国产'),
         ('imported', '进口'),
         ('hongkong_macao_taiwan', '港澳台'),
-    ], string='产品来源', default='domestic')
+    ], string='产品来源', default='domestic', compute='_parse_registration_number', store=True)
 
     @api.depends('type')
     def _compute_is_medical_consumables(self):
         self.filtered(lambda p: p.type not in ['product']).update({'is_medical_consumables': False})
+
+    @api.depends('registration_number')
+    def _parse_registration_number(self):
+        for record in self:
+            if not record.registration_number:
+                continue
+
+            # 注册证编号有可能有多个，提取第1个
+            parts = record.registration_number.split(',')
+            if parts:
+                registration_number = parts[0].strip()
+            else:
+                registration_number = ''
+
+            pattern = re.compile(r"械注([准进许])")
+            match = pattern.search(registration_number)
+            if match:
+                product_origin_values = {
+                    '准': 'domestic',
+                    '进': 'imported',
+                    '许': 'hongkong_macao_taiwan',
+                }
+                record.product_origin = product_origin_values.get(match.group(1), 'domestic')
