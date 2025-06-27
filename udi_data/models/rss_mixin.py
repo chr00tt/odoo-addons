@@ -142,7 +142,7 @@ class RssMixin(models.AbstractModel):
             'ylqxzcrbarmc': manufacturer.id,
             'ylqxzcrbarywmc': elem.findtext('ylqxzcrbarywmc'),
             'tyshxydm': elem.findtext('tyshxydm'),
-            'zczbhhzbapzbh': elem.findtext('zczbhhzbapzbh'),
+            'registration_number': elem.findtext('registration_number'),
             'ybbm': elem.findtext('ybbm'),
             'cplb': elem.findtext('cplb'),
             'cgzmraqxgxx': elem.findtext('cgzmraqxgxx'),

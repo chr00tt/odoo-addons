@@ -10,7 +10,7 @@ class ParseRegistrationNumber(models.AbstractModel):
 
     def parse_registration_number(self):
         # 注册证编号有可能有多个，提取第1个
-        parts = self.zczbhhzbapzbh.split(',')
+        parts = self.registration_number.split(',')
         if parts:
             registration_number = parts[0].strip()
         else:

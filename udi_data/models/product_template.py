@@ -7,7 +7,7 @@ class ProductTemplate(models.Model):
 
     udi_data_id = fields.Many2one('udi.data', '医疗器械唯一标识', compute='_compute_udi_data_id', store=True)
 
-    zczbhhzbapzbh = fields.Char("注册证编号或者备案凭证编号")
+    registration_number = fields.Char("注册证编号或者备案凭证编号")
     product_origin = fields.Selection([
         ('domestic', '国产'),
         ('imported', '进口'),

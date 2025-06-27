@@ -37,7 +37,7 @@
                             <field name="cphhhbh"/>
                             <field name="yflbm"/>
                             <field name="tyshxydm"/>
-                            <field name="zczbhhzbapzbh"/>
+                            <field name="registration_number"/>
                             <field name="ylqxzcrbarmc"/>
                             <field name="ylqxzcrbarywmc"/>
                         </group>
@@ -100,7 +100,7 @@
                 <field name="flbm" optional="show"/>
                 <field name="gllb" optional="show"/>
                 <field name="tyshxydm" optional="hide"/>
-                <field name="zczbhhzbapzbh" optional="hide"/>
+                <field name="registration_number" optional="hide"/>
                 <field name="ylqxzcrbarmc" optional="hide"/>
                 <field name="ylqxzcrbarywmc" optional="hide"/>
                 <field name="ybbm" optional="show"/>

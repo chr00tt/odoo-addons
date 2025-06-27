@@ -27,7 +27,7 @@ class UDIData(models.Model):
     yflbm = fields.Char("原器械目录代码")
     flbm = fields.Many2one('medical.device.category', '医疗器械分类')
     tyshxydm = fields.Char("统一社会信息代码")
-    zczbhhzbapzbh = fields.Char("注册证编号或者备案凭证编号")
+    registration_number = fields.Char("注册证编号或者备案凭证编号")
     ylqxzcrbarmc = fields.Many2one(
         'res.partner', '医疗器械注册人/备案人名称',
         required=True)
@@ -163,8 +163,8 @@ class UDIData(models.Model):
                 product_template = product_template_model.search([('name', '=', record.cpmctymc), ('ggxh', '=', record.ggxh)], limit=1)
             if product_template and not product_template.udi_data_id.id:
                 product_template.udi_data_id = record
-                if record.zczbhhzbapzbh:
-                    product_template.zczbhhzbapzbh = record.zczbhhzbapzbh
+                if record.registration_number:
+                    product_template.registration_number = record.registration_number
                     parse_res = record.parse_registration_number()
                     if parse_res['product_origin']:
                         product_template.product_origin = parse_res['product_origin']
