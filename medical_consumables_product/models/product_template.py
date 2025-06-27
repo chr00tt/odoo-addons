@@ -10,15 +10,18 @@ class ProductTemplate(models.Model):
     is_medical_consumables = fields.Boolean('医用耗材', compute='_compute_is_medical_consumables',
         store=True, readonly=False)
 
-    ggxh = fields.Char("规格/型号")
-    ybbm = fields.Char("医保耗材编码")
+    ggxh = fields.Char('规格/型号')
+    ybbm = fields.Char('医保耗材编码')
 
-    registration_number = fields.Char("注册证编号或者备案凭证编号")
+    registration_number = fields.Char('注册证编号或者备案凭证编号')
+    registration_start_date = fields.Date('注册证开始日期')
+    registration_validity_period = fields.Date('注册证有效期')
+
     product_origin = fields.Selection([
         ('domestic', '国产'),
         ('imported', '进口'),
         ('hongkong_macao_taiwan', '港澳台'),
-    ], string='产品来源', default='domestic', compute='_parse_registration_number', store=True)
+    ], string='产品来源', default='domestic', compute='_parse_registration_number', store=True, readonly=False)
 
     @api.depends('type')
     def _compute_is_medical_consumables(self):
