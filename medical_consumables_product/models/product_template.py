@@ -24,9 +24,9 @@ class ProductTemplate(models.Model):
     ], string='产品来源', default='domestic', compute='_parse_registration_number', store=True, readonly=False)
 
     purchase_type = fields.Selection([
-        ('longterm-access', '长期准入'),
-        ('temporary-use', '临购使用'),
-        ('no-access', '未准入'),
+        ('longterm_access', '长期准入'),
+        ('temporary_use', '临购使用'),
+        ('no_access', '未准入'),
     ], string='采购类型', default='no_access')
     purchase_style = fields.Selection([
         ('centralized_procurement', '集中采购'),
