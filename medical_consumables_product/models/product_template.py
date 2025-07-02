@@ -25,7 +25,8 @@ class ProductTemplate(models.Model):
 
     purchase_type = fields.Selection([
         ('longterm-access', '长期准入'),
-        ('temporary-use', '临时使用'),
+        ('temporary-use', '临购使用'),
+        ('no-access', '未准入'),
     ], string='采购类型')
     purchase_style = fields.Selection([
         ('centralized_procurement', '集中采购'),
