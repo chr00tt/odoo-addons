@@ -17,11 +17,15 @@
                     <group>
                         <group>
                             <field name="ybbm"/>
+                            <field name="purchase_type"/>
+                            <field name="purchase_style"/>
                         </group>
-                        <group>
+                        <group string="注册信息">
                             <field name="registration_number"/>
                             <field name="registration_start_date"/>
                             <field name="registration_validity_period"/>
+                        </group>
+                        <group>
                             <field name="product_origin"/>
                         </group>
                     </group>

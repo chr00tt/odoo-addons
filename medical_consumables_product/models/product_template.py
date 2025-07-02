@@ -23,6 +23,16 @@ class ProductTemplate(models.Model):
         ('hongkong_macao_taiwan', '港澳台'),
     ], string='产品来源', default='domestic', compute='_parse_registration_number', store=True, readonly=False)
 
+    purchase_type = fields.Selection([
+        ('longterm-access', '长期准入'),
+        ('temporary-use', '临时使用'),
+    ], string='采购类型')
+    purchase_style = fields.Selection([
+        ('centralized_procurement', '集中采购'),
+        ('platform_procurement', '平台采购'),
+        ('self_purchase', '自购'),
+    ], string='采购方式')
+
     @api.depends('type')
     def _compute_is_medical_consumables(self):
         self.filtered(lambda p: p.type not in ['product']).update({'is_medical_consumables': False})
