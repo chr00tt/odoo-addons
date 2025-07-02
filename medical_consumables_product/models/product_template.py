@@ -27,12 +27,12 @@ class ProductTemplate(models.Model):
         ('longterm-access', '长期准入'),
         ('temporary-use', '临购使用'),
         ('no-access', '未准入'),
-    ], string='采购类型')
+    ], string='采购类型', default='no_access')
     purchase_style = fields.Selection([
         ('centralized_procurement', '集中采购'),
         ('platform_procurement', '平台采购'),
         ('self_purchase', '自购'),
-    ], string='采购方式')
+    ], string='采购方式', default='self_purchase')
 
     @api.depends('type')
     def _compute_is_medical_consumables(self):
