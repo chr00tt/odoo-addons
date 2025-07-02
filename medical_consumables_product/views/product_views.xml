@@ -40,9 +40,15 @@
         <field name="arch" type="xml">
             <field name="categ_id" position="after">
                 <field name="ybbm"/>
+                <field name="registration_number"/>
             </field>
             <xpath expr="//filter[@name='filter_to_purchase']" position="after">
                 <filter string="医用耗材" name="filter_to_medical_consumables" domain="[('is_medical_consumables', '=', True)]"/>
+            </xpath>
+            <xpath expr="//filter[@name='categ_id']" position="after">
+                <filter string="产品来源" name="filter_product_origin" context="{'group_by': 'product_origin'}"/>
+                <filter string="采购类型" name="filter_purchase_type" context="{'group_by': 'purchase_type'}"/>
+                <filter string="采购方式" name="filter_purchase_style" context="{'group_by': 'purchase_style'}"/>
             </xpath>
         </field>
     </record>
