@@ -51,7 +51,7 @@
                             <field name="qtxxdwzlj"/>
                             <field name="tsrq"/>
                             <field name="scbssfbhph"/>
-                            <field name="scbssfbhxlh"/>
+                            <field name="serial_number"/>
                             <field name="scbssfbhscrq"/>
                             <field name="scbssfbhsxrq"/>
                             <field name="tscchcztj"/>
@@ -115,7 +115,7 @@
                 <field name="syqsfxyjxmj" string="需要灭菌" optional="hide"/>
                 <field name="mjfs" optional="hide"/>
                 <field name="scbssfbhph" string="批号" optional="hide"/>
-                <field name="scbssfbhxlh" string="序列号" optional="show"/>
+                <field name="serial_number" string="序列号" optional="show"/>
                 <field name="scbssfbhscrq" string="生产日期" optional="hide"/>
                 <field name="scbssfbhsxrq" string="失效日期" optional="hide"/>
                 <field name="tscchcztj" string="特殊储存或操作条件" optional="hide"/>
@@ -144,7 +144,7 @@
                 <filter name="sfwwjbz" string="无菌包装" domain="[('sfwwjbz', '=', True)]"/>
                 <filter name="syqsfxyjxmj" string="需要灭菌" domain="[('syqsfxyjxmj', '=', True)]"/>
                 <filter name="scbssfbhph" string="包含批号" domain="[('scbssfbhph', '!=', False)]"/>
-                <filter name="scbssfbhxlh" string="包含序列号" domain="[('scbssfbhxlh', '!=', False)]"/>
+                <filter name="serial_number" string="包含序列号" domain="[('serial_number', '!=', False)]"/>
                 <filter name="scbssfbhscrq" string="包含生产日期" domain="[('scbssfbhscrq', '!=', False)]"/>
                 <filter name="scbssfbhsxrq" string="包含失效日期" domain="[('scbssfbhsxrq', '!=', False)]"/>
                 <searchpanel>

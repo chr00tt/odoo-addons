@@ -43,7 +43,7 @@ class UDIData(models.Model):
     qtxxdwzlj = fields.Text("提供医疗器械其他信息的网址链接")
     tsrq = fields.Char("退市日期")
     scbssfbhph = fields.Boolean("医疗器械生产标识是否包含批号")
-    scbssfbhxlh = fields.Boolean("医疗器械生产标识是否包含序列号")
+    serial_number = fields.Boolean("医疗器械生产标识是否包含序列号")
     scbssfbhscrq = fields.Boolean("医疗器械生产标识是否包含生产日期")
     scbssfbhsxrq = fields.Boolean("医疗器械生产标识是否包含失效日期")
     tscchcztj = fields.Char("特殊储存或操作条件")
@@ -97,7 +97,7 @@ class UDIData(models.Model):
             'default_code': barcode,
             'barcode': barcode,
             'description': self.cpms,
-            'tracking': 'serial' if self.scbssfbhxlh else 'lot',
+            'tracking': 'serial' if self.serial_number else 'lot',
             'use_expiration_date': self.scbssfbhsxrq,
 
             # product_manufacturer 信息

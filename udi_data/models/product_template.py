@@ -46,7 +46,7 @@ class ProductTemplate(models.Model):
                 self.ggxh = self.udi_data_id.ggxh
 
             # 设置追溯
-            if self.udi_data_id.scbssfbhxlh:
+            if self.udi_data_id.serial_number:
                 self.tracking = 'serial'
             elif self.udi_data_id.scbssfbhph and self.tracking != 'serial':
                 self.tracking = 'lot'
