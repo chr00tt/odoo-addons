@@ -147,6 +147,10 @@
                 <filter name="serial_number" string="包含序列号" domain="[('serial_number', '!=', False)]"/>
                 <filter name="scbssfbhscrq" string="包含生产日期" domain="[('scbssfbhscrq', '!=', False)]"/>
                 <filter name="scbssfbhsxrq" string="包含失效日期" domain="[('scbssfbhsxrq', '!=', False)]"/>
+                <group expand="1" string="分组">
+                    <filter name="serial_number_group" string="包含序列号" context="{'group_by': 'serial_number'}"/>
+                    <filter name="gllb_group" string="管理类别" context="{'group_by': 'gllb'}"/>
+                </group>
                 <searchpanel>
                     <field name="gllb" enable_counters="1" select="multi"/>
                     <field name="flbm" enable_counters="1" limit="0" string="医疗器械分类"/>
