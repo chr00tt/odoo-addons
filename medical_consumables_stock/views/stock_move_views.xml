@@ -8,6 +8,12 @@
                 <xpath expr="//field[@name='product_id']" position="after">
                     <field name="product_ggxh" optional="hide"/>
                 </xpath>
+                <xpath expr="//field[@name='product_uom']" position="after">
+                    <field name="registration_number" optional="hide"/>
+                    <field name="product_tag_ids" optional="hide"/>
+                    <field name="manufacturer_id" optional="hide"/>
+                    <field name="categ_id" optional="hide"/>
+                </xpath>
             </field>
         </record>
 
