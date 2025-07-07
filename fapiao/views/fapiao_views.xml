@@ -2,6 +2,20 @@
 <odoo>
     <data>
 
+        <record id="fapiao_list_view" model="ir.ui.view">
+            <field name="name">fapiao.list</field>
+            <field name="model">fapiao</field>
+            <field name="arch" type="xml">
+                <tree string="发票列表">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="type" optional="hide"/>
+                    <field name="amount"/>
+                    <field name="currency_id"/>
+                </tree>
+            </field>
+        </record>
+
         <record id="action_fapiao" model="ir.actions.act_window">
             <field name="name">发票</field>
             <field name="res_model">fapiao</field>
