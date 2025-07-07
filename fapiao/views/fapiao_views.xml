@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="action_fapiao" model="ir.actions.act_window">
+            <field name="name">发票</field>
+            <field name="res_model">fapiao</field>
+            <field name="view_mode">tree,kanban,form,activity</field>
+        </record>
+
+    </data>
+</odoo>
