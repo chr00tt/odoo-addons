@@ -16,3 +16,10 @@ class Fapiao(models.Model):
     date = fields.Date('开票日期')
     amount = fields.Monetary(string='金额', required=True, currency_field='currency_id')
     currency_id = fields.Many2one('res.currency', string='币种', required=True, default=lambda self: self.env.company.currency_id)
+
+    line_ids = fields.One2many(
+        'fapiao.line',
+        'fapiao_id',
+        string='发票明细',
+        copy = True,
+    )

@@ -2,6 +2,38 @@
 <odoo>
     <data>
 
+        <record id="fapiao_form_view" model="ir.ui.view">
+            <field name="name">fapiao.form</field>
+            <field name="model">fapiao</field>
+            <field name="arch" type="xml">
+                <form string="发票">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="date"/>
+                                <field name="type"/>
+                            </group>
+                            <group>
+                                <field name="amount"/>
+                                <field name="currency_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="发票行">
+                                <field name="line_ids" context="{'default_fapiao_id': id}">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="amount"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
         <record id="fapiao_list_view" model="ir.ui.view">
             <field name="name">fapiao.list</field>
             <field name="model">fapiao</field>
