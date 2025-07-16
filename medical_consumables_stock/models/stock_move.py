@@ -16,4 +16,4 @@ class StockMove(models.Model):
     categ_id = fields.Many2one(
         'product.category', string='产品类别',
         related='product_id.categ_id')
-
+    product_ybbm = fields.Char(related="product_id.ybbm")

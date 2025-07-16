@@ -12,6 +12,7 @@
                 <field name="product_tag_ids" optional="hide"/>
                 <field name="manufacturer_id" optional="hide"/>
                 <field name="categ_id" optional="hide"/>
+                <field name="product_ybbm" optional="hide"/>
             </xpath>
         </field>
     </record>

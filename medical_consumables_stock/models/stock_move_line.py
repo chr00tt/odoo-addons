@@ -6,7 +6,6 @@ class StockMoveLine(models.Model):
     _inherit = "stock.move.line"
 
     product_ggxh = fields.Char(related="product_id.ggxh")
-    product_ybbm = fields.Char(related="product_id.ybbm")
     registration_number = fields.Char('注册证号', related="product_id.registration_number")
     product_tag_ids = fields.Many2many(
         'product.tag', string='产品标签',
@@ -17,3 +16,4 @@ class StockMoveLine(models.Model):
     categ_id = fields.Many2one(
         'product.category', string='产品类别',
         related='product_id.categ_id')
+    product_ybbm = fields.Char(related="product_id.ybbm")
