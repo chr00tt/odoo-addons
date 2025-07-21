@@ -16,6 +16,25 @@
         </field>
     </record>
 
+    <record id="gz_medical_consumables_search_view" model="ir.ui.view">
+        <field name="name">gz.medical.consumables.search</field>
+        <field name="model">gz.medical.consumables</field>
+        <field name="arch" type="xml">
+            <search string="贵州医保医用耗材目录">
+                <field name="name"/>
+                <field name="common_name"/>
+                <field name="material"/>
+                <field name="characteristics"/>
+                <group expand="1" string="分组">
+                    <filter string="一级分类" name="primary_classification" context="{'group_by':'primary_classification'}"/>
+                    <filter string="二级分类" name="secondary_classification" context="{'group_by':'secondary_classification'}"/>
+                    <filter string="三级分类" name="tertiary_classification" context="{'group_by':'tertiary_classification'}"/>
+                    <filter string="支付类别" name="payment_category" context="{'group_by':'payment_category'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record id="gz_medical_consumables_action" model="ir.actions.act_window">
         <field name="name">贵州医保医用耗材目录</field>
         <field name="type">ir.actions.act_window</field>
