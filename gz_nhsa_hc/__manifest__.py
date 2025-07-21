@@ -14,6 +14,7 @@
         'security/ir.model.access.csv',
         'data/gz.medical.consumables.csv',
         'views/gz_medical_consumables_views.xml',
+        'views/product_views.xml',
         'views/stock_menu_views.xml',
     ],
     'license': 'LGPL-3',
