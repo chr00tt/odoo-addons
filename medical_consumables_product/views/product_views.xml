@@ -58,7 +58,9 @@
             <field name="inherit_id" ref="product.product_product_tree_view"/>
             <field name="arch" type="xml">
                 <field name="name" position="after">
-                    <field name="ggxh" optional="show" readonly="1"/>
+                    <field name="ggxh" optional="hide"/>
+                    <field name="registration_number" optional="hide"/>
+                    <field name="manufacturer_id" optional="hide"/>
                 </field>
             </field>
         </record>
