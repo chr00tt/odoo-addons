@@ -38,6 +38,9 @@
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_search_view"/>
         <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="ggxh" filter_domain="[('ggxh', 'ilike', self)]"/>
+            </xpath>
             <field name="categ_id" position="after">
                 <field name="ybbm"/>
                 <field name="registration_number"/>
