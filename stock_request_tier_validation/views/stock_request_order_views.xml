@@ -9,10 +9,10 @@
                 <separator/>
                 <filter name="needs_review" string="需要我审审核"
                         domain="[('reviewer_ids','in',uid), ('state', 'not in', ['done', 'cancel'])]"
-                        help="待我审核的库存请求"/>
+                        help="待我审核的库存申请"/>
                 <filter name="tier_validated" string="已批准"
                         domain="[('validated', '=', True)]"
-                        help="已批准且准备好确认的库存请求"/>
+                        help="已批准且准备好确认的库存申请"/>
             </filter>
         </field>
     </record>
