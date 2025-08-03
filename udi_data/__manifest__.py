@@ -19,6 +19,7 @@
         'data/ir_cron_data.xml',
         'data/udi_data_data.xml',
         # 'data/medical.device.category.csv', # 采用异步导入
+        'views/ir_cron_views.xml',
         'views/product_views.xml',
         'views/udi_data_views.xml',
         'views/medical_device_category_views.xml',
