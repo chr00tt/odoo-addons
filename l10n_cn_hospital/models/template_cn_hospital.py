@@ -24,7 +24,7 @@ class AccountChartTemplate(models.AbstractModel):
             'property_account_expense_categ_id': 'account_template_hospital_5201',
             'property_account_income_categ_id': 'account_template_hospital_4401',
             'property_stock_account_input_categ_id': 'account_template_hospital_1301',
-            'property_stock_account_output_categ_id': 'account_template_hospital_1303',
+            'property_stock_account_output_categ_id': 'account_template_hospital_5001',
             'property_stock_valuation_account_id': 'account_template_hospital_130201',
             # 'property_stock_account_production_cost_id': 'cost_of_production',
         }
