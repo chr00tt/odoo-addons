@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="product_category_130201" model="product.category">
+            <field name="parent_id" ref="product.product_category_all"/>
+            <field name="name">药品</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_stock_valuation_account_id" search="[('code', '=', '130201')]"/>
+        </record>
+        <record id="product_category_130202" model="product.category">
+            <field name="parent_id" ref="product.product_category_all"/>
+            <field name="name">卫生材料</field>
+        </record>
+        <record id="product_category_13020201" model="product.category">
+            <field name="parent_id" ref="product_category_130202"/>
+            <field name="name">血库材料</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_stock_valuation_account_id" search="[('code', '=', '13020201')]"/>
+        </record>
+        <record id="product_category_13020202" model="product.category">
+            <field name="parent_id" ref="product_category_130202"/>
+            <field name="name">医用气体</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_stock_valuation_account_id" search="[('code', '=', '13020202')]"/>
+        </record>
+        <record id="product_category_13020203" model="product.category">
+            <field name="parent_id" ref="product_category_130202"/>
+            <field name="name">影像材料</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_stock_valuation_account_id" search="[('code', '=', '13020203')]"/>
+        </record>
+        <record id="product_category_13020204" model="product.category">
+            <field name="parent_id" ref="product_category_130202"/>
+            <field name="name">化验材料</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_stock_valuation_account_id" search="[('code', '=', '13020204')]"/>
+        </record>
+        <record id="product_category_13020205" model="product.category">
+            <field name="parent_id" ref="product_category_130202"/>
+            <field name="name">其他卫生材料</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_stock_valuation_account_id" search="[('code', '=', '13020205')]"/>
+        </record>
+        <record id="product_category_130203" model="product.category">
+            <field name="parent_id" ref="product.product_category_all"/>
+            <field name="name">低值易耗品</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_stock_valuation_account_id" search="[('code', '=', '130203')]"/>
+        </record>
+        <record id="product_category_130204" model="product.category">
+            <field name="parent_id" ref="product.product_category_all"/>
+            <field name="name">其他材料</field>
+            <field name="property_valuation">real_time</field>
+            <field name="property_stock_valuation_account_id" search="[('code', '=', '130204')]"/>
+        </record>
+    </data>
+</odoo>
