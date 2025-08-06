@@ -1,7 +1,7 @@
 /** @odoo-module **/
 
 import { registry } from "@web/core/registry";
-import { SelectionField } from "@web/views/fields/selection/selection_field";
+import { SelectionField, selectionField } from "@web/views/fields/selection/selection_field";
 
 export class AccountTypeSelection extends SelectionField {
     get hierarchyOptions() {
@@ -21,5 +21,10 @@ export class AccountTypeSelection extends SelectionField {
 }
 AccountTypeSelection.template = "account.AccountTypeSelection";
 
+export const accountTypeSelection = {
+    ...selectionField,
+    component: AccountTypeSelection,
+};
+
 registry.category("fields").remove("account_type_selection");
-registry.category("fields").add("account_type_selection", AccountTypeSelection);
+registry.category("fields").add("account_type_selection", accountTypeSelection);
