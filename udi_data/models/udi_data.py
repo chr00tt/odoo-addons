@@ -26,7 +26,7 @@ class UDIData(models.Model):
     cphhhbh = fields.Char("产品货号或编号")
     yflbm = fields.Char("原器械目录代码")
     flbm = fields.Many2one('medical.device.category', '医疗器械分类')
-    tyshxydm = fields.Char("统一社会信息代码")
+    tyshxydm = fields.Char("统一社会信用代码")
     registration_number = fields.Char("注册证编号或者备案凭证编号")
     license_holder = fields.Many2one(
         'res.partner', '医疗器械注册人/备案人名称',

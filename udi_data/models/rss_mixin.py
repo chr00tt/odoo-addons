@@ -114,11 +114,13 @@ class RssMixin(models.AbstractModel):
             flbm = category.id if category else None
 
         license_holder = elem.findtext('ylqxzcrbarmc')
+        tyshxydm = elem.findtext('tyshxydm'),
         manufacturer = self.env['res.partner'].search([('name', '=', license_holder)], limit=1)
         if not manufacturer:
             manufacturer = self.env['res.partner'].create({
                 'name': license_holder,
                 'company_type': 'company',
+                'company_registry': tyshxydm,
                 'category_id': [self.env.ref('nhsa_hc.res_partner_category_manufacturer').id],
             })
 
@@ -141,7 +143,7 @@ class RssMixin(models.AbstractModel):
             'flbm': flbm,
             'license_holder': manufacturer.id,
             'ylqxzcrbarywmc': elem.findtext('ylqxzcrbarywmc'),
-            'tyshxydm': elem.findtext('tyshxydm'),
+            'tyshxydm': tyshxydm,
             'registration_number': elem.findtext('zczbhhzbapzbh'),
             'ybbm': elem.findtext('ybbm'),
             'cplb': elem.findtext('cplb'),
