@@ -67,6 +67,9 @@ class ProductTemplate(models.Model):
             # 注册证号
             if self.udi_data_id.registration_number:
                 self.registration_number = self.udi_data_id.registration_number
+            # 生产厂家
+            if self.udi_data_id.license_holder:
+                self.manufacturer_id = self.udi_data_id.license_holder.id
 
     @api.onchange('barcode')
     def _barcode_to_udi_data(self):
