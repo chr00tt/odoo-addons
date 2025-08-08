@@ -38,7 +38,7 @@
                             <field name="yflbm"/>
                             <field name="tyshxydm"/>
                             <field name="registration_number"/>
-                            <field name="ylqxzcrbarmc"/>
+                            <field name="license_holder"/>
                             <field name="ylqxzcrbarywmc"/>
                         </group>
                         <group>
@@ -101,7 +101,7 @@
                 <field name="gllb" optional="show"/>
                 <field name="tyshxydm" optional="hide"/>
                 <field name="registration_number" optional="hide"/>
-                <field name="ylqxzcrbarmc" optional="hide"/>
+                <field name="license_holder" optional="hide"/>
                 <field name="ylqxzcrbarywmc" optional="hide"/>
                 <field name="ybbm" optional="show"/>
                 <field name="nhsa_consumables_categ_id" optional="hide"/>

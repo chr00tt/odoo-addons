@@ -28,7 +28,7 @@ class UDIData(models.Model):
     flbm = fields.Many2one('medical.device.category', '医疗器械分类')
     tyshxydm = fields.Char("统一社会信息代码")
     registration_number = fields.Char("注册证编号或者备案凭证编号")
-    ylqxzcrbarmc = fields.Many2one(
+    license_holder = fields.Many2one(
         'res.partner', '医疗器械注册人/备案人名称',
         required=True)
     ylqxzcrbarywmc = fields.Char("医疗器械注册人/备案人英文名称")
@@ -101,7 +101,7 @@ class UDIData(models.Model):
             'use_expiration_date': self.scbssfbhsxrq,
 
             # product_manufacturer 信息
-            'manufacturer_id': self.nhsa_consumables_id.enterprise.id if self.nhsa_consumables_id else self.ylqxzcrbarmc.id,
+            'manufacturer_id': self.nhsa_consumables_id.enterprise.id if self.nhsa_consumables_id else self.license_holder.id,
 
             # medical_consumables_product 信息
             'is_medical_consumables': True,
