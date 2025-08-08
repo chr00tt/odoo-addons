@@ -165,9 +165,6 @@ class UDIData(models.Model):
                 product_template.udi_data_id = record
                 if record.registration_number:
                     product_template.registration_number = record.registration_number
-                    parse_res = record.parse_registration_number()
-                    if parse_res['product_origin']:
-                        product_template.product_origin = parse_res['product_origin']
                 product_template.syqsfxyjxmj = record.syqsfxyjxmj
                 product_template.gllb = record.gllb
                 if record.sydycpbs and record.sydycpbs != record.zxxsdycpbs:

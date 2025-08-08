@@ -25,9 +25,9 @@ class ProductTemplate(models.Model):
             # 设置医用耗材标志
             self.is_medical_consumables = self.udi_data_id.cplb == '耗材'
 
-            # 设置医保医用耗材分类与代码
+            # 设置医保医用耗材代码
             if self.udi_data_id.ybbm and not self.nhsa_consumables_id:
-                self.nhsa_consumables_id = self.udi_data_id.nhsa_consumables_id
+                self.ybbm = self.udi_data_id.ybbm
 
             # 设置条码
             if not self.barcode:
@@ -70,7 +70,7 @@ class ProductTemplate(models.Model):
         if self.barcode and self.is_medical_consumables:
             udi_data = self.env['udi.data'].search(['|', ('zxxsdycpbs', '=', self.barcode), ('sydycpbs', '=', self.barcode)], limit=1)
             if udi_data:
-                self.udi_data_id = udi_data.id
+                self.udi_data_id = udi_data.id  # 会自动触发 _onchange_udi_data_id
             else:
                 return {
                     'warning': {

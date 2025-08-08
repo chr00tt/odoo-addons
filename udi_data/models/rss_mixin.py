@@ -34,7 +34,7 @@ class RssMixin(models.AbstractModel):
         # 文件太大，下载会报错
         # self._do_update(UDID_FULL_RSS_URL)
         # 直接使用下载好的文件
-        zip_path = get_module_path('udi_data') + '/data/UDID_FULL_RELEASE_20250302.zip'
+        zip_path = get_module_path('udi_data') + '/data/UDID_FULL_RELEASE_20250801.zip'
         extract_dir = self._extract_zip(zip_path)
         self._import_data_files(extract_dir)        
 
@@ -142,7 +142,7 @@ class RssMixin(models.AbstractModel):
             'ylqxzcrbarmc': manufacturer.id,
             'ylqxzcrbarywmc': elem.findtext('ylqxzcrbarywmc'),
             'tyshxydm': elem.findtext('tyshxydm'),
-            'registration_number': elem.findtext('registration_number'),
+            'registration_number': elem.findtext('zczbhhzbapzbh'),
             'ybbm': elem.findtext('ybbm'),
             'cplb': elem.findtext('cplb'),
             'cgzmraqxgxx': elem.findtext('cgzmraqxgxx'),
@@ -153,8 +153,8 @@ class RssMixin(models.AbstractModel):
             'mjfs': elem.findtext('mjfs'),
             'qtxxdwzlj': elem.findtext('qtxxdwzlj'),
             'tsrq': elem.findtext('tsrq'),
-            'lot_or_batch_number': True if elem.findtext('lot_or_batch_number') == '是' else False,
-            'serial_number': True if elem.findtext('serial_number') == '是' else False,
+            'lot_or_batch_number': True if elem.findtext('scbssfbhph') == '是' else False,
+            'serial_number': True if elem.findtext('scbssfbhxlh') == '是' else False,
             'scbssfbhscrq': True if elem.findtext('scbssfbhscrq') == '是' else False,
             'scbssfbhsxrq': True if elem.findtext('scbssfbhsxrq') == '是' else False,
             'tscchcztj': elem.findtext('tscchcztj'),
