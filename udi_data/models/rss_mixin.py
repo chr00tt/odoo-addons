@@ -153,7 +153,7 @@ class RssMixin(models.AbstractModel):
             'mjfs': elem.findtext('mjfs'),
             'qtxxdwzlj': elem.findtext('qtxxdwzlj'),
             'tsrq': elem.findtext('tsrq'),
-            'scbssfbhph': True if elem.findtext('scbssfbhph') == '是' else False,
+            'lot_or_batch_number': True if elem.findtext('lot_or_batch_number') == '是' else False,
             'serial_number': True if elem.findtext('serial_number') == '是' else False,
             'scbssfbhscrq': True if elem.findtext('scbssfbhscrq') == '是' else False,
             'scbssfbhsxrq': True if elem.findtext('scbssfbhsxrq') == '是' else False,

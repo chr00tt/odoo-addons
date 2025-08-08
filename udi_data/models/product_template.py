@@ -40,7 +40,7 @@ class ProductTemplate(models.Model):
             # 设置追溯
             if self.udi_data_id.serial_number:
                 self.tracking = 'serial'
-            elif self.udi_data_id.scbssfbhph and self.tracking != 'serial':
+            elif self.udi_data_id.lot_or_batch_number and self.tracking != 'serial':
                 self.tracking = 'lot'
             if self.udi_data_id.scbssfbhsxrq:
                 self.use_expiration_date = True
