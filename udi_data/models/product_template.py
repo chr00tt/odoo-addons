@@ -64,6 +64,10 @@ class ProductTemplate(models.Model):
                         'barcode': self.udi_data_id.zxxsdycpbs,
                     })
 
+            # 注册证号
+            if self.udi_data_id.registration_number:
+                self.registration_number = self.udi_data_id.registration_number
+
     @api.onchange('barcode')
     def _barcode_to_udi_data(self):
         # 设置医疗器械唯一标识
@@ -72,9 +76,4 @@ class ProductTemplate(models.Model):
             if udi_data:
                 self.udi_data_id = udi_data.id  # 会自动触发 _onchange_udi_data_id
             else:
-                return {
-                    'warning': {
-                        'title': '警告',
-                        'message': '未能在医疗器械唯一标识数据库里找到产品标识 %s' % self.barcode,
-                    }
-                }
+                self.udi_data_id = None
