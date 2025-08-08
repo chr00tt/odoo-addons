@@ -5,7 +5,7 @@ from odoo import api, fields, models
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    udi_data_id = fields.Many2one('udi.data', '医疗器械唯一标识', compute='_compute_udi_data_id', store=True)
+    udi_data_id = fields.Many2one('udi.data', '医疗器械唯一标识')
 
     syqsfxyjxmj = fields.Boolean("使用前是否需要进行灭菌")
     gllb = fields.Selection([('1', 'Ⅰ'), ('2', 'Ⅱ'), ('3', 'Ⅲ')], string='管理类别', default='1')
@@ -18,14 +18,6 @@ class ProductTemplate(models.Model):
     udi_cpmctymc = fields.Char(related='udi_data_id.cpmctymc')
     udi_spmc = fields.Char(related='udi_data_id.spmc')
     udi_ggxh = fields.Char(related='udi_data_id.ggxh')
-
-    @api.depends('ybbm')
-    def _compute_udi_data_id(self):
-        for template in self:
-            if template.ybbm:
-                udi_data = self.env['udi.data'].search([('ybbm', '=', template.ybbm)], limit=1)
-                if udi_data:
-                    template.udi_data_id = udi_data.id
 
     @api.onchange('udi_data_id')
     def _onchange_udi_data_id(self):
