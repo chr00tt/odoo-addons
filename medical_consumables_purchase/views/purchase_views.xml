@@ -5,7 +5,12 @@
             <field name="inherit_id" ref="purchase.purchase_order_form" />
             <field name="arch" type="xml">
                 <xpath expr="//tree/field[@name='name']" position="after">
-                    <field name="product_ggxh" optional="show"/>
+                    <field name="product_ggxh" optional="hide"/>
+                    <field name="registration_number" optional="hide"/>
+                    <field name="registration_start_date" optional="hide"/>
+                    <field name="registration_validity_period" optional="hide"/>
+                    <field name="manufacturer_id" optional="hide"/>
+                    <field name="ybbm" optional="hide"/>
                 </xpath>
             </field>
         </record>
@@ -15,7 +20,12 @@
             <field name="inherit_id" ref="purchase.purchase_order_line_tree" />
             <field name="arch" type="xml">
                 <field name="product_id" position="after">
-                    <field name="product_ggxh" optional="show"/>
+                    <field name="product_ggxh" optional="hide"/>
+                    <field name="registration_number" optional="hide"/>
+                    <field name="registration_start_date" optional="hide"/>
+                    <field name="registration_validity_period" optional="hide"/>
+                    <field name="manufacturer_id" optional="hide"/>
+                    <field name="ybbm" optional="hide"/>
                 </field>
             </field>
         </record>

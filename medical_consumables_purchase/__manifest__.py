@@ -8,6 +8,9 @@
     'website': 'https://github.com/chr00tt/odoo-addons',
     'depends': [
         'purchase',
+
+        'product_manufacturer',
+
         'medical_consumables_product',
     ],
     'data': [
