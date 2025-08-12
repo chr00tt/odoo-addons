@@ -1,0 +1,4 @@
+#. module: stock_request_tier_validation
+#: model:ir.model,name:stock_request_tier_validation.model_stock_request_order
+msgid "Stock Request Order"
+msgstr "库存申请"
