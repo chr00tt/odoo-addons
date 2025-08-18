@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, tools, models, _
+from odoo import api, fields, models
 
 class UoM(models.Model):
     _inherit = 'uom.uom'

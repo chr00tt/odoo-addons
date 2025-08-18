@@ -5,6 +5,9 @@
         <field name="model">queue.job</field>
         <field name="inherit_id" ref="queue_job.view_queue_job_tree"/>
         <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="multi_edit">1</attribute>
+            </xpath>
             <field name="state" position="after">
                 <field name="priority" optional="show"/>
             </field>
