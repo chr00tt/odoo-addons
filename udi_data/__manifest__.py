@@ -5,6 +5,7 @@
     'author': 'He Jian',
     'website': 'https://github.com/chr00tt/odoo-addons',
     'depends': [
+        'product_expiry',
         'stock',
 
         'product_manufacturer',
