@@ -72,10 +72,12 @@ class NHSAConsumablesCategory(models.Model):
     def name_create(self, name):
         return self.create({'name': name}).name_get()[0]
 
-    def name_get(self):
-        if not self.env.context.get('hierarchical_naming', True):
-            return [(record.id, record.name) for record in self]
-        return super().name_get()
+    @api.depends_context('hierarchical_naming')
+    def _compute_display_name(self):
+        if self.env.context.get('hierarchical_naming', True):
+            return super()._compute_display_name()
+        for record in self:
+            record.display_name = record.name
 
     @api.ondelete(at_uninstall=False)
     def _unlink_except_default_category(self):
