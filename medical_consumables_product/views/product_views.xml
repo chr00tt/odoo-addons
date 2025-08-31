@@ -62,7 +62,6 @@
             <field name="arch" type="xml">
                 <field name="name" position="after">
                     <field name="ggxh" optional="hide"/>
-                    <field name="registration_number" optional="hide"/>
                     <field name="manufacturer_id" optional="hide"/>
                 </field>
             </field>

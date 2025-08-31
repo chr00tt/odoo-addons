@@ -13,10 +13,6 @@ class ProductTemplate(models.Model):
     ggxh = fields.Char('规格/型号', tracking=True)
     ybbm = fields.Char('医保耗材编码', tracking=True)
 
-    registration_number = fields.Char('注册证编号或者备案凭证编号', tracking=True)
-    registration_start_date = fields.Date('注册证开始日期', tracking=True)
-    registration_validity_period = fields.Date('注册证有效期', tracking=True)
-
     product_origin = fields.Selection([
         ('domestic', '国产'),
         ('imported', '进口'),

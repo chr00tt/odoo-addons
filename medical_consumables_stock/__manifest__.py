@@ -6,7 +6,9 @@
     'website': 'https://github.com/chr00tt/odoo-addons',
     'depends': [
         'stock',
+
         'medical_consumables_product',
+        'product_registration_number',
     ],
     'category': 'Inventory/Inventory',
     'data': [

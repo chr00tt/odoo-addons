@@ -12,6 +12,7 @@
         'product_manufacturer',
 
         'medical_consumables_product',
+        'product_registration_number',
     ],
     'data': [
         'views/purchase_views.xml',

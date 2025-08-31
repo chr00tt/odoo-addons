@@ -13,7 +13,8 @@
 
         'medical_consumables_product',
         'nhsa_hc',
-        ],
+        'product_registration_number',
+    ],
     'category': 'Inventory/Inventory',
     'data': [
         'security/ir.model.access.csv',

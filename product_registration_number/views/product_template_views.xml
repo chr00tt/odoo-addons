@@ -5,9 +5,9 @@
         <field name="inherit_id" ref="product.product_template_tree_view" />
         <field name="arch" type="xml">
             <field name="default_code" position="after">
-                <field name="ggxh" optional="hide"/>
-                <field name="ybbm" optional="hide"/>
-                <field name="product_origin" optional="hide"/>
+                <field name="registration_number" optional="hide"/>
+                <field name="registration_start_date" optional="hide"/>
+                <field name="registration_validity_period" optional="hide"/>
             </field>
         </field>
     </record>
