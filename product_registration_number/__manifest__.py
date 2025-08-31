@@ -7,6 +7,7 @@
     'category': 'Sales/Sales',
     'depends': ['product'],
     'data': [
+        'data/product_registration_number_data.xml',
         'views/product_supplierinfo_views.xml',
         'views/product_template_views.xml',
         'views/product_views.xml',
