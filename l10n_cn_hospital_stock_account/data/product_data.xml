@@ -10,6 +10,14 @@
         <record id="product_category_130202" model="product.category">
             <field name="parent_id" ref="product.product_category_all"/>
             <field name="name">卫生材料</field>
+            <field name="property_valuation">real_time</field>
+        </record>
+        <record id="property_stock_valuation_account_id_130202" model="ir.property">
+            <field name="name">property_stock_valuation_account_id_130202</field>
+            <field name="type">many2one</field>
+            <field name="fields_id" search="[('model','=','product.category'),('name','=','property_stock_valuation_account_id')]"/>
+            <field name="res_id">product.category,product_category_130202</field>
+            <field name="value_reference" search="[('code', '=', '13020205')]" model="account.account"/>
         </record>
         <record id="product_category_13020201" model="product.category">
             <field name="parent_id" ref="product_category_130202"/>
