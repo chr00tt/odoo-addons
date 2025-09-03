@@ -80,3 +80,10 @@ class ProductTemplate(models.Model):
                 self.udi_data_id = udi_data.id  # 会自动触发 _onchange_udi_data_id
             else:
                 self.udi_data_id = None
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            # TODO
+            d = 1
+        return super().create(vals_list)
