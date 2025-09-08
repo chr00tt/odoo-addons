@@ -83,6 +83,13 @@ class MedicalDeficeCategory(models.Model):
             return [(record.id, record.name) for record in self]
         return super().name_get()
 
+    @api.depends_context('hierarchical_naming')
+    def _compute_display_name(self):
+        if self.env.context.get('hierarchical_naming', True):
+            return super()._compute_display_name()
+        for record in self:
+            record.display_name = record.name
+
     @api.ondelete(at_uninstall=False)
     def _unlink_except_default_category(self):
         main_category = self.env.ref('udi_data.medical_device_category_all', raise_if_not_found=False)
