@@ -8,7 +8,7 @@
                 <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='product_id']" position="after">
                     <field name="product_ggxh" optional="hide"/>
                     <field name="registration_number" optional="hide"/>
-                    <field name="product_tag_ids" optional="hide"/>
+                    <field name="product_tag_ids" optional="hide" widget="many2many_tags"/>
                     <field name="manufacturer_id" optional="hide"/>
                     <field name="categ_id" optional="hide"/>
                     <field name="product_ybbm" optional="hide"/>
