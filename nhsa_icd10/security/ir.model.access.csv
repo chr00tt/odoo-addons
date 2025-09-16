@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_icd10_category_user,icd10.category.user,model_icd10_category,base.group_user,1,0,0,0
+access_icd10_code_user,icd10.code.user,model_icd10_code,base.group_user,1,0,0,0

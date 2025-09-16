@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="icd10_code_action" model="ir.actions.act_window">
+        <field name="name">ICD-10 诊断代码</field>
+        <field name="res_model">icd10.code</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
