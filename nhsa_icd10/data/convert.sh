@@ -13,11 +13,18 @@ BEGIN {
     FPAT="([^,]*)|(\"[^\"]+\")"
     OFS = ","
 }
-NR > 1 && $10!="" {
+NR > 1 && $10 != "" {
     # 检查是否有足够的列且关键字段不为空
         code = $10
         name = $11
         category = $8
+        if (category == "") {
+            category = $6
+            if (category == "") {
+                category = $4
+            }
+        }
+        # 删除多余的 fi 行
 
         # 构造输出行
         id_field = "icd10_diagnostic_code_" code
