@@ -480,8 +480,6 @@ icd10_category_category_C14,唇、口腔和咽其他和部位不明的恶性肿�
 icd10_category_category_C01,舌根恶性肿瘤,C01,icd10_category_block_C00-C14
 icd10_category_category_C07,腮腺恶性肿瘤,C07,icd10_category_block_C00-C14
 icd10_category_category_C12,梨状窦恶性肿瘤,C12,icd10_category_block_C00-C14
-icd10_category_category_,,,icd10_category_block_C00−C75
-icd10_category_category_,,,icd10_category_block_C00−C97
 icd10_category_category_C15,食管恶性肿瘤,C15,icd10_category_block_C15-C26
 icd10_category_category_C16,胃恶性肿瘤,C16,icd10_category_block_C15-C26
 icd10_category_category_C17,小肠恶性肿瘤,C17,icd10_category_block_C15-C26

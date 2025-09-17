@@ -12,6 +12,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/icd10_code_views.xml',
+        'data/icd10.category.csv',
     ],
     'license': 'LGPL-3',
 }

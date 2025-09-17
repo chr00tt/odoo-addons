@@ -4,7 +4,7 @@ from odoo import models, api, fields
 
 class Icd10Code(models.Model):
     _name = 'icd10.code'
-    _description = 'ICD-10 Code'
+    _description = '诊断代码'
     _rec_name = 'code'
 
     code = fields.Char(string='编号', required=True, index=True)
