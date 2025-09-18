@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ICD-10 分类列表视图 -->
+    <record id="view_icd10_category_tree" model="ir.ui.view">
+        <field name="name">icd10.category.tree</field>
+        <field name="model">icd10.category</field>
+        <field name="arch" type="xml">
+            <tree string="ICD-10 分类">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="parent_id"/>
+                <field name="code_count" string="代码数量"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- ICD-10 分类表单视图 -->
+    <record id="view_icd10_category_form" model="ir.ui.view">
+        <field name="name">icd10.category.form</field>
+        <field name="model">icd10.category</field>
+        <field name="arch" type="xml">
+            <form string="ICD-10 分类">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="parent_id"/>
+                            <field name="code_count" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="下级分类" name="child_categories">
+                            <field name="child_id">
+                                <tree>
+                                    <field name="code"/>
+                                    <field name="name"/>
+                                    <field name="code_count"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ICD-10 分类搜索视图 -->
+    <record id="view_icd10_category_search" model="ir.ui.view">
+        <field name="name">icd10.category.search</field>
+        <field name="model">icd10.category</field>
+        <field name="arch" type="xml">
+            <search string="ICD-10 分类">
+                <field name="code" string="分类代码"/>
+                <field name="name" string="名称"/>
+                <field name="parent_id" string="上级分类"/>
+                <group string="分组">
+                    <filter name="group_by_parent" string="按上级分类分组" context="{'group_by':'parent_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ICD-10 分类动作 -->
+    <record id="icd10_category_action" model="ir.actions.act_window">
+        <field name="name">ICD-10 分类</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">icd10.category</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

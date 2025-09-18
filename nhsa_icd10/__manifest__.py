@@ -12,6 +12,7 @@
     'data': [
         'security/ir.model.access.csv',
         'data/nhsa_icd10_data.xml',
+        'views/icd10_category_views.xml',
         'views/icd10_code_views.xml',
         # 'data/icd10.category.csv', # 通过代码导入
     ],

@@ -1,0 +1,20 @@
+
+#. module: nhsa_icd10
+#: model:ir.model.fields,field_description:nhsa_icd10.field_icd10_code__create_uid
+msgid "Created by"
+msgstr "创建人"
+
+#. module: nhsa_icd10
+#: model:ir.model.fields,field_description:nhsa_icd10.field_icd10_code__create_date
+msgid "Created on"
+msgstr "创建时间"
+
+#. module: nhsa_icd10
+#: model:ir.model.fields,field_description:nhsa_icd10.field_icd10_code__write_uid
+msgid "Last Updated by"
+msgstr "最后修改人"
+
+#. module: nhsa_icd10
+#: model:ir.model.fields,field_description:nhsa_icd10.field_icd10_code__write_date
+msgid "Last Updated on"
+msgstr "最后修改时间"
