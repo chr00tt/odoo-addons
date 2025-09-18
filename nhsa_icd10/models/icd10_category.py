@@ -17,7 +17,7 @@ class Icd10Category(models.Model):
         help="该分类下的ICD-10代码数量（不包括子分类）")
 
     def _compute_code_count(self):
-        read_group_res = self.env['icd10.code']._read_group([('category', 'child_of', self.ids)], ['category'], ['__count'])
+        read_group_res = self.env['icd10.code']._read_group([('category_id', 'child_of', self.ids)], ['category_id'], ['__count'])
         group_data = {categ.id: count for categ, count in read_group_res}
         for categ in self:
             code_count = 0
