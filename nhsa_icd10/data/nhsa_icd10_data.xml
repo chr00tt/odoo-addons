@@ -3,6 +3,7 @@
     <data noupdate="1">
         <record id="icd10_category_all" model="icd10.category">
             <field name="name">所有</field>
+            <field name="code">ALL</field>
         </record>
     </data>
 </odoo>
