@@ -2,7 +2,7 @@
 
 echo 'id,name,code,parent_id/id' > icd10.category.csv
 awk -v FPAT='([^,]*)|("[^"]*")' 'NR>1 {
-print "icd10_category_chapter_" $2 "," $3 "," $2 ",icd10_category_all"
+print "icd10_category_chapter_" $2 "," $3 "," $2 ",nhsa_icd10.icd10_category_all"
 }' output.csv | uniq >> icd10.category.csv
 awk -v FPAT='([^,]*)|("[^"]*")' 'NR>1 {
 print "icd10_category_block_" $4 "," $5 "," $4 ",icd10_category_chapter_" $2
