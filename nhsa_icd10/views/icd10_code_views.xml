@@ -5,7 +5,7 @@
         <field name="name">icd10.code.tree</field>
         <field name="model">icd10.code</field>
         <field name="arch" type="xml">
-            <tree string="诊断编码列表">
+            <tree string="诊断代码列表">
                 <field name="code"/>
                 <field name="name"/>
                 <field name="category_id"/>
@@ -18,7 +18,7 @@
         <field name="name">icd10.code.form</field>
         <field name="model">icd10.code</field>
         <field name="arch" type="xml">
-            <form string="诊断编码">
+            <form string="诊断代码">
                 <sheet>
                     <group>
                         <field name="code"/>
@@ -35,8 +35,8 @@
         <field name="name">icd10.code.search</field>
         <field name="model">icd10.code</field>
         <field name="arch" type="xml">
-            <search string="诊断编码">
-                <field name="code" string="诊断编码"/>
+            <search string="诊断代码">
+                <field name="code" string="诊断代码"/>
                 <field name="name" string="名称"/>
                 <field name="category_id" string="分类"/>
                 <searchpanel>
@@ -51,7 +51,7 @@
 
     <!-- ICD-10 代码动作 -->
     <record id="icd10_code_action" model="ir.actions.act_window">
-        <field name="name">ICD-10诊断编码</field>
+        <field name="name">ICD-10 诊断代码</field>
         <field name="res_model">icd10.code</field>
         <field name="view_mode">tree,form</field>
     </record>
