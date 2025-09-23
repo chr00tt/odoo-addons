@@ -93,15 +93,17 @@ class ProductTemplate(models.Model):
             if vals.get('ybbm'):
                 # 根据医保编码查找UDI数据
                 uid_record = self.env['udi.data'].search([('ybbm', '=', vals.get('ybbm'))], limit=1)
-            else:
-                # 根据产品名称和规格型号查找
-                name = vals.get('name')
-                ggxh = vals.get('ggxh')
-                if name and ggxh:
-                    uid_record = self.env['udi.data'].search([
-                        ('cpmctymc', '=', name),
-                        ('ggxh', '=', ggxh)
-                    ], limit=1)
+            # 不能根据产品名称+规格型号查询，因为不同厂家的产品会有不同的产品标识.
+            # 其他方案：查询产品名称+规格型号+生产厂家
+            # else:
+            #     # 根据产品名称和规格型号查找
+            #     name = vals.get('name')
+            #     ggxh = vals.get('ggxh')
+            #     if name and ggxh:
+            #         uid_record = self.env['udi.data'].search([
+            #             ('cpmctymc', '=', name),
+            #             ('ggxh', '=', ggxh)
+            #         ], limit=1)
 
             # 如果找到了UDI记录，设置相关字段
             if uid_record:
