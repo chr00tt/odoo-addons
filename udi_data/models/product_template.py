@@ -2,7 +2,7 @@
 
 from odoo import api, fields, models
 from odoo.addons.sale_subscription.models.product import product_template
-
+from odoo.exceptions import ValidationError
 
 class ProductTemplate(models.Model):
     _inherit = "product.template"
@@ -87,12 +87,19 @@ class ProductTemplate(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
+        udi_data_model = self.env['udi.data']
+        product_template_model = self.env['product.template']
         for vals in vals_list:
             # TODO
-            uid_record = None
+            udi_record = None
             if vals.get('ybbm'):
                 # 根据医保编码查找UDI数据
-                uid_record = self.env['udi.data'].search([('ybbm', '=', vals.get('ybbm'))], limit=1)
+                udi_record = udi_data_model.search([('ybbm', '=', vals.get('ybbm'))], limit=1)
+
+                # 避免用户错误的重复医保编码导致 barcode 重复
+                barcode = udi_record.sydycpbs if udi_record.sydycpbs else udi_record.zxxsdycpbs
+                if product_template_model.search([('barcode', '=', barcode)], limit=1):
+                    udi_record = None
             # 不能根据产品名称+规格型号查询，因为不同厂家的产品会有不同的产品标识.
             # 其他方案：查询产品名称+规格型号+生产厂家
             # else:
@@ -100,47 +107,49 @@ class ProductTemplate(models.Model):
             #     name = vals.get('name')
             #     ggxh = vals.get('ggxh')
             #     if name and ggxh:
-            #         uid_record = self.env['udi.data'].search([
+            #         udi_record = self.env['udi.data'].search([
             #             ('cpmctymc', '=', name),
             #             ('ggxh', '=', ggxh)
             #         ], limit=1)
 
             # 如果找到了UDI记录，设置相关字段
-            if uid_record:
-                vals['udi_data_id'] = uid_record.id
+            if udi_record:
+                vals['udi_data_id'] = udi_record.id
 
                 # 设置医保编码（如果条件满足）
-                if uid_record.ybbm:
-                    vals['ybbm'] = uid_record.ybbm
+                if udi_record.ybbm:
+                    vals['ybbm'] = udi_record.ybbm
 
                 # 设置医用耗材标志
-                if uid_record.cplb == '耗材':
+                if udi_record.cplb == '耗材':
                     vals['is_medical_consumables'] = True
 
                 # 设置条码
                 if not vals.get('barcode'):
-                    vals['barcode'] = uid_record.sydycpbs if uid_record.sydycpbs else uid_record.zxxsdycpbs
+                    vals['barcode'] = udi_record.sydycpbs if udi_record.sydycpbs else udi_record.zxxsdycpbs
 
                 # 设置规格
-                if not vals.get('ggxh') and uid_record.ggxh:
-                    vals['ggxh'] = uid_record.ggxh
+                if not vals.get('ggxh') and udi_record.ggxh:
+                    vals['ggxh'] = udi_record.ggxh
 
                 # 设置追溯方式
-                if uid_record.serial_number:
+                if udi_record.serial_number:
                     vals['tracking'] = 'serial'
 
                 # 设置内部说明
-                if not vals.get('description') and uid_record.cpms:
-                    vals['description'] = uid_record.cpms
+                if not vals.get('description') and udi_record.cpms:
+                    vals['description'] = udi_record.cpms
                 # 注册证号
-                if uid_record.registration_number:
-                    vals['registration_number'] = uid_record.registration_number
+                if udi_record.registration_number:
+                    vals['registration_number'] = udi_record.registration_number
 
                 # 生产厂家
-                if uid_record.license_holder:
-                    vals['manufacturer_id'] = uid_record.license_holder.id
+                if udi_record.license_holder:
+                    vals['manufacturer_id'] = udi_record.license_holder.id
 
         product_templates = super().create(vals_list)
+
+        # 生成产品包装
         for product_template in product_templates:
             # 确保产品有关联的UDI数据
             if product_template.udi_data_id:
