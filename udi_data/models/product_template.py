@@ -96,15 +96,25 @@ class ProductTemplate(models.Model):
                 udi_record = udi_data_model.search([('ybbm', '=', vals.get('ybbm'))], limit=1)
             # 不能根据产品名称+规格型号查询，因为不同厂家的产品会有不同的产品标识.
             # 其他方案：1.注册证号+规格型号; 2.查询产品名称+规格型号+生产厂家
-            # else:
-            #     # 根据产品名称和规格型号查找
-            #     name = vals.get('name')
-            #     ggxh = vals.get('ggxh')
-            #     if name and ggxh:
-            #         udi_record = self.env['udi.data'].search([
-            #             ('cpmctymc', '=', name),
-            #             ('ggxh', '=', ggxh)
-            #         ], limit=1)
+            else:
+                if vals.get('registration_number') and vals.get('ggxh'):
+                    # 1.注册证号+规格型号
+                    registration_number = vals.get('registration_number')
+                    ggxh = vals.get('ggxh')
+                    if registration_number and ggxh:
+                        udi_record = udi_data_model.search([
+                            ('registration_number', '=', registration_number),
+                            ('ggxh', '=', ggxh)
+                        ], limit=1)
+
+                if not udi_record:
+                    # 2.查询产品名称+规格型号+生产厂家
+                    if vals.get('name') and vals.get('ggxh') and vals.get('manufacturer_id'):
+                        udi_record = udi_data_model.search([
+                            ('cpmctymc', '=', vals.get('name')),
+                            ('ggxh', '=', vals.get('ggxh')),
+                            ('license_holder', '=', vals.get('manufacturer_id'))
+                        ], limit=1)
 
             if udi_record:
                 # 避免用户错误的重复医保编码导致 barcode 重复
@@ -113,9 +123,17 @@ class ProductTemplate(models.Model):
                 if product_template_model.search([('barcode', '=', barcode)], limit=1):
                     udi_record = None
                 # 搜索 vals_list
-                match = next((v for v in vals_list if v.get('barcode') == barcode), None)
-                if match:
-                    udi_record = None
+                # match = next((v for v in vals_list if v.get('barcode') == barcode), None)
+                # if match:
+                #     udi_record = None
+                else:
+                    # 检查当前 vals_list 中（除当前项外）是否已存在该条码
+                    duplicate_in_list = any(
+                        v != vals and v.get('barcode') == barcode
+                        for v in vals_list
+                    )
+                    if duplicate_in_list:
+                        udi_record = None
 
             # 根据药监局数据补充产品属性
             if udi_record:
