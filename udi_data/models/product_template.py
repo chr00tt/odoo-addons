@@ -96,15 +96,25 @@ class ProductTemplate(models.Model):
                 udi_record = udi_data_model.search([('ybbm', '=', vals.get('ybbm'))], limit=1)
             # 不能根据产品名称+规格型号查询，因为不同厂家的产品会有不同的产品标识.
             # 其他方案：1.注册证号+规格型号; 2.查询产品名称+规格型号+生产厂家
-            # else:
-            #     # 根据产品名称和规格型号查找
-            #     name = vals.get('name')
-            #     ggxh = vals.get('ggxh')
-            #     if name and ggxh:
-            #         udi_record = self.env['udi.data'].search([
-            #             ('cpmctymc', '=', name),
-            #             ('ggxh', '=', ggxh)
-            #         ], limit=1)
+            else:
+                if vals.get('registration_number') and vals.get('ggxh'):
+                    # 1.注册证号+规格型号
+                    registration_number = vals.get('registration_number')
+                    ggxh = vals.get('ggxh')
+                    if registration_number and ggxh:
+                        udi_record = udi_data_model.search([
+                            ('registration_number', '=', registration_number),
+                            ('ggxh', '=', ggxh)
+                        ], limit=1)
+
+                if not udi_record:
+                    # 2.查询产品名称+规格型号+生产厂家
+                    if vals.get('name') and vals.get('ggxh') and vals.get('manufacturer_id'):
+                        udi_record = udi_data_model.search([
+                            ('cpmctymc', '=', vals.get('name')),
+                            ('ggxh', '=', vals.get('ggxh')),
+                            ('license_holder', '=', vals.get('manufacturer_id'))
+                        ], limit=1)
 
             if udi_record:
                 # 避免用户错误的重复医保编码导致 barcode 重复
