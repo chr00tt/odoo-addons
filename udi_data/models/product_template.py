@@ -123,9 +123,17 @@ class ProductTemplate(models.Model):
                 if product_template_model.search([('barcode', '=', barcode)], limit=1):
                     udi_record = None
                 # 搜索 vals_list
-                match = next((v for v in vals_list if v.get('barcode') == barcode), None)
-                if match:
-                    udi_record = None
+                # match = next((v for v in vals_list if v.get('barcode') == barcode), None)
+                # if match:
+                #     udi_record = None
+                else:
+                    # 检查当前 vals_list 中（除当前项外）是否已存在该条码
+                    duplicate_in_list = any(
+                        v != vals and v.get('barcode') == barcode
+                        for v in vals_list
+                    )
+                    if duplicate_in_list:
+                        udi_record = None
 
             # 根据药监局数据补充产品属性
             if udi_record:
