@@ -90,7 +90,6 @@ class ProductTemplate(models.Model):
         udi_data_model = self.env['udi.data']
         product_template_model = self.env['product.template']
         for vals in vals_list:
-            # TODO
             udi_record = None
             if vals.get('ybbm'):
                 # 根据医保编码查找UDI数据
@@ -107,7 +106,7 @@ class ProductTemplate(models.Model):
             #             ('ggxh', '=', ggxh)
             #         ], limit=1)
 
-            if udi_data:
+            if udi_record:
                 # 避免用户错误的重复医保编码导致 barcode 重复
                 barcode = udi_record.sydycpbs if udi_record.sydycpbs else udi_record.zxxsdycpbs
                 if product_template_model.search([('barcode', '=', barcode)], limit=1):
