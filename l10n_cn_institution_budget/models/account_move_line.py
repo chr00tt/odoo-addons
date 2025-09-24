@@ -16,7 +16,7 @@ class AccountMoveLine(models.Model):
         index=True,
         auto_join=True,
         ondelete="cascade",
-        domain=lambda self: [('deprecated', '=', False), ('company_id', '=', self.company_id.id), ('is_off_balance', '=', False), ('is_budget', '=', self.is_budget)],
+        domain=lambda self: [('deprecated', '=', False), ('company_id', '=', self.company_id.id), ('account_type', '!=', 'off_balance'), ('is_budget', '=', self.is_budget)],
         check_company=True,
         tracking=True,
     )
