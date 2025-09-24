@@ -136,10 +136,12 @@
                 <field name="flbm"/>
                 <field name="ybbm"/>
                 <field name="cplb"/>
+                <field name="registration_number"/>
                 <field name="nhsa_consumables_categ_id"/>
                 <filter name="sfybtzjbs" string="本体直接标识" domain="[('sfybtzjbs', '=', True)]"/>
                 <filter name="btcpbsyzxxsdycpbssfyz" string="本体产品标识与最小销售单元产品标识一致" domain="[('btcpbsyzxxsdycpbssfyz', '=', True)]"/>
                 <filter name="sfwblztlcp" string="包/组套" domain="[('sfwblztlcp', '=', True)]"/>
+                <filter name="registration_number" string="注册证编号或者备案凭证编号" domain="[('registration_number', 'ilike', True)]"/>
                 <filter name="sfbjwycxsy" string="一次性使用" domain="[('sfbjwycxsy', '=', True)]"/>
                 <filter name="sfwwjbz" string="无菌包装" domain="[('sfwwjbz', '=', True)]"/>
                 <filter name="syqsfxyjxmj" string="需要灭菌" domain="[('syqsfxyjxmj', '=', True)]"/>
