@@ -119,10 +119,15 @@ class ProductTemplate(models.Model):
             if udi_record:
                 # 避免用户错误的重复医保编码导致 barcode 重复
                 barcode = udi_record.sydycpbs if udi_record.sydycpbs else udi_record.zxxsdycpbs
+                # 搜索数据库记录
                 if product_template_model.search([('barcode', '=', barcode)], limit=1):
                     udi_record = None
+                # 搜索 vals_list
+                match = next((v for v in vals_list if v.get('barcode') == barcode), None)
+                if match:
+                    udi_record = None
 
-            # 如果找到了UDI记录，设置相关字段
+            # 根据药监局数据补充产品属性
             if udi_record:
                 vals['udi_data_id'] = udi_record.id
 
