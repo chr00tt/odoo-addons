@@ -137,6 +137,7 @@
                 <field name="ybbm"/>
                 <field name="cplb"/>
                 <field name="registration_number"/>
+                <field name="license_holder"/>
                 <field name="nhsa_consumables_categ_id"/>
                 <filter name="sfybtzjbs" string="本体直接标识" domain="[('sfybtzjbs', '=', True)]"/>
                 <filter name="btcpbsyzxxsdycpbssfyz" string="本体产品标识与最小销售单元产品标识一致" domain="[('btcpbsyzxxsdycpbssfyz', '=', True)]"/>
@@ -166,6 +167,13 @@
         <field name="name">医疗器械唯一标识</field>
         <field name="res_model">udi.data</field>
         <field name="view_mode">tree,kanban,form,pivot,graph</field>
+    </record>
+
+    <record id="res_partner_to_udi_data_action" model="ir.actions.act_window">
+        <field name="name">医疗器械唯一标识</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">udi.data</field>
+        <field name="context">{"search_default_license_holder":active_id}</field>
     </record>
 
     <!-- 为选择的医疗器械唯一标识生成产品 -->

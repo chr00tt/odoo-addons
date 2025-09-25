@@ -7,5 +7,5 @@ from . import product_template
 from . import nhsa_consumables_category
 from . import product_supplierinfo
 from . import nhsa_consumables
-
+from . import res_partner
 from . import rss_async

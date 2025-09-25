@@ -5,6 +5,19 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button"
+                        name="%(res_partner_to_udi_data_action)d"
+                        icon="fa-th-list"
+                        type="action"
+                        context="{'search_default_license_holder': active_id, 'default_license_holder': active_id}"
+                        invisible="udi_data_count &lt;= 0">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value"><field name="udi_data_count"/></span>
+                            <span class="o_stat_text">医疗器械唯一标识</span>
+                        </div>
+                    </button>
+                </div>
             </field>
         </record>
     </data>

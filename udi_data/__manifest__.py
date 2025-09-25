@@ -29,6 +29,7 @@
         'views/nhsa_consumables_category_views.xml',
         'views/nhsa_consumables_views.xml',
         'views/product_template_views.xml',
+        'views/res_partner_views.xml',
     ],
     'post_init_hook': '_udi_data_import_data',
     'license': 'LGPL-3',
