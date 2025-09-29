@@ -10,6 +10,9 @@
 
         'stock_lot_production_date',
     ],
+    'data': [
+        'views/stock_move_line_views.xml',
+    ],
     'auto_install': True,
     'license': 'LGPL-3',
     'assets': {
