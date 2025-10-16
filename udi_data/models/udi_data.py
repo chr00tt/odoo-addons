@@ -94,7 +94,7 @@ class UDIData(models.Model):
             # product 信息
             'name': self.cpmctymc,
             'detailed_type': 'product',
-            'default_code': barcode,
+            #'default_code': barcode,
             'barcode': barcode,
             'description': self.cpms,
             'tracking': 'serial' if self.serial_number else 'lot',
