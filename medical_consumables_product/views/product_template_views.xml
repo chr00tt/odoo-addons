@@ -8,7 +8,7 @@
                 <field name="ggxh" optional="hide"/>
                 <field name="ybbm" optional="hide"/>
                 <field name="product_origin" optional="hide"/>
-                <field name="purchase_style" invisible="1"/>
+                <field name="purchase_style" column_invisible="1"/>
             </field>
         </field>
     </record>
@@ -19,7 +19,7 @@
         <field name="arch" type="xml">
             <!-- 在看板视图中添加 purchase_style 字段 -->
             <xpath expr="//kanban" position="inside">
-                 <field name="purchase_style" invisible="1"/>
+                 <field name="purchase_style" column_invisible="1"/>
             </xpath>
         </field>
     </record>
