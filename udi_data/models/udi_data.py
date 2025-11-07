@@ -32,7 +32,7 @@ class UDIData(models.Model):
         'res.partner', '医疗器械注册人/备案人名称',
         required=True)
     ylqxzcrbarywmc = fields.Char("医疗器械注册人/备案人英文名称")
-    ybbm = fields.Char("医保耗材分类编码")
+    ybbm = fields.Char("医保编码")
     cplb = fields.Char("产品类别")
     cgzmraqxgxx = fields.Char("磁共振（MR）安全相关信息")
     sfbjwycxsy = fields.Boolean("是否标记为一次性使用")
@@ -107,6 +107,7 @@ class UDIData(models.Model):
             'is_medical_consumables': True,
             'ggxh': self.ggxh,
             'ybbm': self.ybbm,
+            'gllb': self.gllb,
 
             # nhsa_consumables 信息
             'nhsa_consumables_id': self.nhsa_consumables_id.id if self.nhsa_consumables_id else None,
