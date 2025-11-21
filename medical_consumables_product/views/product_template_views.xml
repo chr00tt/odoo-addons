@@ -8,7 +8,19 @@
                 <field name="ggxh" optional="hide"/>
                 <field name="ybbm" optional="hide"/>
                 <field name="product_origin" optional="hide"/>
+                <field name="purchase_style" column_invisible="1"/>
             </field>
+        </field>
+    </record>
+     <!-- 继承看板视图 -->
+    <record id="product_template_kanban_view" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_kanban_view" />
+        <field name="arch" type="xml">
+            <!-- 在看板视图中添加 purchase_style 字段 -->
+            <xpath expr="//kanban" position="inside">
+                 <field name="purchase_style" column_invisible="1"/>
+            </xpath>
         </field>
     </record>
 

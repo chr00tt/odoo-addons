@@ -11,7 +11,7 @@ class FapiaoLine(models.Model):
     name = fields.Char(string='名称')
 
     move_line_id = fields.Many2one('account.move.line', string='账单明细', required=True, ondelete='cascade')
-    amount = fields.Monetary(string='Amount', required=True, currency_field='currency_id')
+    amount = fields.Monetary(string='金额', required=True, currency_field='currency_id')
     currency_id = fields.Many2one(related='fapiao_id.currency_id', store=True, readonly=True)
     description = fields.Char(string='Description')
 

@@ -34,7 +34,7 @@ class RssMixin(models.AbstractModel):
         # 文件太大，下载会报错
         # self._do_update(UDID_FULL_RSS_URL)
         # 直接使用下载好的文件
-        zip_path = get_module_path('udi_data') + '/data/UDID_FULL_RELEASE_20250901.zip'
+        zip_path = get_module_path('udi_data') + '/data/UDID_FULL_RELEASE_20251001.zip'
         extract_dir = self._extract_zip(zip_path)
         self._import_data_files(extract_dir)        
 

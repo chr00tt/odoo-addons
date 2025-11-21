@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <filter name="cancel" position="after">
                 <separator/>
-                <filter name="needs_review" string="需要我审审核"
+                <filter name="needs_review" string="需要我审核"
                         domain="[('reviewer_ids','in',uid), ('state', 'not in', ['done', 'cancel'])]"
                         help="待我审核的库存申请"/>
                 <filter name="tier_validated" string="已批准"
