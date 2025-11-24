@@ -6,11 +6,9 @@
         <field name="arch" type="xml">
             <xpath expr="//tree" position="inside">
                 <header>
-                    <button name="request_validation"
-                            string="审批"
+                    <button name="validate_tier"
+                            string="批准"
                             type="object"
-                            class="btn-primary"
-                            display="always"
                     />
                 </header>
             </xpath>
