@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_request_tree" model="ir.ui.view">
+        <field name="inherit_id" ref="stock_request.view_stock_request_tree"/>
+        <field name="model">stock.request</field>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <header>
+                    <button name="validate_tier"
+                            string="批准"
+                            type="object"
+                    />
+                </header>
+            </xpath>
+        </field>
+    </record>
+</odoo>
