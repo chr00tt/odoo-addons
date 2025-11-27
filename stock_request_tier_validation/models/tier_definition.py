@@ -10,4 +10,5 @@ class TierDefinition(models.Model):
         res = super()._get_tier_validation_model_names()
         res.append("stock.request.order")
         res.append("stock.request")
+        res.append("stock.picking")
         return res
