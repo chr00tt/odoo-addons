@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models, tools, _
+from odoo import api, fields, models
+from odoo.tools import str2bool
 
 class UDIData(models.Model):
     _name = "udi.data"
@@ -155,6 +156,10 @@ class UDIData(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         records = super(UDIData, self).create(vals_list)
+
+        if not str2bool(self.env['ir.config_parameter'].sudo().get_param('udi_data.auto_link_product', 'True')):
+            return records
+
         for record in records:
             product_template_model = self.env['product.template']
             if record.ybbm:
