@@ -7,7 +7,7 @@ from odoo.exceptions import UserError
 class StockPicking(models.Model):
     _name = "stock.picking"
     _inherit = ["stock.picking", "tier.validation"]
-    _state_from = ["draft", "confirmed", "assigned"]
+    _state_from = ["assigned"]
     _state_to = ["done"]
 
     _tier_validation_manual_config = False
