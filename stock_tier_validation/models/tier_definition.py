@@ -1,6 +1,6 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
-from odoo import _, api, fields, models
+from odoo import api, models
 
 class TierDefinition(models.Model):
     _inherit = "tier.definition"
@@ -8,6 +8,5 @@ class TierDefinition(models.Model):
     @api.model
     def _get_tier_validation_model_names(self):
         res = super()._get_tier_validation_model_names()
-        res.append("stock.request.order")
-        res.append("stock.request")
+        res.append("stock.picking")
         return res
