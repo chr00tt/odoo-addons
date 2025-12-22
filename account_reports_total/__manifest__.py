@@ -9,7 +9,6 @@
     'data': [
         'data/general_ledger.xml',
         'views/account_report_view.xml',
-        'views/report_templates.xml',
     ],
     'auto_install': True,
     'license': 'LGPL-3',
@@ -18,6 +17,7 @@
             'account_reports_total/static/src/scss/account_financial_report.scss',
         ],
         'web.assets_backend': [
+            'account_reports_total/static/src/components/**/*',
             'account_reports_total/static/src/scss/account_financial_report.scss',
         ],
     },

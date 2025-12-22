@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-inherit="account_reports.AccountReportFilterExtraOptions">
+        <xpath expr="//Dropdown" position="inside">
+            <t t-if="controller.filters.show_daily_total">
+                <DropdownItem
+                    class="{ 'selected': controller.options.daily_total }"
+                    onSelected="() => this.toggleFilter('daily_total')"
+                >
+                    本日合计
+                </DropdownItem>
+            </t>
+            <t t-if="controller.filters.show_monthly_total">
+                <DropdownItem
+                    class="{ 'selected': controller.options.monthly_total }"
+                    onSelected="() => this.toggleFilter('monthly_total')"
+                >
+                    本月合计
+                </DropdownItem>
+            </t>
+            <t t-if="controller.filters.show_yearly_total">
+                <DropdownItem
+                    class="{ 'selected': controller.options.yearly_total }"
+                    onSelected="() => this.toggleFilter('yearly_total')"
+                >
+                    本年累计
+                </DropdownItem>
+            </t>
+        </xpath>
+    </t>
+</templates>
