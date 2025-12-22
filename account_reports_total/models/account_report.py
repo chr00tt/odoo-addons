@@ -19,6 +19,13 @@ class AccountReport(models.Model):
         compute=lambda x: x._compute_report_option_filter('show_yearly_total', False), readonly=False, store=True, depends=['root_report_id'],
     )
 
+    def get_report_information(self, options):
+        info = super().get_report_information(options)
+        info['filters']['show_daily_total'] = self.show_daily_total
+        info['filters']['show_monthly_total'] = self.show_monthly_total
+        info['filters']['show_yearly_total'] = self.show_yearly_total
+        return info
+
     def _init_options_daily_total(self, options, previous_options=None):
         if self.show_daily_total and previous_options:
             options['daily_total'] = previous_options.get('daily_total', False)

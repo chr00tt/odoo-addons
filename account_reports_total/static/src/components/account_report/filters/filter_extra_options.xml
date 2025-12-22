@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates>
-    <t t-inherit="account_reports.AccountReportFilterExtraOptions">
+    <t t-name="account_reports_total.AccountReportFilterExtraOptions" t-inherit="account_reports.AccountReportFilterExtraOptions">
         <xpath expr="//Dropdown" position="inside">
             <t t-if="controller.filters.show_daily_total">
                 <DropdownItem

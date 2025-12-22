@@ -17,7 +17,7 @@
             'account_reports_total/static/src/scss/account_financial_report.scss',
         ],
         'web.assets_backend': [
-            'account_reports_total/static/src/components/**/*',
+            # 'account_reports_total/static/src/components/**/*',
             'account_reports_total/static/src/scss/account_financial_report.scss',
         ],
     },
