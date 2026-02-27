@@ -26,7 +26,7 @@ class UDIData(models.Model):
     cpms = fields.Text("产品描述")
     cphhhbh = fields.Char("产品货号或编号")
     yflbm = fields.Char("原器械目录代码")
-    flbm = fields.Many2one('medical.device.category', '医疗器械分类')
+    flbm = fields.Many2one('medical.device.category', '医疗器械分类', index=True)
     tyshxydm = fields.Char("统一社会信用代码")
     registration_number = fields.Char("注册证编号或者备案凭证编号")
     license_holder = fields.Many2one(
@@ -53,11 +53,11 @@ class UDIData(models.Model):
     versionNumber = fields.Integer("公开的版本号")
     versionTime = fields.Char("版本日期")
 
-    gllb = fields.Selection(related='flbm.gllb', store=True)
+    gllb = fields.Selection(related='flbm.gllb', store=True, index=True)
 
     nhsa_consumables_id = fields.Many2one('nhsa.consumables', '医保医用耗材分类与代码', compute='_compute_nhsa_consumables_id', store=True)
 
-    nhsa_consumables_categ_id = fields.Many2one('nhsa.consumables.category', '医保耗材分类', related='nhsa_consumables_id.nhsa_consumables_categ_id', store=True)
+    nhsa_consumables_categ_id = fields.Many2one('nhsa.consumables.category', '医保耗材分类', related='nhsa_consumables_id.nhsa_consumables_categ_id', store=True, index=True)
     nhsa_common_name = fields.Char('医保通用名', related='nhsa_consumables_id.common_name')
     nhsa_material = fields.Char('医保材质', related='nhsa_consumables_id.material')
     nhsa_specifications = fields.Char('医保规格', related='nhsa_consumables_id.specifications')
